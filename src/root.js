@@ -1,9 +1,18 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import { AsyncStorage } from 'react-native';
 
-import App from './components';
+import configureStore from './config/store';
+import AppContainer from './components';
+
+const store = configureStore();
 
 export default class ConnectedApp extends React.Component {
   render() {
-    return <App />;
+    return (
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    );
   }
 }
