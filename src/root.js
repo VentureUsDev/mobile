@@ -5,13 +5,17 @@ import { AsyncStorage } from 'react-native';
 import configureStore from './config/store';
 import AppContainer from './components';
 
+import { ThemeProvider } from 'react-native-material-ui'
+
 const store = configureStore();
 
 export default class ConnectedApp extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <AppContainer />
+        <ThemeProvider>
+          <AppContainer />
+        </ThemeProvider>
       </Provider>
     );
   }
