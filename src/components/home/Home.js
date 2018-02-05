@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
 import { Subheader, Card } from 'react-native-material-ui';
+import Header from '../common/Header';
 
 import { homeStyles as s } from './style';
 
@@ -8,9 +9,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={s.container}>
-        <View style={s.subheader}>
-          <Subheader text="Venture Invites"/>
-        </View>
+        <Header title="Venture Invites" />
         <View>
           <Card>
             <Image
