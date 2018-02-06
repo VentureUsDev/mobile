@@ -1,7 +1,9 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
-import { Subheader, Card } from 'react-native-material-ui';
+import { Text, View, ScrollView, Image, Button } from 'react-native';
 import Header from '../common/Header';
+import Card from '../common/Card';
+import CardSection from '../common/CardSection';
+import Venture from './Venture'
 
 import { homeStyles as s } from './style';
 
@@ -10,16 +12,106 @@ export default class App extends React.Component {
     return (
       <View style={s.container}>
         <Header title="Venture Invites" />
-        <View>
-          <Card>
-            <Image
-              style={{width: 200, height: 200}}
-              source={{uri: "https://3q8aqw1n2x7v12z4672101ry-wpengine.netdna-ssl.com/wp-content/uploads/2016/05/Checkers-Restaurant1-400x400.jpg"}}
-            />
-            <Text>Some great restaurant</Text>
-
+        <ScrollView>
+          <Card style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
+            <CardSection>
+              <View style={s.thumbnailContainer}>
+                <Image
+                  style={s.thumbnail}
+                  source={{ uri: 'https://vignette.wikia.nocookie.net/overwatch/images/8/87/YZ4w2ey.png/revision/latest?cb=20160419233357' }}
+                />
+              </View>
+              <View style={s.headerContent}>
+                <Text style={s.headerText}>Restaurant</Text>
+                <Text>La Baik</Text>
+              </View>
+            </CardSection>
+            <CardSection image={true}>
+              <Image
+                style={s.image}
+                source={{ uri: 'https://cdnb.artstation.com/p/assets/images/images/005/093/139/medium/carmen-carballo-wandakun-overwatchmovie-wandakun2.jpg?1488406121'}}
+              />
+            </CardSection>
+            <CardSection buttons={true}>
+              <Button
+                onPress={() => (console.log("nay"))}
+                title="DECLINE"
+                color="gray"
+              />
+              <Button
+                onPress={() => console.log('yee')}
+                title="ACCEPT"
+                color="#007aff"
+              />
+            </CardSection>
           </Card>
-        </View>
+
+          <Card style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
+            <CardSection>
+              <View style={s.thumbnailContainer}>
+                <Image
+                  style={s.thumbnail}
+                  source={{ uri: 'https://vignette.wikia.nocookie.net/overwatch/images/8/87/YZ4w2ey.png/revision/latest?cb=20160419233357' }}
+                />
+              </View>
+              <View style={s.headerContent}>
+                <Text style={s.headerText}>Restaurant</Text>
+                <Text>Nick Castaneda</Text>
+              </View>
+            </CardSection>
+            <CardSection image={true}>
+              <Image
+                style={s.image}
+                source={{ uri: 'https://cdnb.artstation.com/p/assets/images/images/005/093/139/medium/carmen-carballo-wandakun-overwatchmovie-wandakun2.jpg?1488406121'}}
+              />
+            </CardSection>
+            <CardSection buttons={true}>
+              <Button
+                onPress={() => (console.log("nay"))}
+                title="DECLINE"
+                color="gray"
+              />
+              <Button
+                onPress={() => console.log('yee')}
+                title="ACCEPT"
+                color="#007aff"
+              />
+            </CardSection>
+          </Card>
+
+          <Card style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
+            <CardSection>
+              <View style={s.thumbnailContainer}>
+                <Image
+                  style={s.thumbnail}
+                  source={{ uri: 'https://vignette.wikia.nocookie.net/overwatch/images/8/87/YZ4w2ey.png/revision/latest?cb=20160419233357' }}
+                />
+              </View>
+              <View style={s.headerContent}>
+                <Text style={s.headerText}>Restaurant</Text>
+                <Text>John Hwang</Text>
+              </View>
+            </CardSection>
+            <CardSection image={true}>
+              <Image
+                style={s.image}
+                source={{ uri: 'https://cdnb.artstation.com/p/assets/images/images/005/093/139/medium/carmen-carballo-wandakun-overwatchmovie-wandakun2.jpg?1488406121'}}
+              />
+            </CardSection>
+            <CardSection buttons={true}>
+              <Button
+                onPress={() => (console.log("nay"))}
+                title="DECLINE"
+                color="gray"
+              />
+              <Button
+                onPress={() => console.log('yee')}
+                title="ACCEPT"
+                color="#007aff"
+              />
+            </CardSection>
+          </Card>
+        </ScrollView>
       </View>
     );
   }
