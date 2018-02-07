@@ -1,13 +1,16 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView, Image } from 'react-native';
 import Header from '../common/Header';
+import User from '../common/User';
+
+import { profileStyles as p } from './style'
 
 export default class Profile extends React.Component {
   render() {
     return (
-      <View>
+      <View style={p.container}>
         <Header title="Profile" />
-        <Text>Yiipykiyay</Text>
+        <User />
       </View>
     );
   }
