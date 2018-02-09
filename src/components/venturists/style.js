@@ -7,5 +7,9 @@ export const venturistStyles = StyleSheet.create({
   level: {
     alignItems: 'flex-end',
     marginRight: 10
-  }
+  },
+  totalVentures: {
+    color: 'gray',
+    fontSize: 11,
+  },
 });

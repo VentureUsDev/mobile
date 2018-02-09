@@ -1,9 +1,49 @@
 import React from 'react';
 import { ScrollView, View, Text, Image } from 'react-native';
 import { ListItem, Avatar, Subheader } from 'react-native-material-ui';
-import Header from '../common/Header'
+import Header from '../common/Header';
+import Venturist from './Venturist';
 
 import { venturistStyles as v } from './style';
+
+const groups = [{
+    name: 'The Juice Biters',
+    image: 'http://wallpaper-gallery.net/images/beautiful-girls-hd-wallpapers-free-download/beautiful-girls-hd-wallpapers-free-download-11.jpg',
+    venturists: 'Joe, Ricky, Bobby',
+    totalVentures: 14,
+    level: 9,
+  }, {
+    name: 'Vagina Monologues',
+    image: 'http://wallpaper-gallery.net/images/beautiful-girls-hd-wallpapers-free-download/beautiful-girls-hd-wallpapers-free-download-11.jpg',
+    venturists: 'Candy, Dandy, Sandy',
+    totalVentures: 10,
+    level: 5,
+  }, {
+    name: 'Hourly Happiness',
+    image: 'http://wallpaper-gallery.net/images/beautiful-girls-hd-wallpapers-free-download/beautiful-girls-hd-wallpapers-free-download-11.jpg',
+    venturists: 'Nick, La, John',
+    totalVentures: 102,
+    level: 100,
+}];
+
+const friends = [{
+    name: 'La Baik',
+    image: 'http://wallpaper-gallery.net/images/beautiful-girls-hd-wallpapers-free-download/beautiful-girls-hd-wallpapers-free-download-11.jpg',
+    title: 'Adventurer',
+    totalVentures: 85,
+    level: 99,
+  }, {
+    name: 'Nick Castaneda',
+    image: 'http://wallpaper-gallery.net/images/beautiful-girls-hd-wallpapers-free-download/beautiful-girls-hd-wallpapers-free-download-11.jpg',
+    title: 'Journeyman',
+    totalVentures: 70,
+    level: 78,
+  }, {
+    name: 'John Hwang',
+    title: 'Novice',
+    totalVentures: 2,
+    level: 2,
+}];
 
 export default class Venturists extends React.Component {
   render() {
@@ -13,80 +53,27 @@ export default class Venturists extends React.Component {
         <ScrollView>
           <View>
             <Subheader text="Posse" />
-              <ListItem
-                leftElement={ <Avatar text="JB" /> }
-                centerElement={{primaryText: 'The JuiceBiters', secondaryText: 'Joe, Rick, Bobby'}}
-                rightElement={
-                  <View style={v.level}>
-                    <Text>Lv. 1</Text>
-                    <Text style={{color: 'gray', fontSize: 11}}>total ventures: 14</Text>
-                  </View>
-                }
-                divider
-                onPress={() => {}}
+            {groups.map(group => (
+              <Venturist
+                name={group.name}
+                image={group.image}
+                venturists={group.venturists}
+                totalVentures={group.totalVentures}
+                level={group.level}
               />
-              <ListItem
-                leftElement={ <Avatar text="JB" /> }
-                centerElement={{primaryText: 'The JuiceBiters', secondaryText: 'Joe, Rick, Bobby'}}
-                rightElement={
-                  <View style={v.level}>
-                    <Text>Lv. 5</Text>
-                    <Text style={{color: 'gray', fontSize: 11}}>total ventures: 14</Text>
-                  </View>
-                }
-                divider
-                onPress={() => {}}
-              />
-              <ListItem
-                leftElement={ <Avatar text="JB" /> }
-                centerElement={{primaryText: 'The JuiceBiters', secondaryText: 'Joe, Rick, Bobby'}}
-                rightElement={
-                  <View style={v.level}>
-                    <Text>Lv. 10</Text>
-                    <Text style={{color: 'gray', fontSize: 11}}>total ventures: 14</Text>
-                  </View>}
-                divider
-                onPress={() => {}}
-              />
-              <ListItem
-                leftElement={ <Avatar text="JB" /> }
-                centerElement={{primaryText: 'The JuiceBiters', secondaryText: 'Joe, Rick, Bobby'}}
-                rightElement={
-                  <View style={v.level}>
-                    <Text>Lv. 12</Text>
-                    <Text style={{color: 'gray', fontSize: 11}}>ventures: 14</Text>
-                  </View>
-                }
-                divider
-                onPress={() => {}}
-              />
+            ))}
           </View>
           <View>
             <Subheader text="Ones" />
-              <ListItem
-                leftElement={ <Avatar text="JS" /> }
-                centerElement={{primaryText: 'Joe Schmoe', secondaryText: 'Hooah'}}
-                divider
-                onPress={() => {}}
+            {friends.map(friend => (
+              <Venturist
+                image={friend.image}
+                name={friend.name}
+                title={friend.title}
+                totalVentures={friend.totalVentures}
+                level={friend.level}
               />
-              <ListItem
-                leftElement={ <Avatar text="JS" /> }
-                centerElement={{primaryText: 'Joe Schmoe', secondaryText: 'Hooah'}}
-                divider
-                onPress={() => {}}
-              />
-              <ListItem
-                leftElement={ <Avatar text="JS" /> }
-                centerElement={{primaryText: 'Joe Schmoe', secondaryText: 'Hooah'}}
-                divider
-                onPress={() => {}}
-              />
-              <ListItem
-                leftElement={ <Avatar text="JS" /> }
-                centerElement={{primaryText: 'Joe Schmoe', secondaryText: 'Hooah'}}
-                divider
-                onPress={() => {}}
-              />
+            ))}
           </View>
         </ScrollView>
       </View>

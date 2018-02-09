@@ -49,22 +49,20 @@ export default class User extends React.Component {
     );
   }
 
-  renderPartners = (partners) => {
-    return (
-      <View>
-        <View style={c.partnersTitle}>
-          <Text style={c.userDetailTitle}>partners in crime:</Text>
-        </View>
-        <View style={c.partnersImageContainer}>
-          {partners.map((partner, index) => (
-            <Image
-              key={index}
-              style={c.partnersImage}
-              source={{uri: partner}}
-            />
-          ))}
-        </View>
+  renderPartners = (partners) => (
+    <View>
+      <View style={c.partnersTitle}>
+        <Text style={c.userDetailTitle}>partners in crime:</Text>
       </View>
-    );
-  }
+      <View style={c.partnersImageContainer}>
+        {partners.map((partner, index) => (
+          <Image
+            key={index}
+            style={c.partnersImage}
+            source={{uri: partner}}
+          />
+        ))}
+      </View>
+    </View>
+  );
 };
