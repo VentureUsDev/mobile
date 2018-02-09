@@ -49,9 +49,9 @@ export const commonStyles = StyleSheet.create({
   },
   cardButtonSection: {
     borderBottomWidth: 1,
-    padding: 5,
+    padding: 10,
     backgroundColor: '#fff',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     flexDirection: 'row',
     borderColor: '#ddd',
     position: 'relative',
@@ -109,8 +109,10 @@ export const commonStyles = StyleSheet.create({
     marginRight: 15,
   },
   partnersImage: {
-    height: 40,
-    width: 40,
-    borderRadius: 20,
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    borderWidth: 1,
+    borderColor: 'gainsboro',
   },
 });

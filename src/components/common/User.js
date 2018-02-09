@@ -35,15 +35,15 @@ export default class User extends React.Component {
           <View style={c.partnersImageContainer}>
             <Image
               style={c.partnersImage}
-              source={{uri: 'https://avatarfiles.alphacoders.com/867/86758.jpg'}}
+              source={{uri: 'http://wallpaper-gallery.net/images/beautiful-girls-hd-wallpapers-free-download/beautiful-girls-hd-wallpapers-free-download-11.jpg'}}
             />
             <Image
               style={c.partnersImage}
-              source={{uri: 'https://avatarfiles.alphacoders.com/867/86758.jpg'}}
+              source={{uri: 'http://www.beautifulhameshablog.com/wp-content/uploads/2017/09/Beautiful-girls-in-India-Taapsee-Pannu-beautiful-indian-girl-image-beautiful-girl-image-indian-girls-photos-indian-girls-images.jpg'}}
             />
             <Image
               style={c.partnersImage}
-              source={{uri: 'https://avatarfiles.alphacoders.com/867/86758.jpg'}}
+              source={{uri: 'https://lh3.googleusercontent.com/hqPedkBv844AQwHO9Xgv7LQKjlHr3njiyi413NnckukQ5GDizy8tbvJ01svUaO-7sw=w300'}}
             />
           </View>
         </View>
