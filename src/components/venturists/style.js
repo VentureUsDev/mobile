@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const groupsStyles = StyleSheet.create({
+export const venturistStyles = StyleSheet.create({
   text: {
     marginTop: 400,
   },

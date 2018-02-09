@@ -3,9 +3,9 @@ import { ScrollView, View, Text, Image } from 'react-native';
 import { ListItem, Avatar, Subheader } from 'react-native-material-ui';
 import Header from '../common/Header'
 
-import { groupsStyles as g } from './style';
+import { venturistStyles as v } from './style';
 
-export default class Groups extends React.Component {
+export default class Venturists extends React.Component {
   render() {
     return (
       <View>
@@ -17,7 +17,7 @@ export default class Groups extends React.Component {
                 leftElement={ <Avatar text="JB" /> }
                 centerElement={{primaryText: 'The JuiceBiters', secondaryText: 'Joe, Rick, Bobby'}}
                 rightElement={
-                  <View style={g.level}>
+                  <View style={v.level}>
                     <Text>Lv. 1</Text>
                     <Text style={{color: 'gray', fontSize: 11}}>total ventures: 14</Text>
                   </View>
@@ -29,7 +29,7 @@ export default class Groups extends React.Component {
                 leftElement={ <Avatar text="JB" /> }
                 centerElement={{primaryText: 'The JuiceBiters', secondaryText: 'Joe, Rick, Bobby'}}
                 rightElement={
-                  <View style={g.level}>
+                  <View style={v.level}>
                     <Text>Lv. 5</Text>
                     <Text style={{color: 'gray', fontSize: 11}}>total ventures: 14</Text>
                   </View>
@@ -41,7 +41,7 @@ export default class Groups extends React.Component {
                 leftElement={ <Avatar text="JB" /> }
                 centerElement={{primaryText: 'The JuiceBiters', secondaryText: 'Joe, Rick, Bobby'}}
                 rightElement={
-                  <View style={g.level}>
+                  <View style={v.level}>
                     <Text>Lv. 10</Text>
                     <Text style={{color: 'gray', fontSize: 11}}>total ventures: 14</Text>
                   </View>}
@@ -52,7 +52,7 @@ export default class Groups extends React.Component {
                 leftElement={ <Avatar text="JB" /> }
                 centerElement={{primaryText: 'The JuiceBiters', secondaryText: 'Joe, Rick, Bobby'}}
                 rightElement={
-                  <View style={g.level}>
+                  <View style={v.level}>
                     <Text>Lv. 12</Text>
                     <Text style={{color: 'gray', fontSize: 11}}>ventures: 14</Text>
                   </View>

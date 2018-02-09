@@ -60,6 +60,9 @@ export const commonStyles = StyleSheet.create({
     height: 280,
     flex: 1,
     width: null,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4},
+    shadowOpacity: 0.1,
   },
   name: {
     textAlign: 'center',
@@ -73,9 +76,6 @@ export const commonStyles = StyleSheet.create({
     paddingTop: 5,
   },
   imageContainer: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4},
-    shadowOpacity: 0.1,
     elevation: 1,
   },
   userDetailContainer: {
@@ -84,8 +84,8 @@ export const commonStyles = StyleSheet.create({
   userDetails: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginLeft: 40,
-    marginRight: 40,
+    marginLeft: 30,
+    marginRight: 30,
     paddingTop: 15,
   },
   userDetailTitle: {
@@ -96,7 +96,7 @@ export const commonStyles = StyleSheet.create({
     fontSize: 18,
   },
   partnersTitle: {
-    marginLeft: 40,
+    marginLeft: 30,
     paddingTop: 15,
   },
   partnersImageContainer: {
@@ -114,5 +114,23 @@ export const commonStyles = StyleSheet.create({
     borderRadius: 25,
     borderWidth: 1,
     borderColor: 'gainsboro',
+  },
+  uploadImageContainer: {
+    height: 280,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  uploadImage: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 180,
+    width: 180,
+    borderRadius: 90,
+    borderWidth: 2,
+    borderStyle: 'dashed',
+    borderColor: 'gray',
+  },
+  uploadImageText: {
+    color: 'gray',
   },
 });
