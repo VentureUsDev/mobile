@@ -53,8 +53,9 @@ export default class Venturists extends React.Component {
         <ScrollView>
           <View>
             <Subheader text="Posse" />
-            {groups.map(group => (
+            {groups.map((group, index) => (
               <Venturist
+                key={index}
                 name={group.name}
                 image={group.image}
                 venturists={group.venturists}
@@ -64,9 +65,10 @@ export default class Venturists extends React.Component {
             ))}
           </View>
           <View>
-            <Subheader text="Ones" />
-            {friends.map(friend => (
+            <Subheader text="Onesies" />
+            {friends.map((friend, index) => (
               <Venturist
+                key={index}
                 image={friend.image}
                 name={friend.name}
                 title={friend.title}

@@ -93,7 +93,7 @@ export const commonStyles = StyleSheet.create({
     fontSize: 16,
   },
   userDetail: {
-    fontSize: 18,
+    fontSize: 17,
   },
   partnersTitle: {
     marginLeft: 30,
