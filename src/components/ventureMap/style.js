@@ -21,4 +21,23 @@ export const mapStyles = StyleSheet.create({
     width: width,
     height: height,
   },
+  calloutContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  calloutImage: {
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+  },
+  calloutHeader: {
+    justifyContent: 'space-around',
+    marginLeft: 10,
+  },
+  calloutTitle: {
+    fontSize: 16,
+  },
+  calloutVenturists: {
+    color: 'gray',
+  },
 })

@@ -1,11 +1,18 @@
 import React from 'react';
-import { View, Text, Dimensions, ScrollView, StyleSheet } from 'react-native';
-import MapView, { Marker, ProviderPropType } from 'react-native-maps';
+import { View, Text, Image, Dimensions, ScrollView, StyleSheet } from 'react-native';
+import MapView, { Marker, Callout } from 'react-native-maps';
 import Header from '../common/Header';
 
 import { mapStyles as m } from './style';
 
 const { width, height } = Dimensions.get('window');
+
+// Make fake data for this page
+// make marker component
+// Make add buttons for venture, venturists, and textfields
+// Add will be venturist with checkbox instead of level
+// Stack Navigator
+// Image Avatar
 
 export default class VentureMap extends React.Component {
   state = {
@@ -27,7 +34,6 @@ export default class VentureMap extends React.Component {
             contentContainerStyle={m.mapView}
           >
             <MapView
-              provider={this.props.provider}
               style={m.map}
               scrollEnabled={true}
               zoomEnabled={true}
@@ -35,12 +41,24 @@ export default class VentureMap extends React.Component {
               rotateEnabled={true}
               initialRegion={this.state.region}
             >
+              <Marker coordinate={this.state.region}>
+                <Callout>
+                  <View>
+                    <View style={m.calloutContainer}>
+                      <Image
+                        style={m.calloutImage}
+                        source={{ uri: 'https://cdnb.artstation.com/p/assets/images/images/005/093/139/medium/carmen-carballo-wandakun-overwatchmovie-wandakun2.jpg?1488406121'}}
+                      />
+                      <View style={m.calloutHeader}>
+                        <Text style={m.calloutTitle}>McDonalDzz</Text>
+                        <Text style={m.calloutVenturists}>La, Nick, Puppies, Spaghetti</Text>
+                      </View>
+                    </View>
+                  </View>
+                </Callout>
+              </Marker>
               <Marker
-                title="This is a title"
-                description="This is a description"
-                coordinate={this.state.region}
-              />
-              <Marker
+                pinColor="purple"
                 title="This is a title"
                 description="This is a description"
                 coordinate={{latitude: 37.78825,
@@ -56,8 +74,4 @@ export default class VentureMap extends React.Component {
     );
   }
 }
-
-VentureMap.propTypes = {
-  provider: ProviderPropType,
-};
 
