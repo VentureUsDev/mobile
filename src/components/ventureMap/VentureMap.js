@@ -2,20 +2,48 @@ import React from 'react';
 import { View, Text, Image, Dimensions, ScrollView, StyleSheet } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import Header from '../common/Header';
+import VentureMarker from './VentureMarker';
 
 import { mapStyles as m } from './style';
 
 const { width, height } = Dimensions.get('window');
 
-// Make fake data for this page
-// make marker component
-// Make add buttons for venture, venturists, and textfields
-// Add will be venturist with checkbox instead of level
-// Stack Navigator
-// Image Avatar
+const markerData = [{
+    region: {
+      latitude: 37.78825,
+      longitude: -122.4324,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0922 * width / height
+    },
+    image: 'https://cdnb.artstation.com/p/assets/images/images/005/093/139/medium/carmen-carballo-wandakun-overwatchmovie-wandakun2.jpg?1488406121',
+    name: 'MCDIZZLEZ',
+    venturists: 'Nick, La, Puppies',
+  }, {
+    region: {
+      latitude: 37.78825,
+      longitude: -122.4424,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0922 * width / height
+  },
+    image: 'https://cdnb.artstation.com/p/assets/images/images/005/093/139/medium/carmen-carballo-wandakun-overwatchmovie-wandakun2.jpg?1488406121',
+    name: 'MCDIZZLEZ',
+    venturists: 'Nick, La, Puppies',
+  }, {
+    region: {
+      latitude: 37.79825,
+      longitude: -122.4524,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0922 * width / height
+  },
+    image: 'https://cdnb.artstation.com/p/assets/images/images/005/093/139/medium/carmen-carballo-wandakun-overwatchmovie-wandakun2.jpg?1488406121',
+    name: 'MCDIZZLEZ',
+    venturists: 'Nick, La, Puppies',
+  }
+];
 
 export default class VentureMap extends React.Component {
   state = {
+    // TODO: set with current location
     region: {
       latitude: 37.78825,
       longitude: -122.4324,
@@ -41,32 +69,12 @@ export default class VentureMap extends React.Component {
               rotateEnabled={true}
               initialRegion={this.state.region}
             >
-              <Marker coordinate={this.state.region}>
-                <Callout>
-                  <View>
-                    <View style={m.calloutContainer}>
-                      <Image
-                        style={m.calloutImage}
-                        source={{ uri: 'https://cdnb.artstation.com/p/assets/images/images/005/093/139/medium/carmen-carballo-wandakun-overwatchmovie-wandakun2.jpg?1488406121'}}
-                      />
-                      <View style={m.calloutHeader}>
-                        <Text style={m.calloutTitle}>McDonalDzz</Text>
-                        <Text style={m.calloutVenturists}>La, Nick, Puppies, Spaghetti</Text>
-                      </View>
-                    </View>
-                  </View>
-                </Callout>
-              </Marker>
-              <Marker
-                pinColor="purple"
-                title="This is a title"
-                description="This is a description"
-                coordinate={{latitude: 37.78825,
-                             longitude: -122.4424,
-                             latitudeDelta: 0.0922,
-                             longitudeDelta: 0.0922 * width / height
-                           }}
-              />
+              {markerData.map((marker, index) => (
+                <VentureMarker
+                  key={index}
+                  markerData={marker}
+                />
+              ))}
             </MapView>
           </View>
         </View>
