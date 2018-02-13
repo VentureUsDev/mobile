@@ -4,6 +4,7 @@ import Header from '../common/Header';
 import Card from '../common/Card';
 import CardSection from '../common/CardSection';
 import Venture from './Venture'
+import { ActionButton } from 'react-native-material-ui';
 
 import { homeStyles as s } from './style';
 
@@ -112,6 +113,10 @@ export default class App extends React.Component {
             </CardSection>
           </Card>
         </ScrollView>
+        <ActionButton
+          style={{container: {backgroundColor: 'black'}}}
+          onPress={() => console.log('pressed')}
+        />
       </View>
     );
   }

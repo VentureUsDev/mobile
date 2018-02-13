@@ -3,6 +3,7 @@ import { ScrollView, View, Text, Image } from 'react-native';
 import { ListItem, Avatar, Subheader } from 'react-native-material-ui';
 import Header from '../common/Header';
 import Venturist from './Venturist';
+import { ActionButton } from 'react-native-material-ui';
 
 import { venturistStyles as v } from './style';
 
@@ -48,7 +49,7 @@ const friends = [{
 export default class Venturists extends React.Component {
   render() {
     return (
-      <View>
+      <View style={{flex: 1}}>
         <Header title="Venturists" />
         <ScrollView>
           <View>
@@ -78,6 +79,12 @@ export default class Venturists extends React.Component {
             ))}
           </View>
         </ScrollView>
+        <ActionButton
+          color="black"
+          style={{container: {backgroundColor: 'black'}}}
+          transition="speedDial"
+          actions={[{icon: 'person-add', label: 'add friend'}, {icon: 'group-add', label: 'add group'}]}
+        />
       </View>
     );
   }
