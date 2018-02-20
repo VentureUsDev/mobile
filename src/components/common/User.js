@@ -26,12 +26,12 @@ export default class User extends React.Component {
     );
   }
   renderDetails = (user) => {
-    const { firstName, lastName, level,
+    const { name, level,
             totalVentures, favoriteCategory } = user;
     return (
       <View>
         <View>
-          <Text style={c.name}>{`${firstName} ${lastName}`}</Text>
+          <Text style={c.name}>{name}</Text>
           <Text style={c.level}>{level}</Text>
         </View>
 

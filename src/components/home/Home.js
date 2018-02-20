@@ -12,7 +12,6 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={s.container}>
-        <Header title="Venture Invites" />
         <ScrollView>
           <Card style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
             <CardSection>
@@ -40,7 +39,7 @@ export default class App extends React.Component {
                 color="gray"
               />
               <Button
-                onPress={() => console.log('yee')}
+                onPress={() => this.props.navigation.navigate('Venture')}
                 title="ACCEPT"
                 color="#007aff"
               />

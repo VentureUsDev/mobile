@@ -6,8 +6,7 @@ import User from '../common/User';
 import { profileStyles as p } from './style';
 
 const ex = {
-  firstName: 'Ron',
-  lastName: 'Wowzer',
+  name: 'Ron Wowzer',
   level: 'Wanderer',
   totalVentures: '15',
   favoriteCategory: 'happiest of hours',
@@ -23,7 +22,6 @@ export default class Profile extends React.Component {
   render() {
     return (
       <View style={p.container}>
-        <Header title="Profile" />
         <User user={ex} />
       </View>
     );

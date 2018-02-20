@@ -13,18 +13,21 @@ const groups = [{
     venturists: 'Joe, Ricky, Bobby',
     totalVentures: 14,
     level: 9,
+    favoriteCategory: 'happiest of hours',
   }, {
     name: 'Vagina Monologues',
     image: 'http://wallpaper-gallery.net/images/beautiful-girls-hd-wallpapers-free-download/beautiful-girls-hd-wallpapers-free-download-11.jpg',
     venturists: 'Candy, Dandy, Sandy',
     totalVentures: 10,
     level: 5,
+    favoriteCategory: 'happiest of hours',
   }, {
     name: 'Hourly Happiness',
     image: 'http://wallpaper-gallery.net/images/beautiful-girls-hd-wallpapers-free-download/beautiful-girls-hd-wallpapers-free-download-11.jpg',
     venturists: 'Nick, La, John',
     totalVentures: 102,
     level: 100,
+    favoriteCategory: 'happiest of hours',
 }];
 
 const friends = [{
@@ -33,17 +36,20 @@ const friends = [{
     title: 'Adventurer',
     totalVentures: 85,
     level: 99,
+    favoriteCategory: 'happiest of hours',
   }, {
     name: 'Nick Castaneda',
     image: 'http://wallpaper-gallery.net/images/beautiful-girls-hd-wallpapers-free-download/beautiful-girls-hd-wallpapers-free-download-11.jpg',
     title: 'Journeyman',
     totalVentures: 70,
     level: 78,
+    favoriteCategory: 'happiest of hours',
   }, {
     name: 'John Hwang',
     title: 'Novice',
     totalVentures: 2,
     level: 2,
+    favoriteCategory: 'happiest of hours',
 }];
 
 export default class Venturists extends React.Component {
@@ -62,6 +68,8 @@ export default class Venturists extends React.Component {
                 venturists={group.venturists}
                 totalVentures={group.totalVentures}
                 level={group.level}
+                favoriteCategory={group.favoriteCategory}
+                {...this.props}
               />
             ))}
           </View>
@@ -75,6 +83,9 @@ export default class Venturists extends React.Component {
                 title={friend.title}
                 totalVentures={friend.totalVentures}
                 level={friend.level}
+                title={friend.title}
+                favoriteCategory={friend.favoriteCategory}
+                {...this.props}
               />
             ))}
           </View>
