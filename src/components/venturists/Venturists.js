@@ -56,7 +56,6 @@ export default class Venturists extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Header title="Venturists" />
         <ScrollView>
           <View>
             <Subheader text="Posse" />
