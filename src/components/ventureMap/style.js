@@ -8,7 +8,6 @@ export const mapStyles = StyleSheet.create({
     height: height,
   },
   innerContainer: {
-    marginTop: 20,
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
     alignItems: 'center',

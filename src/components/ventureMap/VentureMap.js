@@ -55,7 +55,6 @@ export default class VentureMap extends React.Component {
   render() {
     return (
       <View style={m.outerContainer}>
-        <Header title="Venture Map" />
         <View style={m.innerContainer}>
           <View
             style={StyleSheet.absoluteFill}
