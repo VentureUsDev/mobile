@@ -1,12 +1,15 @@
+import React from 'react';
+
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import HomeScreen from '../components/home/Home';
 import VenturistsScreen from '../components/venturists/Venturists';
-import MapScreen from '../components/ventureMap/VentureMap';
+import TerritoryScreen from '../components/ventureMap/VentureMap';
 import ProfileScreen from '../components/profile/Profile';
-
 import VentureScreen from '../components/home/Venture';
 import VenturistScreen from '../components/venturists/Venturist';
+
+import { Icon } from 'react-native-material-ui';
 
 const headerStyles = {
   shadowColor: '#000',
@@ -20,7 +23,7 @@ const HomeTab = StackNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
-      title: 'Venture Invites',
+      title: 'Venture',
       headerStyle: headerStyles,
       headerTitleStyle: { fontSize: 20 }
     }
@@ -55,11 +58,11 @@ const VenturistsTab = StackNavigator({
   },
 });
 
-const MapTab = StackNavigator({
+const TerritoryTab = StackNavigator({
   Map: {
-    screen: MapScreen,
+    screen: TerritoryScreen,
     navigationOptions: {
-      title: 'Venture Map',
+      title: 'Territory',
       headerStyle: headerStyles,
       headerTitleStyle: { fontSize: 20 }
     }
@@ -78,10 +81,35 @@ const ProfileTab = StackNavigator({
 });
 
 const Routes = TabNavigator({
-  Home: { screen: HomeTab },
-  Venturists: { screen: VenturistsTab },
-  Map: { screen: MapTab },
-  Profile: { screen: ProfileTab }
+  Home: {
+    screen: HomeTab,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => <Icon name="spa" color={tintColor} />
+    }
+  },
+  Venturists: {
+    screen: VenturistsTab,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => <Icon name="group" color={tintColor} />
+    }
+  },
+  Map: {
+    screen: TerritoryTab,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => <Icon name="map" color={tintColor} />
+    }
+  },
+  Profile: {
+    screen: ProfileTab,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => <Icon name="person" color={tintColor} />
+    }
+  }
+}, {
+  tabBarOptions: {
+    activeTintColor: '#007aff',
+    inactiveTintColor: 'gray',
+  }
 })
 
 export default Routes;
