@@ -31,4 +31,8 @@ export const homeStyles = StyleSheet.create({
     flex: 1,
     width: null,
   },
+  newVentureContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
 });

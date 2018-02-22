@@ -3,6 +3,8 @@ import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import HomeScreen from '../components/home/Home';
+import NewVentureScreen from '../components/home/NewVenture';
+import SelectVenturists from '../components/home/SelectVenturists';
 import VenturistsScreen from '../components/venturists/Venturists';
 import TerritoryScreen from '../components/ventureMap/VentureMap';
 import ProfileScreen from '../components/profile/Profile';
@@ -17,13 +19,28 @@ const headerStyles = {
   shadowOpacity: 0.2,
   elevation: 2,
 }
-// custom header?
-// Add new venture screen
+
 const HomeTab = StackNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
       title: 'Venture',
+      headerStyle: headerStyles,
+      headerTitleStyle: { fontSize: 20 }
+    }
+  },
+  NewVenture: {
+    screen: NewVentureScreen,
+    navigationOptions: {
+      title: 'New Venture',
+      headerStyle: headerStyles,
+      headerTitleStyle: { fontSize: 20 }
+    }
+  },
+  SelectVenturists: {
+    screen: SelectVenturists,
+    navigationOptions: {
+      title: 'Select Venturists',
       headerStyle: headerStyles,
       headerTitleStyle: { fontSize: 20 }
     }

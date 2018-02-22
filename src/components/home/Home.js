@@ -114,7 +114,7 @@ export default class App extends React.Component {
         </ScrollView>
         <ActionButton
           style={{container: {backgroundColor: 'black'}}}
-          onPress={() => console.log('pressed')}
+          onPress={() => this.props.navigation.navigate('NewVenture')}
         />
       </View>
     );

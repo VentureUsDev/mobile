@@ -2,10 +2,10 @@ import React from 'react';
 import { ScrollView, View, Text, Image } from 'react-native';
 import { ListItem, Avatar, Subheader } from 'react-native-material-ui';
 import Header from '../common/Header';
-import Venturist from './Venturist';
+import Venturist from '../venturists/Venturist';
 import { ActionButton, Icon } from 'react-native-material-ui';
 
-import { venturistStyles as v } from './style';
+import { venturistStyles as v } from '../venturists/style';
 
 const groups = [{
     name: 'The Juice Biters',
@@ -66,9 +66,8 @@ export default class Venturists extends React.Component {
                 name={group.name}
                 image={group.image}
                 venturists={group.venturists}
-                totalVentures={group.totalVentures}
-                level={group.level}
                 favoriteCategory={group.favoriteCategory}
+                editable
               />
             ))}
           </View>
@@ -81,9 +80,8 @@ export default class Venturists extends React.Component {
                 image={friend.image}
                 name={friend.name}
                 title={friend.title}
-                totalVentures={friend.totalVentures}
-                level={friend.level}
                 favoriteCategory={friend.favoriteCategory}
+                editable
               />
             ))}
           </View>
