@@ -12,4 +12,7 @@ export const venturistStyles = StyleSheet.create({
     color: 'gray',
     fontSize: 11,
   },
+  iconStyle: {
+    color: 'white',
+  },
 });

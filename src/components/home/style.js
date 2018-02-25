@@ -33,7 +33,7 @@ export const homeStyles = StyleSheet.create({
   },
   newVentureContainer: {
     flex: 1,
-    padding: 10,
+    padding: 5,
   },
   formContainer: {
     padding: 15,
@@ -44,7 +44,6 @@ export const homeStyles = StyleSheet.create({
     fontWeight: '600',
   },
   categoryPicker: {
-    paddingTop: 5,
   },
   categoryItems: {
     fontSize: 16,

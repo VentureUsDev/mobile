@@ -1,11 +1,12 @@
 import React from 'react';
-import { ScrollView, View, Text, Image } from 'react-native';
+import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
 import { ListItem, Avatar, Subheader } from 'react-native-material-ui';
 import Header from '../common/Header';
 import Venturist from './Venturist';
-import { ActionButton, Icon } from 'react-native-material-ui';
+import { Icon } from 'react-native-material-ui';
+import ActionButton from 'react-native-action-button';
 
-import { venturistStyles as v } from './style';
+import { venturistStyles as style } from './style';
 
 const groups = [{
     name: 'The Juice Biters',
@@ -88,12 +89,14 @@ export default class Venturists extends React.Component {
             ))}
           </View>
         </ScrollView>
-        <ActionButton
-          color="black"
-          style={{container: {backgroundColor: 'black'}}}
-          transition="speedDial"
-          actions={[{icon: <Icon name="person-add" />, label: 'add friend'}, {icon: 'group-add', label: 'add group'}]}
-        />
+        <ActionButton buttonColor="black">
+          <ActionButton.Item buttonColor='#9b59b6' title="New Onesie" onPress={() => this.props.navigation.navigate('NewVenturist')}>
+            <Icon name="person-add" style={style.iconStyle} />
+          </ActionButton.Item>
+          <ActionButton.Item buttonColor='#3498db' title="New Posse" onPress={() => {}}>
+            <Icon name="group-add" style={style.iconStyle} />
+          </ActionButton.Item>
+        </ActionButton>
       </View>
     );
   }

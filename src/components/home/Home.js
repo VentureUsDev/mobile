@@ -4,7 +4,7 @@ import Header from '../common/Header';
 import Card from '../common/Card';
 import CardSection from '../common/CardSection';
 import Venture from './Venture'
-import { ActionButton } from 'react-native-material-ui';
+import ActionButton from 'react-native-action-button';
 
 import { homeStyles as s } from './style';
 
@@ -113,7 +113,7 @@ export default class App extends React.Component {
           </Card>
         </ScrollView>
         <ActionButton
-          style={{container: {backgroundColor: 'black'}}}
+          buttonColor="black"
           onPress={() => this.props.navigation.navigate('NewVenture')}
         />
       </View>
