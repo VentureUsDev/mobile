@@ -6,10 +6,12 @@ import HomeScreen from '../components/home/Home';
 import NewVentureScreen from '../components/home/NewVenture';
 import SelectVenturists from '../components/home/SelectVenturists';
 import VenturistsScreen from '../components/venturists/Venturists';
+import NewVenturistScreen from '../components/venturists/NewVenturist';
 import TerritoryScreen from '../components/ventureMap/VentureMap';
 import ProfileScreen from '../components/profile/Profile';
 import VentureScreen from '../components/home/Venture';
 import VenturistScreen from '../components/venturists/Venturist';
+
 
 import { Icon } from 'react-native-material-ui';
 
@@ -72,6 +74,14 @@ const VenturistsTab = StackNavigator({
       headerStyle: headerStyles,
       headerTitleStyle: { fontSize: 20 }
     }),
+  },
+  NewVenturist: {
+    screen: NewVenturistScreen,
+    navigationOptions: {
+      title: 'New Venturist',
+      headerStyle: headerStyles,
+      headerTitleStyle: { fontSize: 20 }
+    }
   },
 });
 
