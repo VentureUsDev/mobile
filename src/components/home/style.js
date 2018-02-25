@@ -33,6 +33,23 @@ export const homeStyles = StyleSheet.create({
   },
   newVentureContainer: {
     flex: 1,
+    padding: 10,
+  },
+  formContainer: {
+    padding: 15,
     backgroundColor: 'white',
+  },
+  formLabel: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  categoryPicker: {
+    paddingTop: 5,
+  },
+  categoryItems: {
+    fontSize: 16,
+  },
+  datePicker: {
+    transform: [{scaleX: .7}, {scaleY: .7}]
   },
 });
