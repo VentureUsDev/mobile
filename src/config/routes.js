@@ -12,6 +12,8 @@ import ProfileScreen from '../components/profile/Profile';
 import VentureScreen from '../components/home/Venture';
 import VenturistScreen from '../components/venturists/Venturist';
 
+// LoginRoutes
+import LoginHomeScreen from '../components/login/home/Home';
 
 import { Icon } from 'react-native-material-ui';
 
@@ -107,7 +109,7 @@ const ProfileTab = StackNavigator({
   },
 });
 
-const Routes = TabNavigator({
+export const Routes = TabNavigator({
   Home: {
     screen: HomeTab,
     navigationOptions: {
@@ -139,4 +141,11 @@ const Routes = TabNavigator({
   }
 })
 
-export default Routes;
+export const LoginRoutes = StackNavigator({
+  LoginHome: {
+    screen: LoginHomeScreen,
+    navigationOptions: {},
+  },
+});
+
+// export LoginRoutes;
