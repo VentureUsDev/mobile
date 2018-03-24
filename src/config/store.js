@@ -2,7 +2,7 @@ import { compose, createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import accountReducer from '../reducers/accountReducer';
-// import settingsReducer from '../reducers/settingsReducer';
+import friendsReducer from '../reducers/friendsReducer';
 // import errorReducer from '../reducers/errorReducer';
 
 // import logger from '../middleware/logger';
@@ -11,7 +11,7 @@ import accountReducer from '../reducers/accountReducer';
 export default function configureStore() {
   const reducers = combineReducers({
     account: accountReducer,
-    // settings: settingsReducer,
+    friends: friendsReducer,
     // error: errorReducer,
   });
 
