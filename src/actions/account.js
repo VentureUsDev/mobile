@@ -6,8 +6,9 @@ const { request, handleErrors, responseLog } = type; // eslint-disable-line
 ////////////////////////////////////////////////////////////////////////////////
 
 const loggingIn = () => ({ type: type.LOGGING_IN });
-const loginSuccessful = () => ({ // TODO finish routes
+const loginSuccessful = () => ({
   type: type.LOGIN_SUCCESSFUL,
+   // TODO finish routes
 });
 const loginFailed = () => ({ type: type.LOGIN_FAILED });
 
@@ -33,10 +34,6 @@ export function login(phone, password) {
       });
   };
 }
-
-///////
-
-// TODO forgot password action
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -66,6 +63,34 @@ export function signUp(phone) {
           dispatch(signUpFailed());
         }
       });
+  };
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+const resettingPassword = () => ({ type: type.RESETING_PASSWORD });
+const passwordReset = () => ({ type: type.PASSWORD_RESET });
+const passwordResetFailed = () => ({ type: type.PASSWORD_RESET_FAILED });
+
+export function forgotPassword(phone) {
+  return (dispatch) => {
+    dispatch(resettingPassword());
+
+    const url = env.API_URL + env.CHANGE_PASSWORD;
+    const headers = { 'Content-Type': 'application/json' };
+    const body = { phone };
+
+    return fetch(request('PUT', url, headers, body))
+    .then(handleErrors)
+    .then(response => response.json())
+    .then((response) => {
+      dispatch(passwordReset(phone));
+    })
+    .catch((error) => {
+      if (error.apiError) {
+        dispatch(passwordResetFailed());
+      }
+    });
   };
 }
 
@@ -101,6 +126,41 @@ export function verifyCode(phone, code) {
   };
 }
 
-/////
+////////////////////////////////////////////////////////////////////////////////
 
-// TODO user details action
+const updatingUser = () => ({ type: type.UPDATING_USER });
+const userUpdated = () => ({
+  type: type.USER_UPDATED,
+  // Do user stuff
+});
+const userUpdateFailed = () => ({ type: type.USER_UPDATE_FAILED });
+
+export function updateUser({ password, firstName, lastName, email, noticeOff, emailOff }) {
+  return (dispatch) => {
+    dispatch(updatingUser());
+
+    const url = env.API_URL + env.USER_PATH;
+    const headers = { 'Content-Type': 'application/json' };
+    // Send just password if it's a password update
+    const body = !firstName ? { password } : {
+      password,
+      firstName,
+      lastName,
+      email,
+      noticeOff,
+      emailOff,
+    };
+
+    return fetch(request('PUT', url, headers, body))
+      .then(handleErrors)
+      .then(response => response.json())
+      .then((response) => {
+        dispatch(userUpdated());
+      })
+      .catch((error) => {
+        if (error.apiError) {
+          dispatch(userUpdateFailed());
+        }
+      });
+  };
+}

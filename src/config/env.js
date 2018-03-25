@@ -4,6 +4,7 @@ export default {
   API_URL: 'https://venture-sever-api.herokuapp.com/api',
   LOGIN_PATH: '/authenticate',
   USER_PATH: '/user',
+  CHANGE_PASSWORD: '/forgot-password',
   VERIFICATION_PATH: '/verify',
   FRIENDS_PATH: '/friends',
   GROUPS_PATH: '/groups',

@@ -41,6 +41,23 @@ export default function accountReducer(state = initialState, action) {
 
     ////////////////////////////////////////////////////////////////////////////
 
+    // TODO figure out how I'm gonna handle this
+    case type.RESETING_PASSWORD: {
+      return u({ resettingPassword: true }, state);
+    }
+
+    case type.PASSWORD_RESET: {
+      return u({
+        phone: action.phone,
+      }, state);
+    }
+
+    case type.PASSWORD_RESET_FAILED: {
+      return u({ resettingPassword: false }, state);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+
     case type.VERIFYING_CODE: {
       return u({ verifyingCode: true }, state);
     }
@@ -53,6 +70,23 @@ export default function accountReducer(state = initialState, action) {
     }
 
     case type.VERIFICATION_FAILED: {
+      return u({ verifyingCode: false }, state);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+
+    case type.UPDATING_USER: {
+      return u({ verifyingCode: true }, state);
+    }
+
+    case type.USER_UPDATED: {
+      return u({
+        verifyingCode: false,
+        // user here
+      }, state);
+    }
+
+    case type.USER_UPDATE_FAILED: {
       return u({ verifyingCode: false }, state);
     }
 
