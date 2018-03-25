@@ -127,10 +127,12 @@ export const LoginRoutes = StackNavigator({
     screen: SignUpScreen,
     navigationOptions: makeNavOptions('Sign Up'),
   },
+  // TODO No Back button
   Verify: {
     screen: VerifyScreen,
     navigationOptions: makeNavOptions('Verify Code'),
   },
+  // TODO No Back button
   UserDetails: {
     screen: UserDetailsScreen,
     navigationOptions: makeNavOptions('User Details'),

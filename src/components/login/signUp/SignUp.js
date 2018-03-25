@@ -33,7 +33,7 @@ class SignUp extends React.Component {
 
   signUp() {
     const { phone } = this.state;
-    this.props.signUp(phone);
+    this.props.signUp(`+${phone}`);
   }
 
   render() {

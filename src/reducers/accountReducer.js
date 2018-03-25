@@ -41,6 +41,23 @@ export default function accountReducer(state = initialState, action) {
 
     ////////////////////////////////////////////////////////////////////////////
 
+    case type.VERIFYING_CODE: {
+      return u({ verifyingCode: true }, state);
+    }
+
+    case type.VERIFICATION_SUCCESSFUL: {
+      return u({
+        verifyingCode: false,
+        accessToken: action.accessToken,
+      }, state);
+    }
+
+    case type.VERIFICATION_FAILED: {
+      return u({ verifyingCode: false }, state);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+
     default: return state;
   }
 }

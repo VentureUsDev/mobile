@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { View, TextInput, Alert, Text, TouchableOpacity } from 'react-native';
 
 import { verifyCode } from '../../../actions/account';
+import { clearVerficationError } from '../../../actions/account';
 
 class Verify extends React.Component {
   constructor(props) {
@@ -15,9 +16,17 @@ class Verify extends React.Component {
     this.verifyCode = this.verifyCode.bind(this);
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //
-  // }
+  componentWillReceiveProps(nextProps) {
+    const { accessToken, navigation: { navigate } } = this.props;
+    const { verifyError } = this.props;
+
+    if (!accessToken && nextProps.accessToken) {
+      navigate('UserDetails');
+    }
+    if (nextProps.verifyError && !verifyError) {
+      // Alert.alert('adsfasdf'); // TODO change this stuff
+    }
+  }
 
   handleCodeChange(e) { this.setState({ code: e }); }
 
@@ -28,10 +37,8 @@ class Verify extends React.Component {
   }
 
   render() {
-    const { phone, navigation: { navigate } } = this.props;
+    const { phone } = this.props;
     const { code } = this.state;
-
-    const goToFinishSignUp = () => { navigate('UserDetails'); };
 
     return (
       <View>
@@ -47,8 +54,8 @@ class Verify extends React.Component {
 
 function mapStateToProps(state) {
   const {
-    // error: { verifyError },
-    account: { phone },
+    error: { verifyError },
+    account: { accessToken, phone },
   } = state;
 
   return { phone };
@@ -57,6 +64,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     verifyCode,
+    clearVerficationError,
   }, dispatch);
 }
 

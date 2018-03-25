@@ -6,6 +6,7 @@ import friendsReducer from '../reducers/friendsReducer';
 // import venturesReducer from '../reducers/venturesReducer';
 import errorReducer from '../reducers/errorReducer';
 
+// TODO persist account reducer
 export default function configureStore() {
   const reducers = combineReducers({
     account: accountReducer,

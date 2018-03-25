@@ -34,10 +34,14 @@ export function login(phone, password) {
   };
 }
 
+///////
+
+// TODO forgot password action
+
 ////////////////////////////////////////////////////////////////////////////////
 
 const signingUp = () => ({ type: type.SIGNING_UP });
-const signUpSuccessful = phone => ({ // TODO finish routes
+const signUpSuccessful = phone => ({
   type: type.SIGN_UP_SUCCESSFUL,
   phone,
 });
@@ -47,15 +51,15 @@ export function signUp(phone) {
   return (dispatch) => {
     dispatch(signingUp());
 
-    const url = env.API_URL + env.SIGN_UP_PATH;
+    const url = env.API_URL + env.USER_PATH;
     const headers = { 'Content-Type': 'application/json' };
-    const body = { phone: `+${phone}` };
+    const body = { phone: phone };
 
     return fetch(request('POST', url, headers, body))
       .then(handleErrors)
       .then(response => response.json())
       .then((response) => {
-        dispatch(signUpSuccessful(`+${phone}`));
+        dispatch(signUpSuccessful(phone));
       })
       .catch((error) => {
         if (error.apiError) {
@@ -64,3 +68,39 @@ export function signUp(phone) {
       });
   };
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+const verifyingCode = () => ({ type: type.VERIFYING_CODE });
+const verificationSuccessful = accessToken => ({
+  type: type.VERIFICATION_SUCCESSFUL,
+  accessToken,
+});
+const verificationFailed = () => ({ type: type.VERIFICATION_FAILED });
+
+export function verifyCode(phone, code) {
+  return (dispatch) => {
+    dispatch(verifyingCode());
+
+    const url = env.API_URL + env.VERIFICATION_PATH;
+    const headers = { 'Content-Type': 'application/json' };
+    const body = { phone, code };
+
+    return fetch(request('PUT', url, headers, body))
+      .then(handleErrors)
+      .then(response => response.json())
+      .then((response) => {
+        console.log(response);
+        // dispatch(verificationSuccessful(`+${phone}`));
+      })
+      .catch((error) => {
+        if (error.apiError) {
+          dispatch(verificationFailed());
+        }
+      });
+  };
+}
+
+/////
+
+// TODO user details action

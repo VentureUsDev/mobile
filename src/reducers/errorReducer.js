@@ -26,6 +26,16 @@ export default function errorReducer(state = initialState, action) {
 
     ////////////////////////////////////////////////////////////////////////////
 
+    case type.VERIFICATION_FAILED: {
+      return u({ signUpError: true }, state);
+    }
+
+    case type.CLEAR_VERIFICATION_ERROR: {
+      return u({ signUpError: false }, state);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+
     case type.LOGOUT: {
       return initialState;
     }

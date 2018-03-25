@@ -1,43 +1,74 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { View, TextInput, Alert, Text, TouchableOpacity } from 'react-native';
+import { View, TextInput, Alert, Text, TouchableOpacity, Switch } from 'react-native';
 
-import { verify } from '../../../actions/account';
+// import { verify } from '../../../actions/account';
 
 class UserDetails extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { code: '' };
+    this.state = {
+      password: '',
+      confirmPassword: '',
+      firstName: '',
+      lastName: '',
+      emailNotifications: true,
+    };
 
-    this.handleCodeChange = this.handleCodeChange.bind(this);
-    this.signUp = this.signUp.bind(this);
+    this.handleFirstChange = this.handleFirstChange.bind(this);
+    this.handleLastChange = this.handleLastChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleConfirmChange = this.handleConfirmChange.bind(this);
+    this.toggleEmailNotifications = this.toggleEmailNotifications.bind(this);
+    this.updateUser = this.updateUser.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     // nav to finish signup
   }
 
-  handleCodeChange(e) { this.setState({ code: e }); }
+  handleFirstChange(e) { this.setState({ first: e }); }
+  handleLastChange(e) { this.setState({ last: e }); }
+  handlePasswordChange(e) { this.setState({ password: e }); }
+  handleConfirmChange(e) { this.setState({ confirm: e }); }
+  toggleEmailNotifications(e) { this.setState({ emailNotifications: !this.state.emailNotifications }); }
 
-  signUp() {
-    const { code } = this.state;
-    this.props.signUp(code);
+  updateUser() {
+    const { accessToken } = this.props;
+    const {
+      password,
+      confirmPassword,
+      firstName,
+      lastName,
+      emailNotifications,
+    } = this.state;
+    // this.props.signUp(code);
   }
 
   render() {
-    const { phone, navigation: { navigate } } = this.props;
-    const { code } = this.state;
+    const {
+      password,
+      confirmPassword,
+      firstName,
+      lastName,
+      emailNotifications,
+    } = this.state;
 
     const goToFinishSignUp = () => { navigate('UserDetails'); };
 
     return (
       <View>
-        <Text>Enter your phone number</Text>
-        <TextInput placeholder="Code" value={code} onChangeText={this.handleCodeChange} />
-        <TouchableOpacity onPress={this.verifyCode} disabled={!code} >
-          <Text>UserDetails</Text>
+        <Text>Enter User Details</Text>
+        <TextInput placeholder="First Name" value={firstName} onChangeText={this.handleFirstChange} />
+        <TextInput placeholder="Last Name" value={lastName} onChangeText={this.handleLastChange} />
+        <TextInput placeholder="Password" value={password} onChangeText={this.handlePasswordChange} />
+        <TextInput placeholder="Confirm Password" value={confirmPassword} onChangeText={this.handleConfirmChange} />
+        <Text>Email Notifications</Text>
+        <Switch onValueChange={this.toggleEmailNotifications} value={emailNotifications} />
+        <TouchableOpacity onPress={this.updateUser} disabled={!code} >
+          <Text>Update User</Text>
         </TouchableOpacity>
       </View>
     );
@@ -45,9 +76,9 @@ class UserDetails extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { phone } = state.account;
+  const { accessToken } = state.account;
 
-  return { phone };
+  return { accessToken };
 }
 
 function mapDispatchToProps(dispatch) {
