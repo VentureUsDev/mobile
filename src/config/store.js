@@ -3,26 +3,17 @@ import thunk from 'redux-thunk';
 
 import accountReducer from '../reducers/accountReducer';
 import friendsReducer from '../reducers/friendsReducer';
-// import errorReducer from '../reducers/errorReducer';
-
-// import logger from '../middleware/logger';
-// import formatter from '../middleware/formatter';
+import venturesReducer from '../reducers/venturesReducer';
 
 export default function configureStore() {
   const reducers = combineReducers({
     account: accountReducer,
     friends: friendsReducer,
-    // error: errorReducer,
+    ventures: venturesReducer,
   });
 
   return createStore(
     reducers,
-    compose(
-      applyMiddleware(
-        thunk,
-        // logger,
-        // formatter,
-      ),
-    ),
+    compose(applyMiddleware(thunk)),
   );
 }
