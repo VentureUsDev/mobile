@@ -3,13 +3,15 @@ import thunk from 'redux-thunk';
 
 import accountReducer from '../reducers/accountReducer';
 import friendsReducer from '../reducers/friendsReducer';
-import venturesReducer from '../reducers/venturesReducer';
+// import venturesReducer from '../reducers/venturesReducer';
+import errorReducer from '../reducers/errorReducer';
 
 export default function configureStore() {
   const reducers = combineReducers({
     account: accountReducer,
     friends: friendsReducer,
-    ventures: venturesReducer,
+    // ventures: venturesReducer,
+    error: errorReducer,
   });
 
   return createStore(

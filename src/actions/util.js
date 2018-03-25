@@ -1,5 +1,7 @@
+import u from 'updeep';
 
 // Creates a new request for fetch
+// TODO add json header
 export function request(method, url, headers = {}, body = null) {
   let options = { method, headers: new Headers(headers) };
   if (body) options = u({ body: JSON.stringify(body) }, options);
@@ -28,7 +30,11 @@ export function handleErrors(response) {
   return response;
 }
 
-export const FAKE_ACTION = 'FAKE_ACTION';
+export const LOGGING_IN = 'LOGGING_IN';
+export const LOGIN_SUCCESSFUL = 'LOGIN_SUCCESSFUL';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
+
+////////////////////////////////////////////////////////////////////////////////
 
 export const FETCHING_FRIENDS = 'FETCHING_FRIENDS';
 export const FRIENDS_RECEIVED = 'FRIENDS_RECEIVED';
@@ -37,3 +43,7 @@ export const FRIENDS_FETCH_FAILED = 'FRIENDS_FETCH_FAILED';
 export const FETCHING_GROUPS = 'FETCHING_GROUPS';
 export const GROUPS_RECEIVED = 'GROUPS_RECEIVED';
 export const GROUPS_FETCH_FAILED = 'GROUPS_FETCH_FAILED';
+
+////////////////////////////////////////////////////////////////////////////////
+
+export const CLEAR_LOGIN_ERROR = 'CLEAR_LOGIN_ERROR';

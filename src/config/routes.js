@@ -14,6 +14,7 @@ import VenturistScreen from '../components/venturists/Venturist';
 
 // LoginRoutes
 import LoginHomeScreen from '../components/login/home/Home';
+import SignUpScreen from '../components/login/signUp/SignUp';
 
 import { Icon } from 'react-native-material-ui';
 
@@ -24,38 +25,28 @@ const headerStyles = {
   elevation: 2,
 }
 
+const makeNavOptions = title => ({
+  title: 'Login',
+  headerStyle: headerStyles,
+  headerTitleStyle: { fontSize: 20 },
+});
+
 const HomeTab = StackNavigator({
   Home: {
     screen: HomeScreen,
-    navigationOptions: {
-      title: 'Venture',
-      headerStyle: headerStyles,
-      headerTitleStyle: { fontSize: 20 }
-    }
+    navigationOptions: makeNavOptions('Venture'),
   },
   NewVenture: {
     screen: NewVentureScreen,
-    navigationOptions: {
-      title: 'New Venture',
-      headerStyle: headerStyles,
-      headerTitleStyle: { fontSize: 20 }
-    }
+    navigationOptions: makeNavOptions('New Venture'),
   },
   SelectVenturists: {
     screen: SelectVenturists,
-    navigationOptions: {
-      title: 'Select Venturists',
-      headerStyle: headerStyles,
-      headerTitleStyle: { fontSize: 20 }
-    }
+    navigationOptions: makeNavOptions('Select Venturists'),
   },
   Venture: {
     screen: VentureScreen,
-    navigationOptions: {
-      title: 'Venture Time',
-      headerStyle: headerStyles,
-      headerTitleStyle: { fontSize: 20 }
-    }
+    navigationOptions: makeNavOptions('Venture Time'),
   },
 });
 
@@ -63,11 +54,7 @@ const HomeTab = StackNavigator({
 const VenturistsTab = StackNavigator({
   Venturists: {
     screen: VenturistsScreen,
-    navigationOptions: {
-      title: 'Venturists',
-      headerStyle: headerStyles,
-      headerTitleStyle: { fontSize: 20 }
-    }
+    navigationOptions: makeNavOptions('Venturists'),
   },
   VenturistProfile: {
     screen: ProfileScreen,
@@ -79,33 +66,21 @@ const VenturistsTab = StackNavigator({
   },
   NewVenturist: {
     screen: NewVenturistScreen,
-    navigationOptions: {
-      title: 'New Venturist',
-      headerStyle: headerStyles,
-      headerTitleStyle: { fontSize: 20 }
-    }
+    navigationOptions: makeNavOptions('New Venturist'),
   },
 });
 
 const TerritoryTab = StackNavigator({
   Map: {
     screen: TerritoryScreen,
-    navigationOptions: {
-      title: 'Territory',
-      headerStyle: headerStyles,
-      headerTitleStyle: { fontSize: 20 }
-    }
+    navigationOptions: makeNavOptions('Territory'),
   },
 });
 
 const ProfileTab = StackNavigator({
   Profile: {
     screen: ProfileScreen,
-    navigationOptions: {
-      title: 'Profile',
-      headerStyle: headerStyles,
-      headerTitleStyle: { fontSize: 20 }
-    }
+    navigationOptions: makeNavOptions('Profile'),
   },
 });
 
@@ -144,7 +119,11 @@ export const Routes = TabNavigator({
 export const LoginRoutes = StackNavigator({
   LoginHome: {
     screen: LoginHomeScreen,
-    navigationOptions: {},
+    navigationOptions: makeNavOptions('Login'),
+  },
+  SignUp: {
+    screen: SignUpScreen,
+    navigationOptions: makeNavOptions('Sign Up'),
   },
 });
 
