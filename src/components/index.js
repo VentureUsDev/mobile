@@ -12,7 +12,7 @@ class App extends React.Component {
     this.props.getGroups();
   }
   render() {
-    if (this.props.accessToken) return <Routes />;
+    if (this.props.accessToken && this.props.firstName) return <Routes />;
 
     return <LoginRoutes />;
   }
@@ -20,12 +20,13 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
   const {
-    account: { accessToken },
+    account: { accessToken, firstName },
     friends: { friends, groups },
   } = state;
 
   return {
     accessToken,
+    firstName,
     friends,
     groups,
   };

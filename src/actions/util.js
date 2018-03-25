@@ -34,6 +34,18 @@ export const LOGGING_IN = 'LOGGING_IN';
 export const LOGIN_SUCCESSFUL = 'LOGIN_SUCCESSFUL';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 
+export const SIGNING_UP = 'SIGNING_UP';
+export const SIGN_UP_SUCCESSFUL = 'SIGN_UP_SUCCESSFUL';
+export const SIGN_UP_FAILED = 'SIGN_UP_FAILED';
+
+export const VERIFYING_CODE = 'VERIFYING_CODE';
+export const VERIFICATION_SUCCESSFUL = 'VERIFICATION_SUCCESSFUL';
+export const VERIFICATION_FAILED = 'VERIFICATION_FAILED';
+
+export const UPDATING_USER = 'UPDATING_USER';
+export const USER_UPDATED = 'USER_UPDATED';
+export const USER_UPDATE_FAILED = 'USER_UPDATE_FAILED';
+
 ////////////////////////////////////////////////////////////////////////////////
 
 export const FETCHING_FRIENDS = 'FETCHING_FRIENDS';

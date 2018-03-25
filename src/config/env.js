@@ -3,6 +3,7 @@
 export default {
   API_URL: 'https://venture-sever-api.herokuapp.com/api',
   LOGIN_PATH: '/authenticate',
+  SIGN_UP_PATH: '/user',
   FRIENDS_PATH: '/friends',
   GROUPS_PATH: '/groups',
   VENTURES_PATH: '/ventures',

@@ -15,6 +15,8 @@ import VenturistScreen from '../components/venturists/Venturist';
 // LoginRoutes
 import LoginHomeScreen from '../components/login/home/Home';
 import SignUpScreen from '../components/login/signUp/SignUp';
+import VerifyScreen from '../components/login/verify/Verify';
+import UserDetailsScreen from '../components/login/userDetails/UserDetails';
 
 import { Icon } from 'react-native-material-ui';
 
@@ -124,6 +126,14 @@ export const LoginRoutes = StackNavigator({
   SignUp: {
     screen: SignUpScreen,
     navigationOptions: makeNavOptions('Sign Up'),
+  },
+  Verify: {
+    screen: VerifyScreen,
+    navigationOptions: makeNavOptions('Verify Code'),
+  },
+  UserDetails: {
+    screen: UserDetailsScreen,
+    navigationOptions: makeNavOptions('User Details'),
   },
 });
 

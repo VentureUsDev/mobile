@@ -33,3 +33,34 @@ export function login(phone, password) {
       });
   };
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+const signingUp = () => ({ type: type.SIGNING_UP });
+const signUpSuccessful = phone => ({ // TODO finish routes
+  type: type.SIGN_UP_SUCCESSFUL,
+  phone,
+});
+const signUpFailed = () => ({ type: type.SIGN_UP_FAILED });
+
+export function signUp(phone) {
+  return (dispatch) => {
+    dispatch(signingUp());
+
+    const url = env.API_URL + env.SIGN_UP_PATH;
+    const headers = { 'Content-Type': 'application/json' };
+    const body = { phone: `+${phone}` };
+
+    return fetch(request('POST', url, headers, body))
+      .then(handleErrors)
+      .then(response => response.json())
+      .then((response) => {
+        dispatch(signUpSuccessful(`+${phone}`));
+      })
+      .catch((error) => {
+        if (error.apiError) {
+          dispatch(signUpFailed());
+        }
+      });
+  };
+}

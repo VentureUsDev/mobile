@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import { View, TextInput, Alert, Text, TouchableOpacity } from 'react-native';
 
 import { signUp } from '../../../actions/account';
+import { clearSignUpError } from '../../../actions/error';
+
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -15,6 +17,18 @@ class SignUp extends React.Component {
     this.signUp = this.signUp.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { phone, navigation: { navigate } } = this.props;
+    const { signUpError } = this.props;
+
+    if (!phone && nextProps.phone) {
+      navigate('Verify');
+    }
+    if (nextProps.signUpError && !signUpError) {
+      // Alert.alert('adsfasdf'); // TODO change this stuff
+    }
+  }
+
   handlePhoneChange(e) { this.setState({ phone: e }); }
 
   signUp() {
@@ -23,10 +37,7 @@ class SignUp extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     const { phone } = this.state;
-
-    const goToVerify = () => { navigate('Verify'); };
 
     return (
       <View>
@@ -41,13 +52,18 @@ class SignUp extends React.Component {
 }
 
 function mapStateToProps(state) {
+  const {
+    account: { phone },
+    error: { signUpError },
+  } = state;
 
-  return {};
+  return { phone, signUpError };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     signUp,
+    clearSignUpError,
   }, dispatch);
 }
 

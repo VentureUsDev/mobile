@@ -6,6 +6,7 @@ import { View, TextInput, Alert, Text, TouchableOpacity } from 'react-native';
 import { login } from '../../../actions/account';
 import { clearLoginError } from '../../../actions/error';
 
+// TODO change name to LOGIN
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -56,7 +57,7 @@ class Home extends React.Component {
         <TouchableOpacity onPress={goToSignUp} >
           <Text>SignUp</Text>
         </TouchableOpacity>
-        {/* TODO nav to verify */}
+        {/* TODO Do stuff with forgot password */}
         <TouchableOpacity>
           <Text>Forgot Password</Text>
         </TouchableOpacity>
