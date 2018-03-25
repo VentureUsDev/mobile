@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import Routes from '../config/routes';
 import { getFriends, getGroups } from '../actions/friends';
+// import { getVentures } from '../actions/ventures';
 
 class App extends React.Component {
   componentWillMount() {

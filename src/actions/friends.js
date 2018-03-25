@@ -1,5 +1,4 @@
 import env from '../config/env';
-// import { apiError } from './errorActions';
 import * as type from './util';
 
 const { request, handleErrors, responseLog } = type; // eslint-disable-line
