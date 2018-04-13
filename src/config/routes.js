@@ -121,7 +121,9 @@ export const Routes = TabNavigator({
 export const LoginRoutes = StackNavigator({
   LoginHome: {
     screen: LoginHomeScreen,
-    navigationOptions: makeNavOptions('Login'),
+    navigationOptions: {
+      header: null
+    }
   },
   SignUp: {
     screen: SignUpScreen,

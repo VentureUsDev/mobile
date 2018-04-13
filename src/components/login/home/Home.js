@@ -2,9 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { View, TextInput, Alert, Text, TouchableOpacity } from 'react-native';
+import Card from '../../common/Card';
 
 import { login } from '../../../actions/account';
 import { clearLoginError } from '../../../actions/error';
+
+import style from '../style';
 
 // TODO change name to LOGIN
 class Home extends React.Component {
@@ -44,23 +47,48 @@ class Home extends React.Component {
     const goToSignUp = () => { navigate('SignUp'); };
 
     return (
-      <View>
-        <Text>Welcome</Text>
-        <TextInput keyboardType="phone-pad" placeholder="Phone Number" value={phone} onChangeText={this.handlePhoneChange} />
-        <TextInput secureTextEntry autoCorrect={false} placeholder="password" value={password} onChangeText={this.handlePasswordChange} />
-        <TouchableOpacity onPress={this.login} disabled={!phone || !password} >
-          <Text>Login</Text>
-        </TouchableOpacity>
+      <View style={style.container}>
+        <Text style={style.title}>Login</Text>
+        <Card style={style.cardContainer}>
+          <TextInput
+            style={style.textInput}
+            keyboardType="phone-pad"
+            placeholder="Your Digits"
+            value={phone}
+            onChangeText={this.handlePhoneChange}
+          />
+          <TextInput
+            style={style.textInput}
+            secureTextEntry
+            autoCorrect={false}
+            placeholder="Top Secret Word"
+            value={password}
+            onChangeText={this.handlePasswordChange}
+          />
+          <TouchableOpacity
+            style={style.loginBtn}
+            onPress={this.login}
+            disabled={!phone || !password}
+          >
+            <Text style={style.loginTxt}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={style.forgotPw}>
+            <Text style={style.forgotPwTxt}>Forgot Password?</Text>
+          </TouchableOpacity>
+        </Card>
 
-        <View style={{ height: 50 }} />
-
-        <TouchableOpacity onPress={goToSignUp} >
-          <Text>SignUp</Text>
-        </TouchableOpacity>
-        {/* TODO Do stuff with forgot password */}
-        <TouchableOpacity>
-          <Text>Forgot Password</Text>
-        </TouchableOpacity>
+        <View style={style.br} />
+        <View style={style.noAccount}>
+          <TouchableOpacity onPress={goToSignUp} >
+            <View style={style.noAccountContainer}>
+            <Text style={style.noAccountMsg}>Don't got no account?</Text>
+            <View style={style.noAccountAction}>
+              <Text style={style.noAccountActionTxt}>Sign up.</Text>
+            </View>
+            </View>
+          </TouchableOpacity>
+          {/* TODO Do stuff with forgot password */}
+        </View>
       </View>
     );
   }
