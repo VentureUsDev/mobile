@@ -81,13 +81,12 @@ class Home extends React.Component {
         <View style={style.noAccount}>
           <TouchableOpacity onPress={goToSignUp} >
             <View style={style.noAccountContainer}>
-            <Text style={style.noAccountMsg}>Don't got no account?</Text>
-            <View style={style.noAccountAction}>
-              <Text style={style.noAccountActionTxt}>Sign up.</Text>
-            </View>
+              <Text style={style.noAccountMsg}>Don't got no account?</Text>
+              <View style={style.noAccountAction}>
+                <Text style={style.noAccountActionTxt}>Sign up.</Text>
+              </View>
             </View>
           </TouchableOpacity>
-          {/* TODO Do stuff with forgot password */}
         </View>
       </View>
     );

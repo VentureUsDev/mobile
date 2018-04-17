@@ -28,7 +28,7 @@ const headerStyles = {
 }
 
 const makeNavOptions = title => ({
-  title: 'Login',
+  title,
   headerStyle: headerStyles,
   headerTitleStyle: { fontSize: 20 },
 });
@@ -127,7 +127,9 @@ export const LoginRoutes = StackNavigator({
   },
   SignUp: {
     screen: SignUpScreen,
-    navigationOptions: makeNavOptions('Sign Up'),
+    navigationOptions: {
+      header: null
+    }
   },
   // TODO No Back button
   Verify: {

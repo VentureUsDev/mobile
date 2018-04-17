@@ -72,4 +72,7 @@ export default StyleSheet.create({
     color: 'gray',
     fontWeight: '600',
   },
+  space: {
+    height: 230,
+  },
 });

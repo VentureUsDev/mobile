@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { View, TextInput, Alert, Text, TouchableOpacity } from 'react-native';
+import Card from '../../common/Card';
 
 import { signUp } from '../../../actions/account';
 import { clearSignUpError } from '../../../actions/error';
 
+import style from '../style';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -38,14 +40,30 @@ class SignUp extends React.Component {
 
   render() {
     const { phone } = this.state;
+    const { navigate } = this.props.navigation;
+
+    const goToLogin = () => { navigate('LoginHome'); };
 
     return (
-      <View>
-        <Text>Enter your phone number</Text>
-        <TextInput keyboardType="phone-pad" placeholder="Phone Number" value={phone} onChangeText={this.handlePhoneChange} />
-        <TouchableOpacity onPress={this.signUp} disabled={!phone} >
-          <Text>Sign Up</Text>
-        </TouchableOpacity>
+      <View style={style.container}>
+        <Text style={style.title}>Sign Up</Text>
+        <Card style={[style.cardContainer, style.space]}>
+          <TextInput style={style.textInput} keyboardType="phone-pad" placeholder="Your Digits" value={phone} onChangeText={this.handlePhoneChange} />
+          <TouchableOpacity style={style.loginBtn} onPress={this.signUp} disabled={!phone} >
+            <Text style={style.loginTxt}>Sign Up</Text>
+          </TouchableOpacity>
+        </Card>
+        <View style={style.br} />
+        <View style={style.noAccount}>
+          <TouchableOpacity onPress={goToLogin} >
+            <View style={style.noAccountContainer}>
+              <Text style={style.noAccountMsg}>Lied to us?</Text>
+              <View style={style.noAccountAction}>
+                <Text style={style.noAccountActionTxt}>Log in.</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
