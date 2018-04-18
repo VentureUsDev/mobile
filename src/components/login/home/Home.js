@@ -48,7 +48,8 @@ class Home extends React.Component {
 
     return (
       <View style={style.container}>
-        <Text style={style.title}>Login</Text>
+        <Text style={style.title}>You miss 100% of the shots you don't take.</Text>
+        <Text style={style.subtitle}>-Wayne Gretzsky, Michael Scott</Text>
         <Card style={style.cardContainer}>
           <TextInput
             style={style.textInput}

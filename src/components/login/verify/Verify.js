@@ -2,9 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { View, TextInput, Alert, Text, TouchableOpacity } from 'react-native';
+import Card from '../../common/Card';
 
 import { verifyCode } from '../../../actions/account';
 import { clearVerficationError } from '../../../actions/account';
+
+import style from '../style';
 
 class Verify extends React.Component {
   constructor(props) {
@@ -41,12 +44,24 @@ class Verify extends React.Component {
     const { code } = this.state;
 
     return (
-      <View>
-        <Text>{`Enter your verification code for ${phone}`}</Text>
-        <TextInput placeholder="Code" value={code} onChangeText={this.handleCodeChange} />
-        <TouchableOpacity onPress={this.verifyCode} disabled={!code} >
-          <Text>Verify</Text>
-        </TouchableOpacity>
+      <View style={[style.container, style.padBot]}>
+        <Text style={style.title}>Tell me you're real. I need to know.</Text>
+        <Text style={style.subtitle}>I NEED TO KNOW</Text>
+        <Card style={[style.cardContainer, style.space]}>
+          <TextInput
+            style={style.textInput}
+            placeholder="Enter Code"
+            value={code}
+            onChangeText={this.handleCodeChange}
+          />
+          <TouchableOpacity
+            style={style.loginBtn}
+            onPress={this.verifyCode}
+            disabled={!code}
+          >
+            <Text style={style.loginTxt}>Insert Retinas</Text>
+          </TouchableOpacity>
+        </Card>
       </View>
     );
   }

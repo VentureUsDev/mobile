@@ -7,10 +7,14 @@ export default StyleSheet.create({
     backgroundColor: '#f4f4f4',
   },
   title: {
-    fontSize: 24,
-    fontWeight: '600',
-    marginBottom: 30,
+    fontSize: 14,
     textAlign: 'center',
+  },
+  subtitle: {
+    textAlign: 'center',
+    color: 'gray',
+    marginTop: 10,
+    marginBottom: 20,
   },
   cardContainer: {
     backgroundColor: 'white',
@@ -74,5 +78,8 @@ export default StyleSheet.create({
   },
   space: {
     height: 230,
+  },
+  padBot: {
+    paddingBottom: 80,
   },
 });

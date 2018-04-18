@@ -46,7 +46,8 @@ class SignUp extends React.Component {
 
     return (
       <View style={style.container}>
-        <Text style={style.title}>Sign Up</Text>
+        <Text style={style.title}>Give us your data, watch us grow rich.</Text>
+        <Text style={style.subtitle}>Just kidding~</Text>
         <Card style={[style.cardContainer, style.space]}>
           <TextInput style={style.textInput} keyboardType="phone-pad" placeholder="Your Digits" value={phone} onChangeText={this.handlePhoneChange} />
           <TouchableOpacity style={style.loginBtn} onPress={this.signUp} disabled={!phone} >

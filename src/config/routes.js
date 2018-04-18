@@ -121,15 +121,11 @@ export const Routes = TabNavigator({
 export const LoginRoutes = StackNavigator({
   LoginHome: {
     screen: LoginHomeScreen,
-    navigationOptions: {
-      header: null
-    }
+    navigationOptions: makeNavOptions('Login')
   },
   SignUp: {
     screen: SignUpScreen,
-    navigationOptions: {
-      header: null
-    }
+    navigationOptions: makeNavOptions('Signup')
   },
   // TODO No Back button
   Verify: {
