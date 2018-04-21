@@ -4,7 +4,6 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#f4f4f4',
   },
   title: {
     fontSize: 14,
@@ -23,8 +22,8 @@ export default StyleSheet.create({
     paddingTop: 40,
   },
   textInput: {
-    marginLeft: 50,
-    marginRight: 50,
+    marginLeft: 35,
+    marginRight: 35,
     marginTop: 10,
     marginBottom: 10,
     borderBottomWidth: 1,
@@ -36,9 +35,9 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
     backgroundColor: 'black',
-    marginTop: 30,
-    marginRight: 50,
-    marginLeft: 50,
+    marginTop: 20,
+    marginRight: 35,
+    marginLeft: 35,
     padding: 10
   },
   loginTxt: {
@@ -57,6 +56,9 @@ export default StyleSheet.create({
   },
   br: {
     height: 70,
+  },
+  sbr: {
+    height: 30,
   },
   noAccount: {
     alignSelf: 'center',

@@ -2,8 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { View, TextInput, Alert, Text, TouchableOpacity, Switch } from 'react-native';
+import Card from '../../common/Card';
 
-// import { verify } from '../../../actions/account';
+import { verify } from '../../../actions/account';
+
+import style from '../style';
 
 class UserDetails extends React.Component {
   constructor(props) {
@@ -14,14 +17,12 @@ class UserDetails extends React.Component {
       confirmPassword: '',
       firstName: '',
       lastName: '',
-      emailNotifications: true,
     };
 
     this.handleFirstChange = this.handleFirstChange.bind(this);
     this.handleLastChange = this.handleLastChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleConfirmChange = this.handleConfirmChange.bind(this);
-    this.toggleEmailNotifications = this.toggleEmailNotifications.bind(this);
     this.updateUser = this.updateUser.bind(this);
   }
 
@@ -33,7 +34,6 @@ class UserDetails extends React.Component {
   handleLastChange(e) { this.setState({ last: e }); }
   handlePasswordChange(e) { this.setState({ password: e }); }
   handleConfirmChange(e) { this.setState({ confirm: e }); }
-  toggleEmailNotifications(e) { this.setState({ emailNotifications: !this.state.emailNotifications }); }
 
   updateUser() {
     const { accessToken } = this.props;
@@ -42,7 +42,6 @@ class UserDetails extends React.Component {
       confirmPassword,
       firstName,
       lastName,
-      emailNotifications,
     } = this.state;
     // this.props.signUp(code);
   }
@@ -53,23 +52,30 @@ class UserDetails extends React.Component {
       confirmPassword,
       firstName,
       lastName,
-      emailNotifications,
     } = this.state;
 
     const goToFinishSignUp = () => { navigate('UserDetails'); };
 
     return (
-      <View>
-        <Text>Enter User Details</Text>
-        <TextInput placeholder="First Name" value={firstName} onChangeText={this.handleFirstChange} />
-        <TextInput placeholder="Last Name" value={lastName} onChangeText={this.handleLastChange} />
-        <TextInput placeholder="Password" value={password} onChangeText={this.handlePasswordChange} />
-        <TextInput placeholder="Confirm Password" value={confirmPassword} onChangeText={this.handleConfirmChange} />
-        <Text>Email Notifications</Text>
-        <Switch onValueChange={this.toggleEmailNotifications} value={emailNotifications} />
-        <TouchableOpacity onPress={this.updateUser} disabled={!code} >
-          <Text>Update User</Text>
-        </TouchableOpacity>
+      <View style={style.container}>
+        <Text style={style.title}>Enter your life details.</Text>
+        <Text style={style.subtitle}>Last step. We promise.</Text>
+        <Card style={style.cardContainer}>
+          <TextInput style={style.textInput} placeholder="First Name" value={firstName} onChangeText={this.handleFirstChange} />
+          <TextInput style={style.textInput} placeholder="Last Name" value={lastName} onChangeText={this.handleLastChange} />
+          <TextInput style={style.textInput} placeholder="Password" value={password} onChangeText={this.handlePasswordChange} />
+          <TextInput style={style.textInput} placeholder="Confirm Password" value={confirmPassword} onChangeText={this.handleConfirmChange} />
+          <TouchableOpacity
+            style={style.loginBtn}
+            onPress={() => console.log('hello')}
+          >
+            <Text style={style.loginTxt}>Fork Over Data</Text>
+          </TouchableOpacity>
+        </Card>
+      {/*<TouchableOpacity style={style.loginBtn}> onPress={this.updateUser} disabled={!code} >
+        <Text style={style.loginTxt}>Update User</Text>
+      </TouchableOpacity>*/}
+        <View style={style.sbr} />
       </View>
     );
   }
