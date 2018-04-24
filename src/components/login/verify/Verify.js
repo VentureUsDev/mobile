@@ -36,7 +36,8 @@ class Verify extends React.Component {
   verifyCode() {
     const { phone } = this.props;
     const { code } = this.state;
-    this.props.verifyCode(phone, code);
+    // this.props.verifyCode(phone, code);
+    this.props.navigation.navigate('UserDetails')
   }
 
   render() {
@@ -48,12 +49,15 @@ class Verify extends React.Component {
         <Text style={style.title}>Tell me you're real. I need to know.</Text>
         <Text style={style.subtitle}>I NEED TO KNOW</Text>
         <Card style={[style.cardContainer, style.space]}>
+          <View style={style.inputContainer}>
+          <Text style={style.inputTitle}>VERIFICATION CODE</Text>
           <TextInput
             style={style.textInput}
             placeholder="Enter Code"
             value={code}
             onChangeText={this.handleCodeChange}
           />
+          </View>
           <TouchableOpacity
             style={style.loginBtn}
             onPress={this.verifyCode}

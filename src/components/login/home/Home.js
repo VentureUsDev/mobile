@@ -51,21 +51,27 @@ class Home extends React.Component {
         <Text style={style.title}>You miss 100% of the shots you don't take.</Text>
         <Text style={style.subtitle}>-Wayne Gretzsky, Michael Scott</Text>
         <Card style={style.cardContainer}>
-          <TextInput
-            style={style.textInput}
-            keyboardType="phone-pad"
-            placeholder="Your Digits"
-            value={phone}
-            onChangeText={this.handlePhoneChange}
-          />
-          <TextInput
-            style={style.textInput}
-            secureTextEntry
-            autoCorrect={false}
-            placeholder="Top Secret Word"
-            value={password}
-            onChangeText={this.handlePasswordChange}
-          />
+          <View style={style.inputContainer}>
+            <Text style={style.inputTitle}>PHONE NUMBER</Text>
+            <TextInput
+              style={style.textInput}
+              keyboardType="phone-pad"
+              placeholder="Your Digits"
+              value={phone}
+              onChangeText={this.handlePhoneChange}
+            />
+          </View>
+          <View style={style.inputContainer}>
+            <Text style={style.inputTitle}>PASSWORD</Text>
+            <TextInput
+              style={style.textInput}
+              secureTextEntry
+              autoCorrect={false}
+              placeholder="Top Secret Word"
+              value={password}
+              onChangeText={this.handlePasswordChange}
+            />
+          </View>
           <TouchableOpacity
             style={style.loginBtn}
             onPress={this.login}

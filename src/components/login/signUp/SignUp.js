@@ -49,7 +49,10 @@ class SignUp extends React.Component {
         <Text style={style.title}>Give us your data, watch us grow rich.</Text>
         <Text style={style.subtitle}>Just kidding~</Text>
         <Card style={[style.cardContainer, style.space]}>
-          <TextInput style={style.textInput} keyboardType="phone-pad" placeholder="Your Digits" value={phone} onChangeText={this.handlePhoneChange} />
+          <View style={style.inputContainer}>
+            <Text style={style.inputTitle}>PHONE NUMBER</Text>
+            <TextInput style={style.textInput} keyboardType="phone-pad" placeholder="Your Digits" value={phone} onChangeText={this.handlePhoneChange} />
+          </View>
           <TouchableOpacity style={style.loginBtn} onPress={this.signUp} disabled={!phone} >
             <Text style={style.loginTxt}>Sign Up</Text>
           </TouchableOpacity>

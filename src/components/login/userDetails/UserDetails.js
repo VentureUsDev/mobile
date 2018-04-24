@@ -61,21 +61,33 @@ class UserDetails extends React.Component {
         <Text style={style.title}>Enter your life details.</Text>
         <Text style={style.subtitle}>Last step. We promise.</Text>
         <Card style={style.cardContainer}>
-          <TextInput style={style.textInput} placeholder="First Name" value={firstName} onChangeText={this.handleFirstChange} />
-          <TextInput style={style.textInput} placeholder="Last Name" value={lastName} onChangeText={this.handleLastChange} />
-          <TextInput style={style.textInput} placeholder="Password" value={password} onChangeText={this.handlePasswordChange} />
-          <TextInput style={style.textInput} placeholder="Confirm Password" value={confirmPassword} onChangeText={this.handleConfirmChange} />
+          <View style={style.inputContainer}>
+            <Text style={style.inputTitle}>FIRST NAME</Text>
+            <TextInput style={style.textInput} placeholder="First Name" value={firstName} onChangeText={this.handleFirstChange} />
+          </View>
+          <View style={style.inputContainer}>
+            <Text style={style.inputTitle}>LAST NAME</Text>
+            <TextInput style={style.textInput} placeholder="Last Name" value={lastName} onChangeText={this.handleLastChange} />
+          </View>
+          <View style={style.inputContainer}>
+            <Text style={style.inputTitle}>PASSWORD</Text>
+            <TextInput style={style.textInput} placeholder="Password" value={password} onChangeText={this.handlePasswordChange} />
+          </View>
+          <View style={style.inputContainer}>
+            <Text style={style.inputTitle}>CONFIRM PASSWORD</Text>
+            <TextInput style={style.textInput} placeholder="Confirm Password" value={confirmPassword} onChangeText={this.handleConfirmChange} />
+          </View>
+
           <TouchableOpacity
             style={style.loginBtn}
             onPress={() => console.log('hello')}
           >
             <Text style={style.loginTxt}>Fork Over Data</Text>
           </TouchableOpacity>
+          {/*<TouchableOpacity style={style.loginBtn}> onPress={this.updateUser} disabled={!code} >
+            <Text style={style.loginTxt}>Update User</Text>
+          </TouchableOpacity>*/}
         </Card>
-      {/*<TouchableOpacity style={style.loginBtn}> onPress={this.updateUser} disabled={!code} >
-        <Text style={style.loginTxt}>Update User</Text>
-      </TouchableOpacity>*/}
-        <View style={style.sbr} />
       </View>
     );
   }

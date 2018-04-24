@@ -6,11 +6,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 14,
+    fontSize: 18,
+    fontWeight: '500',
     textAlign: 'center',
   },
   subtitle: {
     textAlign: 'center',
+    fontSize: 16,
     color: 'gray',
     marginTop: 10,
     marginBottom: 20,
@@ -20,21 +22,26 @@ export default StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     paddingTop: 40,
+    paddingBottom: 20,
+    justifyContent: 'space-around'
+  },
+  inputContainer: {
+    marginHorizontal: 35,
+    marginVertical: 5,
+  },
+  inputTitle: {
+    fontSize: 10,
+    fontWeight: '600',
   },
   textInput: {
-    marginLeft: 35,
-    marginRight: 35,
-    marginTop: 10,
     marginBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: 'black',
-    height: 50,
+    borderBottomWidth: 0.5,
+    borderBottomColor: 'rgba(0, 0, 0, 0.9)',
+    height: 40,
     fontSize: 16,
   },
   loginBtn: {
-    borderWidth: 1,
-    borderColor: 'black',
-    backgroundColor: 'black',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
     marginTop: 20,
     marginRight: 35,
     marginLeft: 35,
@@ -46,9 +53,10 @@ export default StyleSheet.create({
     fontSize: 18,
   },
   forgotPw: {
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingTop: 20,
     alignSelf: 'flex-end',
-    marginRight: 30,
+    marginRight: 15,
   },
   forgotPwTxt: {
     color: 'gray',
@@ -56,9 +64,6 @@ export default StyleSheet.create({
   },
   br: {
     height: 70,
-  },
-  sbr: {
-    height: 30,
   },
   noAccount: {
     alignSelf: 'center',
