@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     if (this.props.accessToken && this.props.firstName) return <Routes />;
 
-    return <Routes />;
+    return <LoginRoutes />;
   }
 }
 

@@ -3,7 +3,7 @@ import Card from '../common/Card';
 import CardSection from '../common/CardSection';
 import { homeStyles as s } from './style';
 
-export default class Venture extends Component {
+export default class Venture extends React.Component {
   render() {
     return (
       <View style={s.container}>
@@ -11,7 +11,7 @@ export default class Venture extends Component {
           cards={['Yummy', 'Yummy2', 'Yummy3', 'Yummy4', 'Yummy5', 'Yummy6', 'Yummy7']}
           renderCard={(card) => {
             return (
-              <Card style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
+              <Card style={{justifyContent: 'center', backgroundColor: 'white'}}>
                 <CardSection>
                   <View style={s.thumbnailContainer}>
                     <Image
@@ -32,7 +32,7 @@ export default class Venture extends Component {
                 </CardSection>
                 <CardSection>
                   <Button
-                    onPress={() => Linking.openURL(url)}
+                    onPress={() => console.log('HI~')}
                     title="ACCEPT INVITATION"
                     color="#007aff"
                   />

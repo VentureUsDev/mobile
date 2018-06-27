@@ -1,3 +1,5 @@
+import { StyleSheet } from 'react-native';
+
 export const commonStyles = StyleSheet.create({
   headerTitle: {
     fontSize: 20
@@ -25,7 +27,7 @@ export const commonStyles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 2,
     elevation: 1,
-    margin: 10,
+    margin: 15,
   },
   cardSection: {
     borderBottomWidth: 1,
