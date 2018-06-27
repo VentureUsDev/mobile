@@ -1,5 +1,3 @@
-import React from 'react';
-import { Text, View, ScrollView, Image, Button } from 'react-native';
 import Header from '../common/Header';
 import Card from '../common/Card';
 import CardSection from '../common/CardSection';
@@ -8,11 +6,11 @@ import ActionButton from 'react-native-action-button';
 
 import { homeStyles as s } from './style';
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
       <View style={s.container}>
-        <ScrollView>
+        <ScrollView style={{paddingVertical: 20}}>
           <Card style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
             <CardSection>
               <View style={s.thumbnailContainer}>

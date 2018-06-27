@@ -1,5 +1,3 @@
-import React from 'react';
-import { ScrollView, View, Text, Image } from 'react-native';
 import UploadImage from './UploadImage';
 
 import { commonStyles as c } from './style';

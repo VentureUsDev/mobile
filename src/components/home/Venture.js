@@ -1,11 +1,9 @@
-import React from 'react';
-import { View, Text, Button, Image} from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import Card from '../common/Card';
 import CardSection from '../common/CardSection';
 import { homeStyles as s } from './style';
 
-export default class Venture extends React.Component {
+export default class Venture extends Component {
   render() {
     return (
       <View style={s.container}>

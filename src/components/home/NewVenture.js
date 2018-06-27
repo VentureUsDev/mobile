@@ -1,10 +1,8 @@
-import React from 'react';
-import { ScrollView, Picker, View, Text, DatePickerIOS, Button } from 'react-native';
 import Card from '../common/Card';
 
 import { homeStyles as s } from './style';
 
-export default class NewVenture extends React.Component {
+export default class NewVenture extends Component {
   state = { category: 'activities', date: new Date() };
 
   setDate = (newDate) => this.setState({ date: newDate });

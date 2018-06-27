@@ -1,5 +1,3 @@
-import React from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
 import Header from '../common/Header';
 import User from '../common/User';
 
@@ -18,7 +16,7 @@ const ex = {
   ]
 };
 
-export default class Profile extends React.Component {
+export default class Profile extends Component {
   render() {
     return (
       <View style={p.container}>

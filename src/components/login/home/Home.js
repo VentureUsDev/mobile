@@ -1,7 +1,5 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { View, TextInput, Alert, Text, TouchableOpacity } from 'react-native';
 import Card from '../../common/Card';
 
 import { login } from '../../../actions/account';
@@ -10,7 +8,7 @@ import { clearLoginError } from '../../../actions/error';
 import style from '../style';
 
 // TODO change name to LOGIN
-class Home extends React.Component {
+class Home extends Component {
   constructor(props) {
     super(props);
 

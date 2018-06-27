@@ -2,7 +2,21 @@
   "presets": ["babel-preset-expo"],
   "env": {
     "development": {
-      "plugins": ["transform-react-jsx-source"]
+      "plugins": [
+        "transform-react-jsx-source",
+        ["auto-import", {
+          "declarations": [
+            {"path": "react", "default": "React", "members": ["Component"]},
+            {"path": "react-native",
+              "members": [
+                "Image", "Platform", "StyleSheet", "Dimensions", "View", "ScrollView",
+                "Text", "TextInput", "Switch", "Picker", "CheckBox", "Alert",
+                "Button", "ActivityIndicator", "TouchableOpacity", "Switch", "DatePickerIOS"
+              ]
+            },
+          ]
+        }]
+      ]
     }
   }
 }

@@ -1,5 +1,3 @@
-import React from 'react';
-import { TextInput, View, Text, Button } from 'react-native';
 import Card from '../common/Card';
 import CardSection from '../common/CardSection';
 import Input from '../common/Input';

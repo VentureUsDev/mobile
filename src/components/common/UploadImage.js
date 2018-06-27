@@ -1,8 +1,6 @@
-import React from 'react';
-import { View, Text } from 'react-native';
 import { commonStyles as c } from './style';
 
-export default class UploadImage extends React.Component {
+export default class UploadImage extends Component {
   render() {
     return (
       <View style={c.uploadImageContainer}>

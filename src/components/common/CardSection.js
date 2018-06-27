@@ -1,8 +1,6 @@
-import React from 'react';
-import { View } from 'react-native';
 import { commonStyles as common } from './style';
 
-export default class CardSection extends React.Component {
+export default class CardSection extends Component {
   getStyles = () => {
     const { image, buttons } = this.props;
     if (image) {

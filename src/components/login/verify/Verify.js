@@ -1,7 +1,5 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { View, TextInput, Alert, Text, TouchableOpacity } from 'react-native';
 import Card from '../../common/Card';
 
 import { verifyCode } from '../../../actions/account';
@@ -9,7 +7,7 @@ import { clearVerficationError } from '../../../actions/account';
 
 import style from '../style';
 
-class Verify extends React.Component {
+class Verify extends Component {
   constructor(props) {
     super(props);
 

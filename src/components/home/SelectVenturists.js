@@ -1,5 +1,3 @@
-import React from 'react';
-import { ScrollView, View, Text, Image } from 'react-native';
 import { ListItem, Avatar, Subheader } from 'react-native-material-ui';
 import Header from '../common/Header';
 import Venturist from '../venturists/Venturist';
@@ -52,7 +50,7 @@ const friends = [{
     favoriteCategory: 'happiest of hours',
 }];
 
-export default class Venturists extends React.Component {
+export default class Venturists extends Component {
   render() {
     return (
       <View style={{flex: 1}}>

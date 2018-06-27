@@ -1,9 +1,7 @@
 import React from 'react';
-import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
-import { ListItem, Avatar, Subheader } from 'react-native-material-ui';
+import { ListItem, Avatar, Subheader, Icon } from 'react-native-material-ui';
 import Header from '../common/Header';
 import Venturist from './Venturist';
-import { Icon } from 'react-native-material-ui';
 import ActionButton from 'react-native-action-button';
 
 import { venturistStyles as style } from './style';

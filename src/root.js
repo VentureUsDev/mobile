@@ -1,4 +1,3 @@
-import React from 'react';
 import { Provider } from 'react-redux';
 import { AsyncStorage } from 'react-native';
 
@@ -9,7 +8,7 @@ import { ThemeProvider } from 'react-native-material-ui'
 
 const store = configureStore();
 
-export default class ConnectedApp extends React.Component {
+export default class ConnectedApp extends Component {
   render() {
     return (
       <Provider store={store}>

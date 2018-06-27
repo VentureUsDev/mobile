@@ -1,8 +1,6 @@
-import React from 'react';
-import { Text, View } from 'react-native';
 import {commonStyles as common} from './style';
 
-export default class Header extends React.Component {
+export default class Header extends Component {
   render() {
     return (
       <View style={common.headerContainer}>

@@ -1,5 +1,3 @@
-import React from 'react';
-import { View, Text, Image } from 'react-native';
 import { ListItem, Avatar, Checkbox } from 'react-native-material-ui';
 
 import { venturistStyles as v } from './style';
