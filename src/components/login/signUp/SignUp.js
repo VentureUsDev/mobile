@@ -1,46 +1,30 @@
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import Card from '../../common/Card';
+import Card from '../../common/Card'
+import { signUp } from '../../../actions/account'
+import firebase, { auth } from '../../firebase'
 
-import { signUp } from '../../../actions/account';
-import { clearSignUpError } from '../../../actions/error';
+import style from '../style'
 
-import style from '../style';
+export default class extends Component {
+  state = { email: '', password: '', error: '', loading: false }
 
-class SignUp extends React.Component {
-  constructor(props) {
-    super(props);
+  handleEmailChange = email => this.setState({email})
 
-    this.state = { phone: '' };
+  handlePasswordChange = password => this.setState({password})
 
-    this.handlePhoneChange = this.handlePhoneChange.bind(this);
-    this.signUp = this.signUp.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { phone, navigation: { navigate } } = this.props;
-    const { signUpError } = this.props;
-
-    if (!phone && nextProps.phone) {
-      navigate('Verify');
-    }
-    if (nextProps.signUpError && !signUpError) {
-      // Alert.alert('adsfasdf'); // TODO change this stuff
-    }
-  }
-
-  handlePhoneChange(e) { this.setState({ phone: e }); }
-
-  signUp() {
-    const { phone } = this.state;
-    this.props.signUp(`+${phone}`);
+  signUp = () => {
+    const { email, password } = this.state
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(result => {
+        console.log('result', result)
+      })
+      .catch(error => {
+        this.setState({error: error.message, loading: false})
+      })
   }
 
   render() {
-    const { phone } = this.state;
-    const { navigate } = this.props.navigation;
-
-    const goToLogin = () => { navigate('LoginHome'); };
+    const { password, email, loading, error } = this.state
+    const { goBack } = this.props.navigation
 
     return (
       <View style={style.container}>
@@ -49,15 +33,40 @@ class SignUp extends React.Component {
         <Card style={[style.cardContainer, style.space]}>
           <View style={style.inputContainer}>
             <Text style={style.inputTitle}>PHONE NUMBER</Text>
-            <TextInput style={style.textInput} keyboardType="phone-pad" placeholder="Your Digits" value={phone} onChangeText={this.handlePhoneChange} />
+            <TextInput
+              style={style.textInput}
+              autoCorrect={false}
+              placeholder="Email"
+              value={email}
+              onChangeText={this.handleEmailChange}
+            />
           </View>
-          <TouchableOpacity style={style.loginBtn} onPress={this.signUp} disabled={!phone} >
-            <Text style={style.loginTxt}>Sign Up</Text>
+          <View style={style.inputContainer}>
+            <Text style={style.inputTitle}>PASSWORD</Text>
+            <TextInput
+              style={style.textInput}
+              secureTextEntry
+              autoCorrect={false}
+              placeholder="Top Secret Word"
+              value={password}
+              onChangeText={this.handlePasswordChange}
+            />
+          </View>
+          <Text style={{paddingHorizontal: 20, color: 'red', fontSize: 14, alignSelf: 'center'}}>{this.state.error}</Text>
+          <TouchableOpacity
+            style={style.loginBtn}
+            onPress={this.signUp}
+            disabled={!email || !password}
+          >
+            {this.state.loading
+              ? <ActivityIndicator size="small" color="white" />
+              : <Text style={style.loginTxt}>Sign Up</Text>
+            }
           </TouchableOpacity>
         </Card>
         <View style={style.br} />
         <View style={style.noAccount}>
-          <TouchableOpacity onPress={goToLogin} >
+          <TouchableOpacity onPress={() => goBack()} >
             <View style={style.noAccountContainer}>
               <Text style={style.noAccountMsg}>Lied to us?</Text>
               <View style={style.noAccountAction}>
@@ -67,29 +76,6 @@ class SignUp extends React.Component {
           </TouchableOpacity>
         </View>
       </View>
-    );
+    )
   }
 }
-
-function mapStateToProps(state) {
-  const {
-    account: { phone },
-    error: { signUpError },
-  } = state;
-
-  return { phone, signUpError };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    signUp,
-    clearSignUpError,
-  }, dispatch);
-}
-
-const SignUpContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SignUp);
-
-export default SignUpContainer;

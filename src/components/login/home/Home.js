@@ -1,49 +1,30 @@
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import Card from '../../common/Card';
+import { connect } from 'react-redux'
+import Card from '../../common/Card'
+import firebase, { auth } from '../../firebase'
 
-import { login } from '../../../actions/account';
-import { clearLoginError } from '../../../actions/error';
+import style from '../style'
 
-import style from '../style';
+export default class extends Component {
+  state = { email: '', password: '', error: '', loading: false }
 
-// TODO change name to LOGIN
-class Home extends Component {
-  constructor(props) {
-    super(props);
+  handleEmailChange = email => this.setState({email})
 
-    this.state = {
-      phone: '',
-      password: '',
-    }
+  handlePasswordChange = password => this.setState({password})
 
-    this.handlePhoneChange = this.handlePhoneChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.login = this.login.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { loginError } = this.props;
-
-    if (nextProps.loginError && !loginError) {
-      // Alert.alert('adsfasdf'); TODO change this stuff
-    }
-  }
-
-  handlePhoneChange(e) { this.setState({ phone: e }); }
-  handlePasswordChange(e) { this.setState({ password: e }); }
-
-  login() {
-    const { phone, password } = this.state;
-    this.props.login(phone, password);
+  login = () => {
+    const { email, password } = this.state
+    this.setState({ error: '', loading: true })
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then()
+      .catch(error => {
+        this.setState({error: error.message, loading: false})
+      })
   }
 
   render() {
-    const { navigate } = this.props.navigation;
-    const { phone, password } = this.state;
-
-    const goToSignUp = () => { navigate('SignUp'); };
-
+    const { email, password } = this.state
+    const { navigate } = this.props.navigation
+    const goToSignUp = () => navigate('SignUp')
     return (
       <View style={style.container}>
         <Text style={style.title}>You miss 100% of the shots you don't take.</Text>
@@ -53,10 +34,10 @@ class Home extends Component {
             <Text style={style.inputTitle}>PHONE NUMBER</Text>
             <TextInput
               style={style.textInput}
-              keyboardType="phone-pad"
-              placeholder="Your Digits"
-              value={phone}
-              onChangeText={this.handlePhoneChange}
+              placeholder="Email"
+              value={email}
+              autoCorrect={false}
+              onChangeText={this.handleEmailChange}
             />
           </View>
           <View style={style.inputContainer}>
@@ -70,12 +51,16 @@ class Home extends Component {
               onChangeText={this.handlePasswordChange}
             />
           </View>
+          <Text style={{paddingHorizontal: 20, color: 'red', fontSize: 14, alignSelf: 'center'}}>{this.state.error}</Text>
           <TouchableOpacity
             style={style.loginBtn}
             onPress={this.login}
-            disabled={!phone || !password}
+            disabled={!email || !password}
           >
-            <Text style={style.loginTxt}>Login</Text>
+            {this.state.loading
+              ? <ActivityIndicator size="small" color="white" />
+              : <Text style={style.loginTxt}>Login</Text>
+            }
           </TouchableOpacity>
           <TouchableOpacity style={style.forgotPw}>
             <Text style={style.forgotPwTxt}>Forgot Password?</Text>
@@ -94,26 +79,6 @@ class Home extends Component {
           </TouchableOpacity>
         </View>
       </View>
-    );
+    )
   }
 }
-
-function mapStateToProps(state) {
-  const { loginError } = state.error;
-
-  return { loginError };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    login,
-    clearLoginError,
-  }, dispatch);
-}
-
-const HomeContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Home);
-
-export default HomeContainer;

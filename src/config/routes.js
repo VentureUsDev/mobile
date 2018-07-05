@@ -1,22 +1,22 @@
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation'
 
-import HomeScreen from '../components/home/Home';
-import NewVentureScreen from '../components/home/NewVenture';
-import SelectVenturists from '../components/home/SelectVenturists';
-import VenturistsScreen from '../components/venturists/Venturists';
-import NewVenturistScreen from '../components/venturists/NewVenturist';
-import TerritoryScreen from '../components/ventureMap/VentureMap';
-import ProfileScreen from '../components/profile/Profile';
-import VentureScreen from '../components/home/Venture';
-import VenturistScreen from '../components/venturists/Venturist';
+import HomeScreen from '../components/home/Home'
+import NewVentureScreen from '../components/home/NewVenture'
+import SelectVenturists from '../components/home/SelectVenturists'
+import VenturistsScreen from '../components/venturists/Venturists'
+import NewVenturistScreen from '../components/venturists/NewVenturist'
+import TerritoryScreen from '../components/ventureMap/VentureMap'
+import ProfileScreen from '../components/profile/Profile'
+import VentureScreen from '../components/home/Venture'
+import VenturistScreen from '../components/venturists/Venturist'
 
 // LoginRoutes
-import LoginHomeScreen from '../components/login/home/Home';
-import SignUpScreen from '../components/login/signUp/SignUp';
-import VerifyScreen from '../components/login/verify/Verify';
-import UserDetailsScreen from '../components/login/userDetails/UserDetails';
+import LoginHomeScreen from '../components/login/home/Home'
+import SignUpScreen from '../components/login/signUp/SignUp'
+import VerifyScreen from '../components/login/verify/Verify'
+import UserDetailsScreen from '../components/login/userDetails/UserDetails'
 
-import { Icon } from 'react-native-material-ui';
+import { Icon } from 'react-native-material-ui'
 
 const headerStyles = {
   shadowColor: '#000',
@@ -29,12 +29,17 @@ const makeNavOptions = title => ({
   title,
   headerStyle: headerStyles,
   headerTitleStyle: { fontSize: 20 },
-});
+})
 
 const HomeTab = StackNavigator({
   Home: {
     screen: HomeScreen,
-    navigationOptions: makeNavOptions('Venture'),
+    navigationOptions: {
+      title: 'Venture',
+      headerStyle: headerStyles,
+      headerTitleStyle: { fontSize: 20 },
+      headerLeft: null
+    },
   },
   NewVenture: {
     screen: NewVentureScreen,
@@ -48,7 +53,7 @@ const HomeTab = StackNavigator({
     screen: VentureScreen,
     navigationOptions: makeNavOptions('Venture Time'),
   },
-});
+})
 
 // Add new venturist/group screen
 const VenturistsTab = StackNavigator({
@@ -68,21 +73,21 @@ const VenturistsTab = StackNavigator({
     screen: NewVenturistScreen,
     navigationOptions: makeNavOptions('New Venturist'),
   },
-});
+})
 
 const TerritoryTab = StackNavigator({
   Map: {
     screen: TerritoryScreen,
     navigationOptions: makeNavOptions('Territory'),
   },
-});
+})
 
 const ProfileTab = StackNavigator({
   Profile: {
     screen: ProfileScreen,
     navigationOptions: makeNavOptions('Profile'),
   },
-});
+})
 
 export const Routes = TabNavigator({
   Home: {
@@ -135,6 +140,4 @@ export const LoginRoutes = StackNavigator({
     screen: UserDetailsScreen,
     navigationOptions: makeNavOptions('User Details'),
   },
-});
-
-// export LoginRoutes;
+})

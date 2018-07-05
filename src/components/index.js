@@ -1,46 +1,34 @@
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from 'react'
+import { SwitchNavigator } from 'react-navigation'
+import { Routes, LoginRoutes } from '../config/routes'
+import Loading from './Loading'
 
-import { Routes, LoginRoutes } from '../config/routes';
-import { getFriends, getGroups } from '../actions/friends';
-// import { getVentures } from '../actions/ventures';
+export default SwitchNavigator({
+  Loading,
+  Routes,
+  LoginRoutes,
+}, {
+  initialRouteName: 'Loading'
+})
 
-class App extends Component {
-  componentWillMount() {
-    this.props.getFriends();
-    this.props.getGroups();
-  }
-  render() {
-    if (this.props.accessToken && this.props.firstName) return <Routes />;
+// import { getVentures } from '../actions/ventures'
 
-    return <LoginRoutes />;
-  }
-}
+// export default class extends Component {
+//   state = { user: null }
+//   componentWillMount() {
+//     firebase.auth().onAuthStateChanged((user) => {
+//       if (user) {
+//         this.setState({ user })
+//       } else {
+//         this.setState({ user: null })
+//       }
+//     })
 
-function mapStateToProps(state) {
-  const {
-    account: { accessToken, firstName },
-    friends: { friends, groups },
-  } = state;
+//   }
+//   render() {
+//     const { user } = this.state
+//     if (user) return <Routes screenProps={user} />
 
-  return {
-    accessToken,
-    firstName,
-    friends,
-    groups,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    getFriends,
-    getGroups,
-  }, dispatch);
-}
-
-const AppContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(App);
-
-export default AppContainer;
+//     return <LoginRoutes />
+//   }
+// }

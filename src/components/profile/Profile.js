@@ -1,7 +1,8 @@
-import Header from '../common/Header';
-import User from '../common/User';
+import firebase, { auth } from '../firebase'
+import Header from '../common/Header'
+import User from '../common/User'
 
-import { profileStyles as p } from './style';
+import { profileStyles as p } from './style'
 
 const ex = {
   name: 'Ron Wowzer',
@@ -14,14 +15,20 @@ const ex = {
     'http://www.beautifulhameshablog.com/wp-content/uploads/2017/09/Beautiful-girls-in-India-Taapsee-Pannu-beautiful-indian-girl-image-beautiful-girl-image-indian-girls-photos-indian-girls-images.jpg',
     'https://lh3.googleusercontent.com/hqPedkBv844AQwHO9Xgv7LQKjlHr3njiyi413NnckukQ5GDizy8tbvJ01svUaO-7sw=w300'
   ]
-};
+}
 
 export default class Profile extends Component {
+
+  logout = () => auth.signOut()
+
   render() {
     return (
       <View style={p.container}>
         <User user={ex} />
+        <TouchableOpacity onPress={this.logout}>
+          <Text style={{alignSelf: 'center', color: 'blue', fontSize: 16}}>Logout</Text>
+        </TouchableOpacity>
       </View>
-    );
+    )
   }
-};
+}
