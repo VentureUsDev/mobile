@@ -13,6 +13,7 @@ export default class extends Component {
 
   signUp = () => {
     const { email, password } = this.state
+    this.setState({loading: true, error: ''})
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(result => {
         console.log('result', result)
@@ -30,9 +31,9 @@ export default class extends Component {
       <View style={style.container}>
         <Text style={style.title}>Give us your data, watch us grow rich.</Text>
         <Text style={style.subtitle}>Just kidding~</Text>
-        <Card style={[style.cardContainer, style.space]}>
+        <Card style={style.cardContainer}>
           <View style={style.inputContainer}>
-            <Text style={style.inputTitle}>PHONE NUMBER</Text>
+            <Text style={style.inputTitle}>EMAIL</Text>
             <TextInput
               style={style.textInput}
               autoCorrect={false}
@@ -52,13 +53,13 @@ export default class extends Component {
               onChangeText={this.handlePasswordChange}
             />
           </View>
-          <Text style={{paddingHorizontal: 20, color: 'red', fontSize: 14, alignSelf: 'center'}}>{this.state.error}</Text>
+          <Text style={style.errorText}>{error}</Text>
           <TouchableOpacity
-            style={style.loginBtn}
+            style={!email || !password ? [style.loginBtn, style.disabled] : style.loginBtn}
             onPress={this.signUp}
             disabled={!email || !password}
           >
-            {this.state.loading
+            {loading
               ? <ActivityIndicator size="small" color="white" />
               : <Text style={style.loginTxt}>Sign Up</Text>
             }
@@ -66,7 +67,7 @@ export default class extends Component {
         </Card>
         <View style={style.br} />
         <View style={style.noAccount}>
-          <TouchableOpacity onPress={() => goBack()} >
+          <TouchableOpacity onPress={() => goBack()}>
             <View style={style.noAccountContainer}>
               <Text style={style.noAccountMsg}>Lied to us?</Text>
               <View style={style.noAccountAction}>

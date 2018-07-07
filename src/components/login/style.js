@@ -32,7 +32,7 @@ export default StyleSheet.create({
     fontWeight: '600',
   },
   textInput: {
-    marginBottom: 10,
+    marginVertical: 10,
     borderBottomWidth: 0.5,
     borderBottomColor: 'rgba(0, 0, 0, 0.9)',
     height: 40,
@@ -40,10 +40,13 @@ export default StyleSheet.create({
   },
   loginBtn: {
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    marginTop: 20,
+    marginVertical: 10,
     marginRight: 35,
     marginLeft: 35,
     padding: 10
+  },
+  disabled: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   loginTxt: {
     color: 'white',
@@ -81,10 +84,13 @@ export default StyleSheet.create({
     color: 'gray',
     fontWeight: '600',
   },
-  space: {
-    height: 230,
-  },
   padBot: {
     paddingBottom: 80,
   },
+  errorText: {
+    paddingHorizontal: 20,
+    color: 'red',
+    fontSize: 14,
+    alignSelf: 'center'
+  }
 });

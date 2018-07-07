@@ -1,4 +1,3 @@
-import { connect } from 'react-redux'
 import Card from '../../common/Card'
 import firebase, { auth } from '../../firebase'
 
@@ -22,16 +21,18 @@ export default class extends Component {
   }
 
   render() {
-    const { email, password } = this.state
+    const { email, password, error, loading } = this.state
     const { navigate } = this.props.navigation
     const goToSignUp = () => navigate('SignUp')
+    const goToPasswordReset = () => navigate('PasswordReset')
+
     return (
       <View style={style.container}>
         <Text style={style.title}>You miss 100% of the shots you don't take.</Text>
         <Text style={style.subtitle}>-Wayne Gretzsky, Michael Scott</Text>
         <Card style={style.cardContainer}>
           <View style={style.inputContainer}>
-            <Text style={style.inputTitle}>PHONE NUMBER</Text>
+            <Text style={style.inputTitle}>EMAIL</Text>
             <TextInput
               style={style.textInput}
               placeholder="Email"
@@ -51,18 +52,18 @@ export default class extends Component {
               onChangeText={this.handlePasswordChange}
             />
           </View>
-          <Text style={{paddingHorizontal: 20, color: 'red', fontSize: 14, alignSelf: 'center'}}>{this.state.error}</Text>
+          <Text style={style.errorText}>{error}</Text>
           <TouchableOpacity
-            style={style.loginBtn}
+            style={!email || !password ? [style.loginBtn, style.disabled] : style.loginBtn}
             onPress={this.login}
             disabled={!email || !password}
           >
-            {this.state.loading
+            {loading
               ? <ActivityIndicator size="small" color="white" />
               : <Text style={style.loginTxt}>Login</Text>
             }
           </TouchableOpacity>
-          <TouchableOpacity style={style.forgotPw}>
+          <TouchableOpacity style={style.forgotPw} onPress={goToPasswordReset}>
             <Text style={style.forgotPwTxt}>Forgot Password?</Text>
           </TouchableOpacity>
         </Card>
