@@ -1,9 +1,10 @@
 import React from 'react'
-import { SwitchNavigator } from 'react-navigation'
+import { SwitchNavigator, StackNavigator } from 'react-navigation'
 import { Routes, LoginRoutes } from '../config/routes'
 import Loading from './Loading'
+import Modal from './Modal'
 
-export default SwitchNavigator({
+const RootStack = SwitchNavigator({
   Loading,
   Routes,
   LoginRoutes,
@@ -11,24 +12,10 @@ export default SwitchNavigator({
   initialRouteName: 'Loading'
 })
 
-// import { getVentures } from '../actions/ventures'
-
-// export default class extends Component {
-//   state = { user: null }
-//   componentWillMount() {
-//     firebase.auth().onAuthStateChanged((user) => {
-//       if (user) {
-//         this.setState({ user })
-//       } else {
-//         this.setState({ user: null })
-//       }
-//     })
-
-//   }
-//   render() {
-//     const { user } = this.state
-//     if (user) return <Routes screenProps={user} />
-
-//     return <LoginRoutes />
-//   }
-// }
+export default StackNavigator({
+  RootStack,
+  Modal
+}, {
+  mode: 'modal',
+  headerMode: 'none'
+})

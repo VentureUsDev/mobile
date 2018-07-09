@@ -2,7 +2,7 @@ import firebase from 'firebase'
 import 'firebase/firestore'
 
 const config = {
-    apiKey: process.env.API_KEY,
+    apiKey: "AIzaSyBbar1n0iYFieV4yWTWicvbnA85P-fonds",
     authDomain: "ventureus-1.firebaseapp.com",
     databaseURL: "https://ventureus-1.firebaseio.com",
     projectId: "ventureus-1",

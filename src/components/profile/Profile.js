@@ -28,6 +28,9 @@ export default class Profile extends Component {
         <TouchableOpacity onPress={this.logout}>
           <Text style={{alignSelf: 'center', color: 'blue', fontSize: 16}}>Logout</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Modal', {content: <User user={ex} />})}>
+          <Text style={{alignSelf: 'center', color: 'black', fontSize: 16}}>OPEN MODAL</Text>
+        </TouchableOpacity>
       </View>
     )
   }
