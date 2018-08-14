@@ -1,22 +1,25 @@
 import Card from '../../common/Card'
 import { signUp } from '../../../actions/account'
-import firebase, { auth } from '../../firebase'
+import firebase, { auth, db } from '../../firebase'
 
 import style from '../style'
 
 export default class extends Component {
-  state = { email: '', password: '', error: '', loading: false }
+  state = { email: '', password: '', error: '', username: '', loading: false }
 
   handleEmailChange = email => this.setState({email})
 
   handlePasswordChange = password => this.setState({password})
 
+  handleUsernameChange = username => this.setState({username})
+
   signUp = () => {
-    const { email, password } = this.state
+    const { email, password, username } = this.state
     this.setState({loading: true, error: ''})
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(result => {
-        console.log('result', result)
+        const { email, uid } = result.user
+        db.collection('users').doc(uid).set({ username, email })
       })
       .catch(error => {
         this.setState({error: error.message, loading: false})
@@ -24,7 +27,7 @@ export default class extends Component {
   }
 
   render() {
-    const { password, email, loading, error } = this.state
+    const { password, email, loading, error, username } = this.state
     const { goBack } = this.props.navigation
 
     return (
@@ -40,6 +43,16 @@ export default class extends Component {
               placeholder="Email"
               value={email}
               onChangeText={this.handleEmailChange}
+            />
+          </View>
+          <View style={style.inputContainer}>
+            <Text style={style.inputTitle}>USERNAME</Text>
+            <TextInput
+              style={style.textInput}
+              autoCorrect={false}
+              placeholder="Username"
+              value={username}
+              onChangeText={this.handleUsernameChange}
             />
           </View>
           <View style={style.inputContainer}>
