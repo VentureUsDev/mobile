@@ -10,7 +10,7 @@
             {"path": "react-native",
               "members": [
                 "Image", "Platform", "StyleSheet", "Dimensions", "View", "ScrollView",
-                "Text", "TextInput", "Switch", "Picker", "CheckBox", "Alert",
+                "Text", "TextInput", "Switch", "Picker", "CheckBox", "Alert", "TouchableWithoutFeedback",
                 "Button", "ActivityIndicator", "TouchableOpacity", "Switch", "DatePickerIOS"
               ]
             },

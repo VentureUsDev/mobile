@@ -1,31 +1,25 @@
-import UploadImage from './UploadImage';
+import ProfileImage from './ProfileImage'
 
-import { commonStyles as c } from './style';
+import { commonStyles as c } from './style'
 
 export default class User extends React.Component {
   render() {
-    const { user: {image, partners}, user } = this.props;
+    const { user: {image, partners}, user } = this.props
     return (
       <ScrollView>
         <View style={c.imageContainer}>
-          {image
-            ? <Image
-                style={c.image}
-                source={{uri: image}}
-              />
-            : <UploadImage />
-          }
+          <ProfileImage />
         </View>
         <View>
           {this.renderDetails(user)}
           {this.renderPartners(partners)}
         </View>
       </ScrollView>
-    );
+    )
   }
   renderDetails = (user) => {
     const { name, level,
-            totalVentures, favoriteCategory } = user;
+            totalVentures, favoriteCategory } = user
     return (
       <View>
         <View>
@@ -44,7 +38,7 @@ export default class User extends React.Component {
           </View>
         </View>
       </View>
-    );
+    )
   }
 
   renderPartners = (partners) => (
@@ -62,5 +56,5 @@ export default class User extends React.Component {
         ))}
       </View>
     </View>
-  );
-};
+  )
+}

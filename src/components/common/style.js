@@ -56,7 +56,6 @@ export const commonStyles = StyleSheet.create({
   },
   image: {
     height: 280,
-    flex: 1,
     width: null,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4},
@@ -75,6 +74,22 @@ export const commonStyles = StyleSheet.create({
   },
   imageContainer: {
     elevation: 1,
+  },
+  editImage: {
+    justifyContent: 'center',
+    alignItems:'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    zIndex: 10,
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    elevation: 2
   },
   userDetailContainer: {
     marginTop: 20,
@@ -115,8 +130,6 @@ export const commonStyles = StyleSheet.create({
   },
   uploadImageContainer: {
     height: 280,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   uploadImage: {
     justifyContent: 'center',
