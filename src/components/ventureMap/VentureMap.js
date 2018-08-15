@@ -1,12 +1,12 @@
-import React from 'react';
-import { View, Text, Image, Dimensions, ScrollView, StyleSheet } from 'react-native';
-import MapView, { Marker, Callout } from 'react-native-maps';
-import Header from '../common/Header';
-import VentureMarker from './VentureMarker';
+import React from 'react'
+import { View, Text, Image, Dimensions, ScrollView, StyleSheet } from 'react-native'
+import { MapView } from 'expo'
+import Header from '../common/Header'
+import VentureMarker from './VentureMarker'
 
-import { mapStyles as m } from './style';
+import { mapStyles as m } from './style'
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window')
 
 const markerData = [{
     region: {
@@ -39,7 +39,7 @@ const markerData = [{
     name: 'MCDIZZLEZ',
     venturists: 'Nick, La, Puppies',
   }
-];
+]
 
 export default class VentureMap extends React.Component {
   state = {
@@ -50,7 +50,7 @@ export default class VentureMap extends React.Component {
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0922 * width / height,
     },
-  };
+  }
 
   render() {
     return (
@@ -78,7 +78,7 @@ export default class VentureMap extends React.Component {
           </View>
         </View>
       </View>
-    );
+    )
   }
 }
 

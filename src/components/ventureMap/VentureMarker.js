@@ -1,18 +1,18 @@
-import React from 'react';
-import { View, Image, Text } from 'react-native';
-import { Marker, Callout } from 'react-native-maps';
+import React from 'react'
+import { View, Image, Text } from 'react-native'
+import { MapView } from 'expo'
 
-import { mapStyles as m } from './style';
+import { mapStyles as m } from './style'
 
 export default class VentureMarker extends React.Component {
   render() {
-    const { region, name, image, venturists } = this.props.markerData;
+    const { region, name, image, venturists } = this.props.markerData
     return (
-      <Marker
+      <MapView.Marker
         coordinate={region}
         pinColor="purple"
       >
-        <Callout>
+        <MapView.Callout>
           <View>
             <View style={m.calloutContainer}>
               <Image
@@ -25,8 +25,8 @@ export default class VentureMarker extends React.Component {
               </View>
             </View>
           </View>
-        </Callout>
-      </Marker>
-    );
+        </MapView.Callout>
+      </MapView.Marker>
+    )
   }
-};
+}
