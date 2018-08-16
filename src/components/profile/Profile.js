@@ -1,37 +1,37 @@
 import firebase, { auth } from '../firebase'
-import Header from '../common/Header'
+import { getUser } from '../../actions'
+import { connect } from 'react-redux'
 import User from '../common/User'
 
 import { profileStyles as p } from './style'
 
-const ex = {
-  name: 'Ron Wowzer',
-  level: 'Wanderer',
-  totalVentures: '15',
-  favoriteCategory: 'happiest of hours',
-  // image: 'http://www.petwave.com/-/media/Images/Center/Care-and-Nutrition/Cat/Kittensv2/Kitten-3.ashx',
-  partners: [
-    'http://wallpaper-gallery.net/images/beautiful-girls-hd-wallpapers-free-download/beautiful-girls-hd-wallpapers-free-download-11.jpg',
-    'http://www.beautifulhameshablog.com/wp-content/uploads/2017/09/Beautiful-girls-in-India-Taapsee-Pannu-beautiful-indian-girl-image-beautiful-girl-image-indian-girls-photos-indian-girls-images.jpg',
-    'https://lh3.googleusercontent.com/hqPedkBv844AQwHO9Xgv7LQKjlHr3njiyi413NnckukQ5GDizy8tbvJ01svUaO-7sw=w300'
-  ]
-}
-
-export default class Profile extends Component {
+class Profile extends Component {
+  componentDidMount() {
+    this.props.getUser()
+  }
 
   logout = () => auth.signOut()
 
   render() {
     return (
-      <View style={p.container}>
-        <User user={ex} />
+      <ScrollView style={p.container}>
+        <User user={this.props.user} />
         <TouchableOpacity onPress={this.logout}>
-          <Text style={{alignSelf: 'center', color: 'blue', fontSize: 16}}>Logout</Text>
+          <Text style={{alignSelf: 'center', color: 'blue', fontSize: 16, margin: 20}}>Logout</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Modal', {content: <User user={ex} />})}>
-          <Text style={{alignSelf: 'center', color: 'black', fontSize: 16}}>OPEN MODAL</Text>
-        </TouchableOpacity>
-      </View>
+      </ScrollView>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.account.user
+  }
+}
+
+export default connect(mapStateToProps, { getUser })(Profile)
+
+//        <TouchableOpacity onPress={() => this.props.navigation.navigate('Modal', {content: <User user={ex} />})}>
+//          <Text style={{alignSelf: 'center', color: 'black', fontSize: 16}}>OPEN MODAL</Text>
+//        </TouchableOpacity>

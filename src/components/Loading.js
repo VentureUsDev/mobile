@@ -1,8 +1,9 @@
 import firebase from './firebase'
+
 export default class extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      this.props.navigation.navigate(user ? 'Routes' : 'LoginRoutes', {user})
+      this.props.navigation.navigate(user ? 'Routes' : 'LoginRoutes')
     })
   }
   render() {

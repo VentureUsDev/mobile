@@ -19,7 +19,7 @@ export default class extends Component {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(result => {
         const { email, uid } = result.user
-        db.collection('users').doc(uid).set({ username, email, image })
+        db.collection('users').doc(uid).set({ username, email, image: '', level: 1, totalVentures: 0 })
       })
       .catch(error => {
         this.setState({error: error.message, loading: false})

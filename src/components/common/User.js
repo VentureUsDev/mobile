@@ -1,43 +1,30 @@
 import ProfileImage from './ProfileImage'
-import firebase, { db } from '../firebase'
 import { commonStyles as c } from './style'
 
 export default class User extends React.Component {
-  state = { image: '' }
-  // make account reducer, watch user document for changes, get user from reducer.
-  componentDidMount() {
-    const { currentUser } = firebase.auth()
-    db.collection('users').doc(currentUser.uid).get()
-      .then(user => {
-        const { image } = user.data()
-        this.setState({ image })
-      })
-      .catch(error => {
-        console.log('error', error)
-      })
-  }
+
   render() {
-    const { user: {image, partners}, user } = this.props
+    const { user } = this.props
     return (
-      <ScrollView>
+      <View>
         <View style={c.imageContainer}>
-          <ProfileImage image={this.state.image} />
+          <ProfileImage image={user.image} />
         </View>
         <View>
           {this.renderDetails(user)}
-          {this.renderPartners(partners)}
+          {this.renderPartners()}
         </View>
-      </ScrollView>
+      </View>
     )
   }
   renderDetails = (user) => {
-    const { name, level,
-            totalVentures, favoriteCategory } = user
+    const { username, level,
+            totalVentures } = user
     return (
       <View>
         <View>
-          <Text style={c.name}>{name}</Text>
-          <Text style={c.level}>{level}</Text>
+          <Text style={c.name}>{username}</Text>
+          <Text style={c.level}>{`Level: ${level}`}</Text>
         </View>
 
         <View style={c.userDetailContainer}>
@@ -45,29 +32,33 @@ export default class User extends React.Component {
             <Text style={c.userDetailTitle}>total ventures:</Text>
             <Text style={c.userDetail}>{totalVentures}</Text>
           </View>
-          <View style={c.userDetails}>
-            <Text style={c.userDetailTitle}>favorite activity:</Text>
-            <Text style={c.userDetail}>{favoriteCategory}</Text>
-          </View>
         </View>
       </View>
     )
   }
 
-  renderPartners = (partners) => (
-    <View>
-      <View style={c.partnersTitle}>
-        <Text style={c.userDetailTitle}>partners in crime:</Text>
+  renderPartners = () => {
+    const partners = [
+      'http://wallpaper-gallery.net/images/beautiful-girls-hd-wallpapers-free-download/beautiful-girls-hd-wallpapers-free-download-11.jpg',
+      'http://www.beautifulhameshablog.com/wp-content/uploads/2017/09/Beautiful-girls-in-India-Taapsee-Pannu-beautiful-indian-girl-image-beautiful-girl-image-indian-girls-photos-indian-girls-images.jpg',
+      'https://lh3.googleusercontent.com/hqPedkBv844AQwHO9Xgv7LQKjlHr3njiyi413NnckukQ5GDizy8tbvJ01svUaO-7sw=w300'
+    ]
+    return (
+      <View>
+        <View style={c.partnersTitle}>
+          <Text style={c.userDetailTitle}>partners in crime:</Text>
+        </View>
+        <View style={c.partnersImageContainer}>
+          {partners.map((partner, index) => (
+            <Image
+              key={index}
+              style={c.partnersImage}
+              source={{uri: partner}}
+            />
+          ))}
+        </View>
       </View>
-      <View style={c.partnersImageContainer}>
-        {partners.map((partner, index) => (
-          <Image
-            key={index}
-            style={c.partnersImage}
-            source={{uri: partner}}
-          />
-        ))}
-      </View>
-    </View>
-  )
+    )
+  }
 }
+

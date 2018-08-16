@@ -2,12 +2,12 @@ import { ImagePicker, Permissions, Constants } from 'expo'
 import firebase, { db } from '../firebase'
 import { connect } from 'react-redux'
 import { Icon } from 'react-native-material-ui'
-import { uploadProfilePic } from '../../actions'
+import { uploadImage } from '../../actions'
 import { commonStyles as c } from './style'
 
 //refactor user upload image to action and reducer. add activity indicator
 // handle image changing fluently right now image does not change
-export default class ProfileImage extends Component {
+class ProfileImage extends Component {
   state = { image: '', loading: false }
 
   askPermissionsAsync = async () => {
@@ -25,14 +25,7 @@ export default class ProfileImage extends Component {
     })
 
     uploadUrl = await uploadImageAsync(result.uri)
-    db.collection('users').doc(currentUser.uid).set({ image: uploadUrl })
-      .then(() => {
-        this.setState({ loading: false, image: uploadUrl })
-      })
-      .catch(error => {
-        console.log('error')
-        this.setState({ loading: false })
-      })
+    this.props.uploadImage(uploadUrl)
   }
 
   render() {
@@ -56,9 +49,7 @@ export default class ProfileImage extends Component {
   }
 }
 
-const mapStateToProps = state => {
-
-}
+export default connect(null, { uploadImage })(ProfileImage)
 
 const uploadImageAsync = async uri => {
   const { currentUser } = firebase.auth()
