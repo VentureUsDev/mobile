@@ -1,14 +1,27 @@
 import ProfileImage from './ProfileImage'
-
+import firebase, { db } from '../firebase'
 import { commonStyles as c } from './style'
 
 export default class User extends React.Component {
+  state = { image: '' }
+  // make account reducer, watch user document for changes, get user from reducer.
+  componentDidMount() {
+    const { currentUser } = firebase.auth()
+    db.collection('users').doc(currentUser.uid).get()
+      .then(user => {
+        const { image } = user.data()
+        this.setState({ image })
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
   render() {
     const { user: {image, partners}, user } = this.props
     return (
       <ScrollView>
         <View style={c.imageContainer}>
-          <ProfileImage />
+          <ProfileImage image={this.state.image} />
         </View>
         <View>
           {this.renderDetails(user)}
