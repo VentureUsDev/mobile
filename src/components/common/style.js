@@ -131,6 +131,20 @@ export const commonStyles = StyleSheet.create({
   uploadImageContainer: {
     height: 280,
   },
+  noImage: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 280
+  },
+  uploadImageLoadingOverlay: {
+    height: 280,
+    width: '100%',
+    position:'absolute',
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 10
+  },
   uploadImage: {
     justifyContent: 'center',
     alignItems: 'center',

@@ -1,14 +1,10 @@
 import firebase, { auth } from '../firebase'
-import { getUser } from '../../actions'
 import { connect } from 'react-redux'
 import User from '../common/User'
 
 import { profileStyles as p } from './style'
 
 class Profile extends Component {
-  componentDidMount() {
-    this.props.getUser()
-  }
 
   logout = () => auth.signOut()
 
@@ -30,7 +26,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getUser })(Profile)
+export default connect(mapStateToProps)(Profile)
 
 //        <TouchableOpacity onPress={() => this.props.navigation.navigate('Modal', {content: <User user={ex} />})}>
 //          <Text style={{alignSelf: 'center', color: 'black', fontSize: 16}}>OPEN MODAL</Text>

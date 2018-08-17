@@ -1,9 +1,17 @@
 import firebase from './firebase'
+import { getUser } from '../actions'
+import { connect } from 'react-redux'
 
-export default class extends Component {
+class Loading extends Component {
   componentDidMount() {
+    const { getUser, navigation } = this.props
     firebase.auth().onAuthStateChanged(user => {
-      this.props.navigation.navigate(user ? 'Routes' : 'LoginRoutes')
+      if (user) {
+        getUser(user)
+        navigation.navigate('Routes')
+      } else {
+        navigation.navigate('LoginRoutes')
+      }
     })
   }
   render() {
@@ -27,3 +35,5 @@ const style = StyleSheet.create({
     fontSize: 16,
   }
 })
+
+export default connect(null, { getUser })(Loading)

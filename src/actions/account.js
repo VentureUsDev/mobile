@@ -19,9 +19,7 @@ export const uploadImage = image => {
   const { currentUser } = firebase.auth()
   return (dispatch) => {
     db.collection('users').doc(currentUser.uid).update({ image })
-      .then(() => {
-        dispatch({ type: UPLOAD_PHOTO })
-      })
+      .then()
       .catch(error => {
         console.log('error', error)
       })
