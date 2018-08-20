@@ -58,37 +58,13 @@ export default class Venturists extends React.Component {
         <ScrollView>
           <View>
             <Subheader text="Posse" />
-            {groups.map((group, index) => (
-              <Venturist
-                {...this.props}
-                key={index}
-                name={group.name}
-                image={group.image}
-                venturists={group.venturists}
-                totalVentures={group.totalVentures}
-                level={group.level}
-                favoriteCategory={group.favoriteCategory}
-              />
-            ))}
           </View>
           <View>
             <Subheader text="Onesies" />
-            {friends.map((friend, index) => (
-              <Venturist
-                {...this.props}
-                key={index}
-                image={friend.image}
-                name={friend.name}
-                title={friend.title}
-                totalVentures={friend.totalVentures}
-                level={friend.level}
-                favoriteCategory={friend.favoriteCategory}
-              />
-            ))}
           </View>
         </ScrollView>
         <ActionButton buttonColor="black">
-          <ActionButton.Item buttonColor='#9b59b6' title="New Onesie" onPress={() => this.props.navigation.navigate('NewVenturist')}>
+          <ActionButton.Item buttonColor='#9b59b6' title="New Onesie" onPress={() => this.props.navigation.navigate('AllVenturists')}>
             <Icon name="person-add" style={style.iconStyle} />
           </ActionButton.Item>
           <ActionButton.Item buttonColor='#3498db' title="New Posse" onPress={() => {}}>

@@ -7,9 +7,15 @@
         ["auto-import", {
           "declarations": [
             {"path": "react", "default": "React", "members": ["Component"]},
+            {"path": "lodash",
+              "default": "_",
+              "members": [
+                "map", "filter", "reduce", "find", "toString", "uniqueId"
+              ]
+            },
             {"path": "react-native",
               "members": [
-                "Image", "Platform", "StyleSheet", "Dimensions", "View", "ScrollView",
+                "Image", "Platform", "StyleSheet", "Dimensions", "View", "ScrollView", "FlatList",
                 "Text", "TextInput", "Switch", "Picker", "CheckBox", "Alert", "TouchableWithoutFeedback",
                 "Button", "ActivityIndicator", "TouchableOpacity", "Switch", "DatePickerIOS"
               ]

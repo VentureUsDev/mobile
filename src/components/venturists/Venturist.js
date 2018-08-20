@@ -1,27 +1,26 @@
-import { ListItem, Avatar, Checkbox } from 'react-native-material-ui';
+import { ListItem, Avatar, Checkbox } from 'react-native-material-ui'
 
-import { venturistStyles as v } from './style';
+import { venturistStyles as v } from './style'
 
 export default class Venturist extends React.Component {
-  state = { checked: false };
+  state = { checked: false }
 
   onCheck = () => {
-    this.setState({ checked: !this.state.checked });
+    this.setState({ checked: !this.state.checked })
   }
 
   render() {
-    const { image, name, title, totalVentures,
-            level, venturists, favoriteCategory, navigation, editable } = this.props;
+    const { user: { username, image, totalVentures, level }, navigation, editable } = this.props
     return (
       <ListItem
         divider
         onPress={
           editable
             ? () => this.onCheck()
-            : () => navigation.navigate('VenturistProfile', { name })
+            : () => navigation.navigate('VenturistProfile', { username })
         }
-        leftElement={ <Avatar text={name.charAt(0)} /> }
-        centerElement={{primaryText: name, secondaryText: venturists || title}}
+        leftElement={ <Avatar text={username.charAt(0)} /> }
+        centerElement={{primaryText: username, secondaryText: 'Novice' }}
         rightElement={
           editable
             ? <View>
@@ -38,6 +37,6 @@ export default class Venturist extends React.Component {
               </View>
         }
       />
-    );
+    )
   }
-};
+}

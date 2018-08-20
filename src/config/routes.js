@@ -4,7 +4,7 @@ import HomeScreen from '../components/home/Home'
 import NewVentureScreen from '../components/home/NewVenture'
 import SelectVenturists from '../components/home/SelectVenturists'
 import VenturistsScreen from '../components/venturists/Venturists'
-import NewVenturistScreen from '../components/venturists/NewVenturist'
+import AllVenturistsScreen from '../components/venturists/AllVenturists'
 import TerritoryScreen from '../components/ventureMap/VentureMap'
 import ProfileScreen from '../components/profile/Profile'
 import VentureScreen from '../components/home/Venture'
@@ -68,9 +68,9 @@ const VenturistsTab = StackNavigator({
       headerTitleStyle: { fontSize: 20 }
     }),
   },
-  NewVenturist: {
-    screen: NewVenturistScreen,
-    navigationOptions: makeNavOptions('New Venturist'),
+  AllVenturists: {
+    screen: AllVenturistsScreen,
+    navigationOptions: makeNavOptions('Search Venturists'),
   },
 })
 

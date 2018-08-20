@@ -42,7 +42,7 @@ class ProfileImage extends Component {
               </TouchableOpacity>
             </View>
           : <View style={c.noImage}>
-              <TouchableOpacity style={c.uploadImage} onPress={this.imagePicker}>
+              <TouchableOpacity style={c.uploadImage} onPress={this.pickImage}>
                 <Text style={c.uploadImageText}>tap to add an image</Text>
               </TouchableOpacity>
             </View>
@@ -64,6 +64,7 @@ class ProfileImage extends Component {
       this.props.uploadImage(uploadUrl)
       this.setState({ loading: false})
     } catch (error) {
+      // insert alert here
       console.log('error', error)
       this.setState({ loading: false})
     }
