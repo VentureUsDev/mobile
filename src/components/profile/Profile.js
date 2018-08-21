@@ -27,7 +27,3 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps)(Profile)
-
-//        <TouchableOpacity onPress={() => this.props.navigation.navigate('Modal', {content: <User user={ex} />})}>
-//          <Text style={{alignSelf: 'center', color: 'black', fontSize: 16}}>OPEN MODAL</Text>
-//        </TouchableOpacity>

@@ -8,7 +8,7 @@ import AllVenturistsScreen from '../components/venturists/AllVenturists'
 import TerritoryScreen from '../components/ventureMap/VentureMap'
 import ProfileScreen from '../components/profile/Profile'
 import VentureScreen from '../components/home/Venture'
-import VenturistScreen from '../components/venturists/Venturist'
+import VenturistScreen from '../components/venturists/VenturistDetail'
 
 // LoginRoutes
 import LoginHomeScreen from '../components/login/home/Home'
@@ -61,16 +61,17 @@ const VenturistsTab = StackNavigator({
     navigationOptions: makeNavOptions('Venturists'),
   },
   VenturistProfile: {
-    screen: ProfileScreen,
+    screen: VenturistScreen,
     navigationOptions: ({navigation}) => ({
-      title: navigation.state.params.name,
+      title: navigation.state.params.user.username,
+      headerBackTitle: null,
       headerStyle: headerStyles,
       headerTitleStyle: { fontSize: 20 }
     }),
   },
   AllVenturists: {
     screen: AllVenturistsScreen,
-    navigationOptions: makeNavOptions('Search Venturists'),
+    navigationOptions: makeNavOptions('Search'),
   },
 })
 

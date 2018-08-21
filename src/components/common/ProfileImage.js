@@ -13,7 +13,6 @@ class ProfileImage extends Component {
   }
 
   render() {
-    const { image } = this.props
     return (
       <View style={c.uploadImageContainer}>
         {this.state.loading && this.renderLoaderOverlay()}
@@ -31,20 +30,24 @@ class ProfileImage extends Component {
   }
 
   renderImage = () => {
-    const { image } = this.props
+    const { image, readOnly } = this.props
     return (
       <View>
         {image
           ? <View>
               <Image style={c.image} source={{uri: image}} />
+              {!readOnly &&
               <TouchableOpacity style={c.editImage} onPress={this.pickImage}>
                 <Icon name="photo" color="white" size={30} />
-              </TouchableOpacity>
+              </TouchableOpacity>}
             </View>
           : <View style={c.noImage}>
-              <TouchableOpacity style={c.uploadImage} onPress={this.pickImage}>
-                <Text style={c.uploadImageText}>tap to add an image</Text>
-              </TouchableOpacity>
+              {readOnly
+                ? <Text style={c.uploadImageText}>No Image Available</Text>
+                : <TouchableOpacity style={c.uploadImage} onPress={this.pickImage}>
+                    <Text style={c.uploadImageText}>tap to add an image</Text>
+                  </TouchableOpacity>
+              }
             </View>
         }
       </View>

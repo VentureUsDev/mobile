@@ -20,7 +20,7 @@ class AllVenturists extends Component {
     )
   }
   renderUser = data => {
-    return <Venturist user={data.item} />
+    return <Venturist user={data.item} {...this.props} />
   }
 }
 
@@ -30,5 +30,9 @@ const mapStateToProps = state => {
     allUsers: account.allUsers
   }
 }
+
+//        <TouchableOpacity onPress={() => this.props.navigation.navigate('Modal', {content: <User user={ex} />})}>
+//          <Text style={{alignSelf: 'center', color: 'black', fontSize: 16}}>OPEN MODAL</Text>
+//        </TouchableOpacity>
 
 export default connect(mapStateToProps, { getAllUsers })(AllVenturists)

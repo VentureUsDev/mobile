@@ -4,22 +4,21 @@ import { commonStyles as c } from './style'
 export default class User extends React.Component {
 
   render() {
-    const { user } = this.props
+    const { user, readOnly } = this.props
     return (
       <View>
         <View style={c.imageContainer}>
-          <ProfileImage image={user.image} />
+          <ProfileImage image={user.image} readOnly />
         </View>
         <View>
-          {this.renderDetails(user)}
+          {this.renderDetails()}
           {this.renderPartners()}
         </View>
       </View>
     )
   }
-  renderDetails = (user) => {
-    const { username, level,
-            totalVentures } = user
+  renderDetails = () => {
+    const { username, level, totalVentures } = this.props.user
     return (
       <View>
         <View>
