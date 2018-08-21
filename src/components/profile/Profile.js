@@ -11,7 +11,7 @@ class Profile extends Component {
   render() {
     return (
       <ScrollView style={p.container}>
-        <User user={this.props.user} />
+        <User user={this.props.user} readOnly={false} />
         <TouchableOpacity onPress={this.logout}>
           <Text style={{alignSelf: 'center', color: 'blue', fontSize: 16, margin: 20}}>Logout</Text>
         </TouchableOpacity>

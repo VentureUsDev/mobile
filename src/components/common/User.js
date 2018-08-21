@@ -8,7 +8,7 @@ export default class User extends React.Component {
     return (
       <View>
         <View style={c.imageContainer}>
-          <ProfileImage image={user.image} readOnly />
+          <ProfileImage image={user.image} readOnly={readOnly} />
         </View>
         <View>
           {this.renderDetails()}
