@@ -5,16 +5,20 @@ import User from '../common/User'
 import { profileStyles as p } from './style'
 
 class Profile extends Component {
-
-  logout = () => auth.signOut()
+  static navigationOptions = {
+    headerRight: (
+      <Button
+        onPress={() => auth.signOut()}
+        title="Logout"
+        color="#157AFB"
+      />
+    )
+  }
 
   render() {
     return (
       <ScrollView style={p.container}>
         <User user={this.props.user} readOnly={false} />
-        <TouchableOpacity onPress={this.logout}>
-          <Text style={{alignSelf: 'center', color: 'blue', fontSize: 16, margin: 20}}>Logout</Text>
-        </TouchableOpacity>
       </ScrollView>
     )
   }
