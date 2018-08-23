@@ -6,6 +6,7 @@ export default class VenturistDetail extends Component {
   static navigationOptions = ({navigation}) => {
     const { state: { params: { user: user } } } = navigation
     const { currentUser } = firebase.auth()
+
     return {
       headerRight:
         <Button
@@ -13,10 +14,8 @@ export default class VenturistDetail extends Component {
             Alert.alert(
               'Adventurer!',
               'Add this fellow adventuree to your venturist list?',
-             [
-              {text: 'Cancel'},
-              {text: 'OK', onPress: () => db.collection('friends').doc(currentUser.uid).set({uid: user.uid})}
-              ]
+              [{text: 'Cancel'},
+              {text: 'OK', onPress: () => db.collection('friends').doc(currentUser.uid).collection('friendsList').doc(user.uid).set({uid: user.uid})}]
            )
           }
           title="Add"
