@@ -21,14 +21,19 @@ class Venturists extends React.Component {
               <ActivityIndicator size="large" />
             </View>
           : <View style={{flex: 1}}>
-              <ScrollView>
-                <FlatList
-                  data={friendsList}
-                  keyExtractor={() => uniqueId()}
-                  renderItem={this.renderUser}
-                  ListHeaderComponent={<Subheader text="Friends" />}
-                />
-              </ScrollView>
+              {friendsList.length > 0
+                ? <ScrollView>
+                    <FlatList
+                      data={friendsList}
+                      keyExtractor={() => uniqueId()}
+                      renderItem={this.renderUser}
+                      ListHeaderComponent={<Subheader text="Friends" />}
+                    />
+                  </ScrollView>
+                : <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+                    <Text>A lone wolf will be devoured by the pack.</Text>
+                  </View>
+              }
               <ActionButton buttonColor="black">
                 <ActionButton.Item buttonColor='#9b59b6' title="Find Friends" onPress={() => this.props.navigation.navigate('AllVenturists')}>
                   <Icon name="person-add" style={style.iconStyle} />

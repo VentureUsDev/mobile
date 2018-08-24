@@ -1,4 +1,4 @@
-import { FRIENDS_FETCH_SUCCESS } from './util'
+import { FRIENDS_FETCH_SUCCESS, NO_FRIENDS_FETCHED } from './util'
 import firebase, { db } from '../components/firebase'
 
 export const getFriends = () => {
@@ -9,6 +9,9 @@ export const getFriends = () => {
     const promises = []
     db.collection('friends').doc(currentUser.uid).collection('friendsList').get()
       .then(snapshot => {
+        if (snapshot.size === 0) {
+          return dispatch({ type: NO_FRIENDS_FETCHED })
+        }
         snapshot.docs.map(friend => {
           const { uid } = friend.data()
           const friendsList = []

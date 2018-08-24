@@ -13,4 +13,15 @@ export const venturistStyles = StyleSheet.create({
   iconStyle: {
     color: 'white',
   },
+  container: {
+    flex: 1,
+  },
+  noUserContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noUserText: {
+    paddingHorizontal: 40,
+  }
 });
