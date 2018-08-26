@@ -10,14 +10,14 @@ export default class Venturist extends React.Component {
   }
 
   render() {
-    const { user: { username, image, totalVentures, level }, user, navigation, editable } = this.props
+    const { user: { username, image, totalVentures, level }, user, friend, navigation, editable } = this.props
     return (
       <ListItem
         divider
         onPress={
           editable
             ? () => this.onCheck()
-            : () => navigation.navigate('VenturistProfile', { user })
+            : () => navigation.navigate('VenturistProfile', { user, friend })
         }
         leftElement={ <Avatar text={username.charAt(0)} /> }
         centerElement={{primaryText: username, secondaryText: 'Novice' }}

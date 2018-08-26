@@ -18,17 +18,18 @@ export const getUser = () => {
 
 export const getAllUsers = () => {
   return (dispatch) => {
-    db.collection('users').orderBy('username').get()
-      .then(snapshot => {
-        const users = []
-        snapshot.forEach(user => {
-          return users.push(user.data())
+    const promises = []
+    db.collection('users').orderBy('username')
+      .onSnapshot(snapshot => {
+      snapshot.docs.map(user => {
+        return promises.push(user.data())
+      })
+      Promise.all(promises)
+        .then(users => {
+          return getAllUsersSuccess(dispatch, users)
         })
-        return getAllUsersSuccess(dispatch, users)
-      })
-      .catch(() => {
-        console.log('error', error)
-      })
+        .catch(error => console.log('error', error))
+    })
   }
 }
 

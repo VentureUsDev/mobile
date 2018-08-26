@@ -1,26 +1,61 @@
+import { connect } from 'react-redux'
+import { addFriend, removeFriend } from '../../actions'
 import User from '../common/User'
 import firebase, { db } from '../firebase'
 
-//handle error, and navigating to adventure list
-export default class VenturistDetail extends Component {
+class VenturistDetail extends Component {
+  componentDidMount() {
+    const { navigation, addFriend, removeFriend } = this.props
+    navigation.setParams({ addFriend, removeFriend })
+  }
   static navigationOptions = ({navigation}) => {
-    const { state: { params: { user: user } } } = navigation
-    const { currentUser } = firebase.auth()
-
+    onPressAction = () => {
+      const { goBack, state: { params: { user, friend, addFriend, removeFriend } } } = navigation
+      const { uid } = user
+      if (!friend) {
+        addFriend(uid)
+        goBack()
+      } else {
+        removeFriend(uid)
+        goBack()
+      }
+    }
+    renderButton = () => {
+      const { state: { params: { friend } } } = navigation
+      if (friend) {
+        return (
+          <Button
+            onPress={() =>
+              Alert.alert(
+                'Hey You',
+                'Are you sure you want to remove this venturist?',
+                [{text: 'Cancel'},
+                 {text: 'Delete', onPress: () => onPressAction()}]
+              )
+            }
+            title="Remove"
+            color="#157AFB"
+          />
+        )
+      } else {
+        return (
+          <Button
+            onPress={() =>
+              Alert.alert(
+                'Adventurer!',
+                'Add this fellow adventuree to your venturist list?',
+                [{text: 'Cancel'},
+                {text: 'OK', onPress: () => onPressAction()}]
+             )
+            }
+            title="Add"
+            color="#157AFB"
+          />
+        )
+      }
+    }
     return {
-      headerRight:
-        <Button
-          onPress={() =>
-            Alert.alert(
-              'Adventurer!',
-              'Add this fellow adventuree to your venturist list?',
-              [{text: 'Cancel'},
-              {text: 'OK', onPress: () => db.collection('friends').doc(currentUser.uid).collection('friendsList').doc(user.uid).set({uid: user.uid})}]
-           )
-          }
-          title="Add"
-          color="#157AFB"
-        />
+      headerRight: renderButton()
     }
   }
   render() {
@@ -32,3 +67,6 @@ export default class VenturistDetail extends Component {
     )
   }
 }
+
+
+export default connect(null, { addFriend, removeFriend })(VenturistDetail)

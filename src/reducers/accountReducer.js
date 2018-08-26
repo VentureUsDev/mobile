@@ -7,6 +7,7 @@ import {
 export const initialState = {
   user: {},
   allUsers: {},
+  fetchingUsers: true
 }
 
 export default function accountReducer(state = initialState, action) {
@@ -17,7 +18,7 @@ export default function accountReducer(state = initialState, action) {
     case ALL_USERS_FETCH_SUCCESS: {
       const { email } = firebase.auth().currentUser
       const allUsers = action.payload.filter(user => user.email !== email)
-      return {...state, allUsers}
+      return {...state, allUsers, fetchingUsers: false}
     }
 
     default:

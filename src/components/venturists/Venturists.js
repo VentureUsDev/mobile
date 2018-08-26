@@ -45,7 +45,7 @@ class Venturists extends React.Component {
     )
   }
   renderUser = data => {
-    return <Venturist user={data.item} {...this.props} />
+    return <Venturist user={data.item} friend {...this.props} />
   }
 }
 

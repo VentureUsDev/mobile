@@ -1,4 +1,8 @@
-import { FRIENDS_FETCH_SUCCESS, NO_FRIENDS_FETCHED } from '../actions/util'
+import {
+  FRIENDS_FETCH_SUCCESS,
+  NO_FRIENDS_FETCHED,
+  REMOVE_FRIEND
+} from '../actions/util'
 
 export const initialState = {
   friendsList: {},
@@ -12,7 +16,15 @@ export default function friendsReducer(state = initialState, action) {
     }
 
     case NO_FRIENDS_FETCHED: {
-      return {...state, fetchingUsers: false}
+      return {...state, friendsList: {}, fetchingUsers: false}
+    }
+
+    case REMOVE_FRIEND: {
+      if (_.isEmpty(state.friendsList)) {
+        return {...state, friendsList: {}}
+      } else {
+        return {...state}
+      }
     }
 
     default:

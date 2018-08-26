@@ -10,7 +10,7 @@
             {"path": "lodash",
               "default": "_",
               "members": [
-                "map", "filter", "reduce", "difference", "uniqueId", "remove",
+                "map", "filter", "reduce", "difference", "uniqueId", "remove", "isEmpty"
               ]
             },
             {"path": "react-native",
