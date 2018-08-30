@@ -41,12 +41,62 @@ export const homeStyles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
-  categoryPicker: {
+  categoryTexts: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
-  categoryItems: {
+  categoryContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  category: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    margin: 15,
+    height: 120,
+    width: 120
+  },
+  icon: {
+    color: 'white',
+    fontSize: 45
+  },
+  name: {
+    color: 'white',
+    fontSize: 20
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)'
+  },
+  modal: {
+    width: 300,
+    height: 150,
+    backgroundColor: 'white',
+    borderRadius: 5
+  },
+  inputContainer: {
+    marginHorizontal: 30,
+    marginBottom: 15,
+    marginTop: 25
+  },
+  inputTitle: {
+    fontSize: 10,
+    fontWeight: '600',
+  },
+  textInput: {
+    marginVertical: 10,
+    borderBottomWidth: 0.5,
+    borderBottomColor: 'rgba(0, 0, 0, 0.9)',
+    height: 40,
     fontSize: 16,
   },
-  datePicker: {
-    transform: [{scaleX: .7}, {scaleY: .7}]
-  },
+  inputButton: {
+    fontSize: 16,
+    textAlign: 'right',
+    marginRight: 30
+  }
 });

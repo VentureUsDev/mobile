@@ -1,49 +1,87 @@
-import Card from '../common/Card';
+import { Modal } from 'react-native'
+import Card from '../common/Card'
+import { Icon } from 'react-native-material-ui'
+import { homeStyles as style } from './style'
 
-import { homeStyles as s } from './style';
+const categories = [
+  {name: 'Food', value: 'food', icon: 'restaurant', color: '#60C1E9'},
+  {name: 'Drinks', value: 'drinks', icon: 'local-bar', color: '#FECB2F'},
+  {name: 'Activities', value: 'activities', icon: 'beach-access', color: '#9CC348'},
+  {name: 'Date Night', value: 'datenight', icon: 'favorite', color: '#E35A3C'},
+  {name: 'Night Life', value: 'nightlife', icon: 'location-city', color: '#F87931'},
+  {name: 'Custom', value: 'custom', icon: 'spa', color: '#A69BF9'}
+]
 
 export default class NewVenture extends Component {
-  state = { category: 'activities', date: new Date() };
+  state = {name: '', color: '', modal: false}
 
-  setDate = (newDate) => this.setState({ date: newDate });
+  onButtonPress = ({value, color, name}) => {
+    this.setState({ name, color })
+    // this.props.navigation.navigate('SelectVenturists')
+  }
 
   render() {
-    const { date, category } = this.state;
     return (
-      <ScrollView style={s.newVentureContainer}>
+      <ScrollView style={style.newVentureContainer}>
         <Card>
-          <View style={s.formContainer}>
-            <Text style={s.formLabel}>Select Category:</Text>
-            <View style={s.categoryPicker}>
-              <Picker
-                itemStyle={s.categoryItems}
-                selectedValue={category}
-                onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}>
-                <Picker.Item label="Food" value="food" />
-                <Picker.Item label="Bars" value="bars" />
-                <Picker.Item label="Activities" value="activities" />
-                <Picker.Item label="Nightlife" value="night_life" />
-                <Picker.Item label="Dating" value="dating" />
-              </Picker>
+          <View style={style.formContainer}>
+            <View style={style.categoryTexts}>
+              <Text style={style.formLabel}>Select Category:</Text>
+              <Text style={[style.formLabel, this.state.color && {color: this.state.color}]}>{this.state.name}</Text>
             </View>
-            <View>
-              <Text style={s.formLabel}>Select Time:</Text>
-              <View style={s.datePicker}>
-                <DatePickerIOS
-                  date={date}
-                  onDateChange={this.setDate}
-                />
-              </View>
-            </View>
-            <View>
-              <Button
-                title="Add Posse"
-                onPress={() => this.props.navigation.navigate('SelectVenturists')}
-              />
+            <View style={style.categoryContainer}>
+              {categories.map(category => {
+                return (
+                  <TouchableOpacity
+                    key={uniqueId()}
+                    onPress={
+                      () =>
+                        category.value === 'custom'
+                          ? this.toggleModal(true)
+                          : this.onButtonPress(category)}
+                    style={[style.category, {backgroundColor: category.color}]}>
+                    <Icon name={category.icon} style={style.icon} />
+                    <Text style={style.name}>{category.name}</Text>
+                  </TouchableOpacity>
+                )
+              })}
             </View>
           </View>
         </Card>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.modal}
+          onDismiss={() => console.log('hello')}
+        >
+          <View style={style.modalOverlay}>
+            <View style={style.modal}>
+              <View style={style.inputContainer}>
+                <Text style={style.inputTitle}>PLEASE TYPE CATEGORY</Text>
+                <TextInput
+                  style={style.textInput}
+                  placeholder="Fly like an eagle"
+                  value={this.state.name}
+                  autoCorrect={false}
+                  onChangeText={this.handleCategoryChange}
+                />
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  this.toggleModal(!this.state.modal)
+                }}>
+                <Text style={style.inputButton}>DONE</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </ScrollView>
-    );
+    )
   }
-};
+
+  handleCategoryChange = category => this.setState({ name: category, color: '#A69BF9' })
+
+  toggleModal = visible => {
+    this.setState({ modal: visible })
+  }
+}
