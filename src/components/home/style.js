@@ -78,6 +78,16 @@ export const homeStyles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 5
   },
+  locationContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  location: {
+    width: 300,
+    height: 180,
+    backgroundColor: 'white'
+  },
   inputContainer: {
     marginHorizontal: 30,
     marginBottom: 15,
@@ -98,5 +108,11 @@ export const homeStyles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'right',
     marginRight: 30
+  },
+  errorTxt: {
+    color: 'red',
+    paddingVertical: 5,
+    marginHorizontal: 30,
+    textAlign: 'center'
   }
 });

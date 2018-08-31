@@ -2,7 +2,9 @@ import { TabNavigator, StackNavigator } from 'react-navigation'
 
 import HomeScreen from '../components/home/Home'
 import NewVentureScreen from '../components/home/NewVenture'
+import SetLocationScreen from '../components/home/Location'
 import SelectVenturists from '../components/home/SelectVenturists'
+import ConfirmVentureScreen from '../components/home/ConfirmVenture'
 import VenturistsScreen from '../components/venturists/Venturists'
 import AllVenturistsScreen from '../components/venturists/AllVenturists'
 import TerritoryScreen from '../components/ventureMap/VentureMap'
@@ -44,9 +46,17 @@ const HomeTab = StackNavigator({
     screen: NewVentureScreen,
     navigationOptions: makeNavOptions('New Venture'),
   },
+  SetLocation: {
+    screen: SetLocationScreen,
+    navigationOptions: makeNavOptions('Choose Location'),
+  },
   SelectVenturists: {
     screen: SelectVenturists,
     navigationOptions: makeNavOptions('Select Venturists'),
+  },
+  ConfirmVenture: {
+    screen: ConfirmVentureScreen,
+    navigationOptions: makeNavOptions('Confirm Venture')
   },
   Venture: {
     screen: VentureScreen,

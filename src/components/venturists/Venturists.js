@@ -13,7 +13,7 @@ class Venturists extends React.Component {
     this.props.getFriends()
   }
   render() {
-    const { fetchingUsers, friendsList } = this.props
+    const { fetchingUsers, friendsList, select } = this.props
     return (
       <View style={{flex: 1}}>
         {fetchingUsers
@@ -34,11 +34,13 @@ class Venturists extends React.Component {
                     <Text>A lone wolf will be devoured by the pack.</Text>
                   </View>
               }
-              <ActionButton buttonColor="black">
-                <ActionButton.Item buttonColor='#9b59b6' title="Find Friends" onPress={() => this.props.navigation.navigate('AllVenturists')}>
-                  <Icon name="person-add" style={style.iconStyle} />
-                </ActionButton.Item>
-              </ActionButton>
+              {!select &&
+                <ActionButton buttonColor="black">
+                  <ActionButton.Item buttonColor='#9b59b6' title="Find Friends" onPress={() => this.props.navigation.navigate('AllVenturists')}>
+                    <Icon name="person-add" style={style.iconStyle} />
+                  </ActionButton.Item>
+                </ActionButton>
+              }
             </View>
         }
       </View>
