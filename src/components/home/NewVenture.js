@@ -1,3 +1,5 @@
+import { connect } from 'react-redux'
+import { setCategory } from '../../actions'
 import { Modal } from 'react-native'
 import Card from '../common/Card'
 import { Icon } from 'react-native-material-ui'
@@ -12,22 +14,24 @@ const categories = [
   {name: 'Custom', value: 'custom', icon: 'spa', color: '#A69BF9'}
 ]
 
-export default class NewVenture extends Component {
+class NewVenture extends Component {
   state = {name: '', color: '', modal: false}
 
   onButtonPress = ({value, color, name}) => {
-    this.setState({ name, color })
+    this.setState({ color })
+    this.props.setCategory(name)
     // this.props.navigation.navigate('SelectVenturists')
   }
 
   render() {
+    console.log(this.props)
     return (
       <ScrollView style={style.newVentureContainer}>
         <Card>
           <View style={style.formContainer}>
             <View style={style.categoryTexts}>
               <Text style={style.formLabel}>Select Category:</Text>
-              <Text style={[style.formLabel, this.state.color && {color: this.state.color}]}>{this.state.name}</Text>
+              <Text style={[style.formLabel, this.state.color && {color: this.state.color}]}>{this.props.category}</Text>
             </View>
             <View style={style.categoryContainer}>
               {categories.map(category => {
@@ -61,7 +65,7 @@ export default class NewVenture extends Component {
                 <TextInput
                   style={style.textInput}
                   placeholder="Fly like an eagle"
-                  value={this.state.name}
+                  value={this.props.category}
                   autoCorrect={false}
                   onChangeText={this.handleCategoryChange}
                 />
@@ -79,9 +83,22 @@ export default class NewVenture extends Component {
     )
   }
 
-  handleCategoryChange = category => this.setState({ name: category, color: '#A69BF9' })
+  handleCategoryChange = category => {
+    this.props.setCategory(category)
+    this.setState({ color: '#A69BF9' })
+  }
 
   toggleModal = visible => {
     this.setState({ modal: visible })
   }
 }
+
+const mapStateToProps = state => {
+  const { ventures } = state
+  return {
+    category: ventures.category
+  }
+}
+
+
+export default connect(mapStateToProps, { setCategory })(NewVenture)
