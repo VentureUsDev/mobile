@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { createVenture } from '../../actions'
 import Card from '../common/Card'
 import { homeStyles as style } from './style'
 
@@ -20,7 +21,7 @@ class ConfirmVenture extends Component {
             </View>
             <View style={style.confirmDetailContainer}>
               <Text style={style.inputTitle}>VENTURIST</Text>
-              <Text style={style.confirmDetail}>w/ {user.username}</Text>
+              <Text style={style.confirmDetail}>{user.username}</Text>
             </View>
           </View>
           <TouchableOpacity
@@ -37,7 +38,8 @@ class ConfirmVenture extends Component {
     )
   }
   onButtonPress = () => {
-    console.log('pressed')
+    const { category, location, user, createVenture } = this.props
+    createVenture({category, location, user})
   }
 }
 
@@ -50,4 +52,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(ConfirmVenture)
+export default connect(mapStateToProps, { createVenture })(ConfirmVenture)

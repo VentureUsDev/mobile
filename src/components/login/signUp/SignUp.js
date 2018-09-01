@@ -13,6 +13,7 @@ export default class extends Component {
 
   handleUsernameChange = username => this.setState({username})
 
+  // move this to action/reducer
   signUp = () => {
     const { email, password, username } = this.state
     this.setState({loading: true, error: ''})
@@ -20,6 +21,12 @@ export default class extends Component {
       .then(result => {
         const { email, uid } = result.user
         db.collection('users').doc(uid).set({ uid, username, email, image: '', level: 1, totalVentures: 0 })
+          .then(() => {
+            db.collection('users').doc(uid).collection('ventures').doc('pending').set({ pending: [] });
+            db.collection('users').doc(uid).collection('ventures').doc('completed').set({ completed: [] });
+          })
+          .catch(error => console.log('error', error))
+
       })
       .catch(error => {
         this.setState({error: error.message, loading: false})
