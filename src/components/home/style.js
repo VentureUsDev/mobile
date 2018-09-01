@@ -114,5 +114,34 @@ export const homeStyles = StyleSheet.create({
     paddingVertical: 5,
     marginHorizontal: 30,
     textAlign: 'center'
+  },
+  cardContainer: {
+    backgroundColor: 'white',
+    paddingBottom: 15,
+    width: '80%',
+  },
+  confirmBtn: {
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    padding: 10,
+    marginTop: 5,
+    marginHorizontal: 15,
+  },
+  confirmTxt: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 18,
+  },
+  confirmDetailContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: 'gainsboro',
+    paddingHorizontal: 15
+  },
+  confirmDetail: {
+    fontSize: 16,
+    fontWeight: '600'
   }
 });
