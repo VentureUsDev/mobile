@@ -6,7 +6,8 @@ import {
   CREATE_VENTURE_SUCCESS,
   GET_PENDING_VENTURES,
   NO_PENDING_VENTURES,
-  GET_VENTURE_SUCCESS
+  GET_VENTURE_SUCCESS,
+  DELETE_VENTURE_SUCCESS
 } from './util'
 
 export const setCategory = category => {
@@ -57,6 +58,19 @@ export const getPendingVentures = () => {
   }
 }
 
+export const deleteVenture = venture => {
+  return (dispatch) => {
+    const { users, uid } = venture
+    users.map(user => {
+      return db.collection('users').doc(user.uid).collection('ventures').doc('pending').set({
+        pending: firebase.firestore.FieldValue.arrayRemove(uid)
+      }, { merge: true })
+        .then(db.collection('ventures').doc(uid).delete())
+        .catch(error => console.log('error', error))
+    })
+  }
+}
+
 export const createVenture = data => {
   const { user, location, category, currentUser } = data
   const ventureId = generateUUID()
@@ -68,6 +82,7 @@ export const createVenture = data => {
       pending: firebase.firestore.FieldValue.arrayUnion(ventureId)
     }, { merge: true })
     db.collection('ventures').doc(ventureId).set({
+      uid: ventureId,
       category,
       date: new Date(),
       users: [user, currentUser],
@@ -107,5 +122,3 @@ const generateUUID = () => {
       return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16)
   })
 }
-
-

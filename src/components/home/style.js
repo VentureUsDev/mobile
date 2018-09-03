@@ -192,6 +192,7 @@ export const homeStyles = StyleSheet.create({
   noVentureTxt: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+    paddingHorizontal: 40
+  },
 });
