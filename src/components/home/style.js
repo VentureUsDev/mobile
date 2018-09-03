@@ -9,14 +9,16 @@ export const homeStyles = StyleSheet.create({
   },
   headerContent: {
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
   },
   headerText: {
-    fontSize: 18
+    fontSize: 20,
+    fontWeight: '600'
   },
   thumbnail: {
-    height: 50,
-    width: 50,
+    height: 30,
+    width: 30,
+    borderRadius: 15,
   },
   thumbnailContainer: {
     justifyContent: 'center',
@@ -48,7 +50,9 @@ export const homeStyles = StyleSheet.create({
   },
   categoryContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   category: {
     justifyContent: 'center',
@@ -143,5 +147,51 @@ export const homeStyles = StyleSheet.create({
   confirmDetail: {
     fontSize: 16,
     fontWeight: '600'
+  },
+  ventureCard: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'white'
+  },
+  ventureCardContent: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingVertical: 10
+  },
+  iconContainer: {
+    marginHorizontal: 10,
+    borderRadius: 5,
+    width: 80,
+    height: 80,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  locationTxt: {
+    fontSize: 14,
+    color: 'gray',
+    paddingTop: 5
+  },
+  ventureCardRight: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    paddingRight: 5
+  },
+  ventureRejectIcon: {
+    color: 'tomato',
+    fontSize: 25
+  },
+  ventureUser: {
+    paddingRight: 5
+  },
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  noVentureTxt: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

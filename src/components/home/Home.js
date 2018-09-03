@@ -1,63 +1,95 @@
+import { connect } from 'react-redux'
+import firebase from '../firebase'
+import { getPendingVentures } from '../../actions'
 import Header from '../common/Header'
 import Card from '../common/Card'
 import CardSection from '../common/CardSection'
 import Venture from './Venture'
 import ActionButton from 'react-native-action-button'
+import { Icon } from 'react-native-material-ui'
+import { categories } from '../../helpers/venture'
 
 import { homeStyles as s } from './style'
 
-
-import axios from 'axios'
-
-
-
-export default class App extends Component {
+class App extends Component {
   componentDidMount() {
-    // axios.get('https://api.yelp.com/v3/businesses/search', config)
-    // .then(response => console.log(response))
+    this.props.getPendingVentures()
   }
   render() {
+    const { loading, pendingVentures } = this.props
     return (
       <View style={s.container}>
-        <ScrollView style={{paddingVertical: 20}}>
-          <Card style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
-            <CardSection>
-              <View style={s.thumbnailContainer}>
-                <Image
-                  style={s.thumbnail}
-                  source={{ uri: 'https://vignette.wikia.nocookie.net/overwatch/images/8/87/YZ4w2ey.png/revision/latest?cb=20160419233357' }}
-                />
-              </View>
-              <View style={s.headerContent}>
-                <Text style={s.headerText}>Restaurant</Text>
-                <Text>La Baik</Text>
-              </View>
-            </CardSection>
-            <CardSection image={true}>
-              <Image
-                style={s.image}
-                source={{ uri: 'https://cdnb.artstation.com/p/assets/images/images/005/093/139/medium/carmen-carballo-wandakun-overwatchmovie-wandakun2.jpg?1488406121'}}
-              />
-            </CardSection>
-            <CardSection buttons={true}>
-              <Button
-                onPress={() => (console.log("nay"))}
-                title="DECLINE"
-                color="gray"
-              />
-              <Button
-                onPress={() => this.props.navigation.navigate('Venture')}
-                title="ACCEPT"
-                color="#007aff"
-              />
-            </CardSection>
-          </Card>
-        </ScrollView>
-        <ActionButton
-          buttonColor="black"
-          onPress={() => this.props.navigation.navigate('NewVenture')}
-        />
+        {loading
+          ? <View style={s.loading}>
+              <ActivityIndicator size="large" />
+            </View>
+          : pendingVentures.length === 0
+              ? <View style={s.container}>
+                  <View style={s.noVentureTxt}>
+                    <Text>No pending invites... If you need someone, you can always talk to me.</Text>
+                  </View>
+                </View>
+              : <View style={s.container}>
+                  <ScrollView style={{paddingBottom: 70}}>
+                    <FlatList
+                      data={pendingVentures}
+                      keyExtractor={() => uniqueId()}
+                      renderItem={this.renderVenture}
+                    />
+
+                  </ScrollView>
+                  <ActionButton
+                    buttonColor="black"
+                    onPress={() => this.props.navigation.navigate('NewVenture')}
+                  />
+                </View>
+        }
       </View>
     )
   }
+  renderVenture = venture => {
+    const { category, date, location: { text }, users } = venture.item
+    // move this stuff to reduer?
+    const { currentUser } = firebase.auth()
+    let user = _.filter(users, user => {
+      return user.uid !== currentUser.uid
+    })
+    user = user[0]
+    const iconData = _.find(categories, ({name}) => {
+      return name === category || name === 'Custom'
+    })
+    return (
+      <TouchableOpacity onPress={() => console.log('accept venture')}>
+        <Card style={s.ventureCard}>
+          <CardSection>
+            <View style={s.ventureCardContent}>
+              <View style={[s.iconContainer, { backgroundColor: iconData.color }]}>
+                <Icon name={iconData.icon} style={s.icon} />
+              </View>
+              <View>
+                <Text style={s.headerText}>{category}</Text>
+                <Text style={s.locationTxt}>@{text}</Text>
+              </View>
+              <View style={s.ventureCardRight}>
+                <TouchableOpacity onPress={() => console.log('put remove action')}>
+                  <Icon name="clear" style={s.ventureRejectIcon} />
+                </TouchableOpacity>
+                <Text style={s.ventureUser}>w/ {user.username}</Text>
+              </View>
+            </View>
+          </CardSection>
+        </Card>
+      </TouchableOpacity>
+    )
+  }
 }
+
+const mapStateToProps = state => {
+  const { ventures } = state
+  return {
+    pendingVentures: ventures.pendingVentures,
+    loading: ventures.loading
+  }
+}
+
+export default connect(mapStateToProps, { getPendingVentures })(App)

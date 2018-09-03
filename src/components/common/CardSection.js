@@ -1,8 +1,8 @@
-import { commonStyles as common } from './style';
+import { commonStyles as common } from './style'
 
 export default class CardSection extends Component {
   getStyles = () => {
-    const { image, buttons } = this.props;
+    const { image, buttons } = this.props
     if (image) {
       return common.cardImageSection
     } else if (buttons) {
@@ -12,11 +12,11 @@ export default class CardSection extends Component {
     }
   }
   render() {
-    const { children, image, buttons } = this.props;
+    const { children } = this.props
     return (
       <View style={this.getStyles()}>
         {children}
       </View>
-    );
+    )
   }
-};
+}

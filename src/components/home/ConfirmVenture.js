@@ -38,17 +38,18 @@ class ConfirmVenture extends Component {
     )
   }
   onButtonPress = () => {
-    const { category, location, user, createVenture } = this.props
-    createVenture({category, location, user})
+    const { category, location, user, createVenture, currentUser } = this.props
+    createVenture({category, location, user, currentUser})
   }
 }
 
 const mapStateToProps = state => {
-  const { ventures: { category, location, user } } = state
+  const { ventures: { category, location, user }, account } = state
   return {
     category,
     location,
-    user
+    user,
+    currentUser: account.user
   }
 }
 

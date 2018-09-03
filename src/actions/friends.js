@@ -10,24 +10,25 @@ export const getFriends = () => {
   return (dispatch) => {
     let promises = []
     db.collection('friends').doc(currentUser.uid).collection('friendsList')
-    .onSnapshot(snapshot => {
-      if (snapshot.size === 0) {
-        return dispatch({ type: NO_FRIENDS_FETCHED })
-      }
-      snapshot.docs.map(friend => {
-        const friendsList = []
-        const { uid } = friend.data()
-        promises.push(db.collection('users').doc(uid).get())
-        Promise.all(promises)
-          .then(friends => {
-            friends.forEach(user => {
-              friendsList.push(user.data())
+      .onSnapshot(snapshot => {
+        if (snapshot.size === 0) {
+          return dispatch({ type: NO_FRIENDS_FETCHED })
+        }
+        snapshot.docs.map(friend => {
+          const friendsList = []
+          const { uid } = friend.data()
+          promises.push(db.collection('users').doc(uid).get())
+          Promise.all(promises)
+            .then(friends => {
+              friends.forEach(user => {
+                friendsList.push(user.data())
+              })
+              //need to empty promises or there will be duplicates
+              promises = []
+              return getFriendsSuccess(dispatch, friendsList)
             })
-            promises = []
-            return getFriendsSuccess(dispatch, friendsList)
-          })
-          .catch(error => console.log('error', error))
-      })
+            .catch(error => console.log('error', error))
+        })
     })
   }
 }
