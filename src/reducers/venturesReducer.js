@@ -14,7 +14,8 @@ export const initialState = {
   location: '',
   user: {},
   loading: true,
-  pendingVentures: []
+  pendingVentures: [],
+  page: ''
 }
 
 export default function venturesReducer(state = initialState, action) {
@@ -44,7 +45,11 @@ export default function venturesReducer(state = initialState, action) {
     }
 
     case GET_VENTURE_VOTE_LIST: {
-      return {...state, ventureVoteList: action.payload}
+      return {
+        ...state,
+        ventureVoteList: action.payload.ventureList,
+        page: action.payload.page
+      }
     }
 
     default:

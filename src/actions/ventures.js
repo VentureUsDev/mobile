@@ -68,9 +68,40 @@ export const deleteVenture = venture => {
       return db.collection('users').doc(user.uid).collection('ventures').doc('pending').set({
         pending: firebase.firestore.FieldValue.arrayRemove(uid)
       }, { merge: true })
-        .then(db.collection('ventures').doc(uid).delete())
+        .then(
+          db.collection('ventures').doc(uid).collection('allVentures').doc('ventureList').delete()
+            .then(
+              db.collection('ventures').doc(uid).delete()
+            )
+        )
         .catch(error => console.log('error', error))
     })
+  }
+}
+
+export const getMoreVentures = (venture, voteList, page) => {
+  const { location: { latitude, longitude, text}, category, uid } = venture
+  let config = {
+
+    params: {
+      term: category,
+      [latitude ? 'latitude' : 'location']: latitude ? latitude : text,
+      [longitude ? 'longitude' : 'gone']: longitude && longitude,
+      radius: 24000,
+      open_now: true,
+      offset: page * 20 + 1
+    }
+  }
+  return (dispatch) => {
+    axios.get('https://api.yelp.com/v3/businesses/search', config)
+      .then(response => {
+        const updatedVentureList = voteList.concat(response.data.businesses)
+        db.collection('ventures').doc(uid).collection('allVentures').doc('ventureList').set({
+          ventureList: updatedVentureList,
+          page: page + 1
+        })
+      })
+      .catch(error => console.log('error', error))
   }
 }
 
@@ -86,26 +117,25 @@ export const acceptVenture = venture => {
       open_now: true,
     }
   }
-  config.params = _.omit(config.params, 'gone')
   return (dispatch) => {
-    db.collection('ventures').doc(uid).collection('allVentures').doc('ventureList').get()
-      .then(ventureData => {
-        if (ventureData.exists) {
-          const ventures = ventureData.data()
-          getVentureVoteList(dispatch, ventures.ventureList)
-        } else {
-          axios.get('https://api.yelp.com/v3/businesses/search', config)
-            .then(response => {
-              db.collection('ventures').doc(uid).collection('allVentures').doc('ventureList').set({
-                ventureList: response.data.businesses
-              }, { merge: true })
-                .then(getVentureVoteList(dispatch, response.data.businesses))
-                .catch(error => console.log('error', error))
-            })
-            .catch(error => console.log('error', error))
-        }
-      })
-      .catch(error => console.log('error', error))
+    db.collection('ventures').doc(uid).collection('allVentures').doc('ventureList')
+    .onSnapshot(ventures => {
+      if (ventures.exists) {
+        const ventureData = ventures.data()
+        getVentureVoteList(dispatch, ventureData)
+      } else {
+        axios.get('https://api.yelp.com/v3/businesses/search', config)
+          .then(response => {
+            db.collection('ventures').doc(uid).collection('allVentures').doc('ventureList').set({
+              ventureList: response.data.businesses,
+              page: 1
+            }, { merge: true })
+              .then(getVentureVoteList(dispatch, response.data.businesses))
+              .catch(error => console.log('error', error))
+          })
+          .catch(error => console.log('error', error))
+      }
+    })
   }
 }
 
@@ -141,10 +171,10 @@ const getPendingVenturesSuccess = (dispatch, ventures) => {
   })
 }
 
-const getVentureVoteList = (dispatch, ventures) => {
+const getVentureVoteList = (dispatch, ventureData) => {
   dispatch({
     type: GET_VENTURE_VOTE_LIST,
-    payload: ventures
+    payload: ventureData
   })
 }
 

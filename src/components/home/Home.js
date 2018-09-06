@@ -51,7 +51,7 @@ class App extends Component {
   onVenturePress  = venture => {
     const { acceptVenture, navigation } = this.props
     acceptVenture(venture)
-    navigation.navigate('Venture')
+    navigation.navigate('Venture', { venture })
   }
 
   renderVenture = venture => {
