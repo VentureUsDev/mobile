@@ -1,3 +1,4 @@
+import axios from 'axios'
 import firebase, { db } from '../components/firebase'
 import {
   SET_CATEGORY,
@@ -7,8 +8,10 @@ import {
   GET_PENDING_VENTURES,
   NO_PENDING_VENTURES,
   GET_VENTURE_SUCCESS,
-  DELETE_VENTURE_SUCCESS
+  DELETE_VENTURE_SUCCESS,
+  GET_VENTURE_VOTE_LIST
 } from './util'
+import { generateUUID } from '../helpers/venture'
 
 export const setCategory = category => {
   return {
@@ -71,6 +74,41 @@ export const deleteVenture = venture => {
   }
 }
 
+export const acceptVenture = venture => {
+  const { location: { latitude, longitude, text}, category, uid } = venture
+  let config = {
+
+    params: {
+      term: category,
+      [latitude ? 'latitude' : 'location']: latitude ? latitude : text,
+      [longitude ? 'longitude' : 'gone']: longitude && longitude,
+      radius: 24000,
+      open_now: true,
+    }
+  }
+  config.params = _.omit(config.params, 'gone')
+  return (dispatch) => {
+    db.collection('ventures').doc(uid).collection('allVentures').doc('ventureList').get()
+      .then(ventureData => {
+        if (ventureData.exists) {
+          const ventures = ventureData.data()
+          getVentureVoteList(dispatch, ventures.ventureList)
+        } else {
+          axios.get('https://api.yelp.com/v3/businesses/search', config)
+            .then(response => {
+              db.collection('ventures').doc(uid).collection('allVentures').doc('ventureList').set({
+                ventureList: response.data.businesses
+              }, { merge: true })
+                .then(getVentureVoteList(dispatch, response.data.businesses))
+                .catch(error => console.log('error', error))
+            })
+            .catch(error => console.log('error', error))
+        }
+      })
+      .catch(error => console.log('error', error))
+  }
+}
+
 export const createVenture = data => {
   const { user, location, category, currentUser } = data
   const ventureId = generateUUID()
@@ -103,22 +141,16 @@ const getPendingVenturesSuccess = (dispatch, ventures) => {
   })
 }
 
+const getVentureVoteList = (dispatch, ventures) => {
+  dispatch({
+    type: GET_VENTURE_VOTE_LIST,
+    payload: ventures
+  })
+}
+
 // const getVentureSuccess = (dispatch, ventures) => {
 //   dispatch({
 //     type: GET_VENTURE_SUCCESS,
 //     payload: ventures
 //   })
 // }
-
-// copypasta for now, but never follow the world blindly.
-const generateUUID = () => {
-  let d = new Date().getTime()
-  if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
-      d += performance.now()
-  }
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      const r = (d + Math.random() * 16) % 16 | 0
-      d = Math.floor(d / 16)
-      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16)
-  })
-}

@@ -38,8 +38,9 @@ class ConfirmVenture extends Component {
     )
   }
   onButtonPress = () => {
-    const { category, location, user, createVenture, currentUser } = this.props
+    const { category, location, user, createVenture, currentUser, navigation } = this.props
     createVenture({category, location, user, currentUser})
+    navigation.replace('Home')
   }
 }
 

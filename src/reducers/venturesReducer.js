@@ -5,7 +5,8 @@ import {
   GET_PENDING_VENTURES,
   NO_PENDING_VENTURES,
   CREATE_VENTURE_SUCCESS,
-  GET_VENTURE_SUCCESS
+  GET_VENTURE_SUCCESS,
+  GET_VENTURE_VOTE_LIST
 } from '../actions/util'
 
 export const initialState = {
@@ -40,6 +41,10 @@ export default function venturesReducer(state = initialState, action) {
 
     case CREATE_VENTURE_SUCCESS: {
       return {...state, category: '', location: '', user: {}}
+    }
+
+    case GET_VENTURE_VOTE_LIST: {
+      return {...state, ventureVoteList: action.payload}
     }
 
     default:

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import firebase from '../firebase'
-import { getPendingVentures, deleteVenture } from '../../actions'
+import { getPendingVentures, deleteVenture, acceptVenture } from '../../actions'
 import Header from '../common/Header'
 import Card from '../common/Card'
 import CardSection from '../common/CardSection'
@@ -48,6 +48,12 @@ class App extends Component {
   removeVenture = venture =>
     this.props.deleteVenture(venture)
 
+  onVenturePress  = venture => {
+    const { acceptVenture, navigation } = this.props
+    acceptVenture(venture)
+    navigation.navigate('Venture')
+  }
+
   renderVenture = venture => {
     const { category, date, location: { text }, users } = venture.item
     // move this stuff to reduer?
@@ -60,7 +66,7 @@ class App extends Component {
       return name === category || name === 'Custom'
     })
     return (
-      <TouchableOpacity onPress={() => console.log('accept venture')}>
+      <TouchableOpacity onPress={() => this.onVenturePress(venture.item)}>
         <Card style={s.ventureCard}>
           <CardSection>
             <View style={s.ventureCardContent}>
@@ -102,4 +108,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getPendingVentures, deleteVenture })(App)
+export default connect(mapStateToProps, { getPendingVentures, deleteVenture, acceptVenture })(App)

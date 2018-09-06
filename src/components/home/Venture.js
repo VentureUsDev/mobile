@@ -1,10 +1,12 @@
-import Swiper from 'react-native-deck-swiper';
-import Card from '../common/Card';
-import CardSection from '../common/CardSection';
-import { homeStyles as s } from './style';
+import { connect } from 'react-redux'
+import Swiper from 'react-native-deck-swiper'
+import Card from '../common/Card'
+import CardSection from '../common/CardSection'
+import { homeStyles as s } from './style'
 
-export default class Venture extends React.Component {
+class Venture extends Component {
   render() {
+    console.log('PROROPOPS', this.props)
     return (
       <View style={s.container}>
         <Swiper
@@ -47,6 +49,15 @@ export default class Venture extends React.Component {
         >
         </Swiper>
       </View>
-    );
+    )
   }
-};
+}
+
+const mapStateToProps = state => {
+  const { ventures } = state
+  return {
+    ventureVoteList: ventures.ventureVoteList
+  }
+}
+
+export default connect(mapStateToProps)(Venture)
