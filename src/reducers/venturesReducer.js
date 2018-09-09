@@ -9,6 +9,8 @@ import {
   GET_VENTURE_VOTE_LIST
 } from '../actions/util'
 
+import firebase from '../components/firebase'
+
 export const initialState = {
   category: '',
   location: '',
@@ -45,10 +47,12 @@ export default function venturesReducer(state = initialState, action) {
     }
 
     case GET_VENTURE_VOTE_LIST: {
+      const { currentUser } = firebase.auth()
       return {
         ...state,
         ventureVoteList: action.payload.ventureList,
-        page: action.payload.page
+        page: action.payload.page,
+        userIndex: action.payload.userIndex[currentUser.uid]
       }
     }
 

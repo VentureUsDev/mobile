@@ -3,7 +3,7 @@ import Swiper from 'react-native-deck-swiper'
 import Card from '../common/Card'
 import CardSection from '../common/CardSection'
 import { homeStyles as s } from './style'
-import { getMoreVentures } from '../../actions'
+import { getMoreVentures, ventureSwipe } from '../../actions'
 
 class Venture extends Component {
 
@@ -12,32 +12,29 @@ class Venture extends Component {
     getMoreVentures(state.params.venture, ventureVoteList, page)
   }
   render() {
-    const { ventureVoteList } = this.props
+    const { ventureVoteList, userIndex } = this.props
     return (
       <View style={[s.container, s.loading]}>
         {ventureVoteList
           ? <Swiper
-              cards={['Yummy', 'Yummy2', 'Yummy3', 'Yummy4', 'Yummy5', 'Yummy6', 'Yummy7']}
+              disableTopSwipe
+              disableBottomSwipe
+              cards={ventureVoteList}
               renderCard={(card) => {
                 return (
                   <Card style={{justifyContent: 'center', backgroundColor: 'white'}}>
-                    <CardSection>
-                      <View style={s.thumbnailContainer}>
-                        <Image
-                          style={s.thumbnail}
-                          source={{ uri: 'https://vignette.wikia.nocookie.net/overwatch/images/8/87/YZ4w2ey.png/revision/latest?cb=20160419233357' }}
-                        />
-                      </View>
-                      <View style={s.headerContent}>
-                        <Text style={s.headerText}>{card}</Text>
-                        <Text>John Hwang</Text>
-                      </View>
-                    </CardSection>
                     <CardSection image={true}>
                       <Image
                         style={s.image}
-                        source={{ uri: 'https://cdnb.artstation.com/p/assets/images/images/005/093/139/medium/carmen-carballo-wandakun-overwatchmovie-wandakun2.jpg?1488406121'}}
+                        source={{ uri: card.image_url }}
                       />
+                    </CardSection>
+                    <CardSection>
+                      <View style={s.headerContent}>
+                        <Text style={s.headerText}>{card.name}</Text>
+                        <Text>{card.rating} {card.review_count}</Text>
+                        <Text>{card.location.display_address}</Text>
+                      </View>
                     </CardSection>
                     <CardSection>
                       <Button
@@ -50,8 +47,10 @@ class Venture extends Component {
                 )
               }}
               onSwiped={(cardIndex) => {console.log(cardIndex)}}
+              onSwipedLeft={this.onSwipeLeft}
+              onSwipedRight={this.onSwipeRight}
               onSwipedAll={() => {console.log('onSwipedAll')}}
-              cardIndex={0}
+              cardIndex={userIndex + 1}
               backgroundColor={'gainsboro'}
             >
             </Swiper>
@@ -60,14 +59,25 @@ class Venture extends Component {
       </View>
     )
   }
+  onSwipeRight = cardIndex => {
+    const { ventureSwipe, ventureVoteList, navigation } = this.props
+    const { state: { params: { venture } } } = navigation
+    ventureSwipe(cardIndex, venture.uid, ventureVoteList[cardIndex])
+  }
+  onSwipeLeft = cardIndex => {
+    const { ventureSwipe, navigation } = this.props
+    const { state: { params: { venture } } } = navigation
+    ventureSwipe(cardIndex, venture.uid)
+  }
 }
 
 const mapStateToProps = state => {
   const { ventures } = state
   return {
     ventureVoteList: ventures.ventureVoteList,
-    page: ventures.page
+    page: ventures.page,
+    userIndex: ventures.userIndex
   }
 }
 
-export default connect(mapStateToProps, { getMoreVentures })(Venture)
+export default connect(mapStateToProps, { getMoreVentures, ventureSwipe })(Venture)

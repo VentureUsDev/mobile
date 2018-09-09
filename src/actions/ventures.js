@@ -9,7 +9,8 @@ import {
   NO_PENDING_VENTURES,
   GET_VENTURE_SUCCESS,
   DELETE_VENTURE_SUCCESS,
-  GET_VENTURE_VOTE_LIST
+  GET_VENTURE_VOTE_LIST,
+  VENTURE_MATCH
 } from './util'
 import { generateUUID } from '../helpers/venture'
 
@@ -79,6 +80,33 @@ export const deleteVenture = venture => {
   }
 }
 
+export const ventureSwipe = (index, ventureId, venture) => {
+  const { currentUser } = firebase.auth()
+  return (dispatch) => {
+    if (venture) {
+      db.collection('ventures').doc(ventureId).collection('allVentures').doc('ventureList').get()
+        .then(ventures => {
+          const { acceptedVenture } = ventures.data()
+          const ventureExists = _.find(acceptedVenture, { id: venture.id })
+          if (ventureExists) {
+            // set venture to complete, but how to get this to other user?
+            console.log('WE GOT A MATCH BOYS, dispatch STUFF HERE')
+          } else {
+            db.collection('ventures').doc(ventureId).collection('allVentures').doc('ventureList').set({
+              acceptedVenture: firebase.firestore.FieldValue.arrayUnion(venture),
+              userIndex: {[currentUser.uid]: index}
+            }, { merge: true })
+          }
+
+        })
+    } else {
+      db.collection('ventures').doc(ventureId).collection('allVentures').doc('ventureList').set({
+        userIndex: {[currentUser.uid]: index}
+      }, { merge: true })
+    }
+  }
+}
+
 export const getMoreVentures = (venture, voteList, page) => {
   const { location: { latitude, longitude, text}, category, uid } = venture
   let config = {
@@ -106,6 +134,7 @@ export const getMoreVentures = (venture, voteList, page) => {
 }
 
 export const acceptVenture = venture => {
+  const { currentUser } = firebase.auth()
   const { location: { latitude, longitude, text}, category, uid } = venture
   let config = {
 
@@ -118,17 +147,19 @@ export const acceptVenture = venture => {
     }
   }
   return (dispatch) => {
-    db.collection('ventures').doc(uid).collection('allVentures').doc('ventureList')
-    .onSnapshot(ventures => {
-      if (ventures.exists) {
-        const ventureData = ventures.data()
-        getVentureVoteList(dispatch, ventureData)
+    db.collection('ventures').doc(uid).collection('allVentures').get()
+    .then(ventures => {
+      if (!ventures.empty) {
+        ventures.forEach(doc => {
+          getVentureVoteList(dispatch, doc.data())
+        })
       } else {
         axios.get('https://api.yelp.com/v3/businesses/search', config)
           .then(response => {
             db.collection('ventures').doc(uid).collection('allVentures').doc('ventureList').set({
               ventureList: response.data.businesses,
-              page: 1
+              page: 1,
+              userIndex: {[currentUser.uid]: 0}
             }, { merge: true })
               .then(getVentureVoteList(dispatch, response.data.businesses))
               .catch(error => console.log('error', error))
@@ -136,6 +167,7 @@ export const acceptVenture = venture => {
           .catch(error => console.log('error', error))
       }
     })
+    .catch(error => console.log('error', error))
   }
 }
 
