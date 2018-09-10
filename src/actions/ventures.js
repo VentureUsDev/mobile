@@ -10,7 +10,8 @@ import {
   GET_VENTURE_SUCCESS,
   DELETE_VENTURE_SUCCESS,
   GET_VENTURE_VOTE_LIST,
-  VENTURE_MATCH
+  VENTURE_MATCH,
+  CLEAR_VENTURE
 } from './util'
 import { generateUUID } from '../helpers/venture'
 
@@ -32,6 +33,12 @@ export const setVenturist = user => {
   return {
     type: SET_VENTURIST,
     payload: user
+  }
+}
+
+export const clearVenture = () => {
+  return {
+    type: CLEAR_VENTURE
   }
 }
 
@@ -80,17 +87,46 @@ export const deleteVenture = venture => {
   }
 }
 
+export const completedVentures = () => {
+  const { currentUser } = firebase.auth()
+  return (dispatch) => {
+    db.collection('users').doc(currentUser.uid).collection('completedVentures')
+    .onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(venture => {
+        const ventureId = venture.doc.id
+        if (venture.type === "added") {
+          completedVenture(dispatch, venture.doc.data())
+          db.collection('users').doc(currentUser.uid).collection('ventures').doc('pending').set({
+            pending: firebase.firestore.FieldValue.arrayRemove(ventureId)
+          }, { merge: true })
+          db.collection('users').doc(currentUser.uid).collection('completedVentures').doc(ventureId).delete()
+          .then(
+            db.collection('users').doc(currentUser.uid).collection('ventures').doc('completed').set({
+              completed: firebase.firestore.FieldValue.arrayUnion(venture.doc.data())
+            }, { merge: true })
+          )
+          .catch(error => console.log('error', error))
+        }
+      })
+    })
+  }
+}
+
 export const ventureSwipe = (index, ventureId, venture) => {
   const { currentUser } = firebase.auth()
   return (dispatch) => {
     if (venture) {
       db.collection('ventures').doc(ventureId).collection('allVentures').doc('ventureList').get()
         .then(ventures => {
-          const { acceptedVenture } = ventures.data()
+          const { acceptedVenture, userIndex } = ventures.data()
           const ventureExists = _.find(acceptedVenture, { id: venture.id })
           if (ventureExists) {
-            // set venture to complete, but how to get this to other user?
-            console.log('WE GOT A MATCH BOYS, dispatch STUFF HERE')
+            const userIds = Object.keys(userIndex)
+            userIds.map(userId => {
+              db.collection('users').doc(userId).collection('completedVentures').doc(ventureId).set({
+                ...venture
+              })
+            })
           } else {
             db.collection('ventures').doc(ventureId).collection('allVentures').doc('ventureList').set({
               acceptedVenture: firebase.firestore.FieldValue.arrayUnion(venture),
@@ -161,7 +197,11 @@ export const acceptVenture = venture => {
               page: 1,
               userIndex: {[currentUser.uid]: 0}
             }, { merge: true })
-              .then(getVentureVoteList(dispatch, response.data.businesses))
+              .then(getVentureVoteList(dispatch, {
+                page: 1,
+                ventureList: response.data.businesses,
+                userIndex: {[currentUser.uid]: 0}
+              }))
               .catch(error => console.log('error', error))
           })
           .catch(error => console.log('error', error))
@@ -194,6 +234,13 @@ export const createVenture = data => {
     .then(() => dispatch({ type: CREATE_VENTURE_SUCCESS }))
     .catch(error => console.log('error', error))
   }
+}
+
+const completedVenture = (dispatch, venture) => {
+  dispatch({
+    type: VENTURE_MATCH,
+    payload: venture
+  })
 }
 
 const getPendingVenturesSuccess = (dispatch, ventures) => {

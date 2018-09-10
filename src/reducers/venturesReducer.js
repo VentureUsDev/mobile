@@ -6,7 +6,9 @@ import {
   NO_PENDING_VENTURES,
   CREATE_VENTURE_SUCCESS,
   GET_VENTURE_SUCCESS,
-  GET_VENTURE_VOTE_LIST
+  GET_VENTURE_VOTE_LIST,
+  VENTURE_MATCH,
+  CLEAR_VENTURE
 } from '../actions/util'
 
 import firebase from '../components/firebase'
@@ -44,6 +46,14 @@ export default function venturesReducer(state = initialState, action) {
 
     case CREATE_VENTURE_SUCCESS: {
       return {...state, category: '', location: '', user: {}}
+    }
+
+    case VENTURE_MATCH: {
+      return {...state, completedVenture: action.payload }
+    }
+
+    case CLEAR_VENTURE: {
+      return {...state, completedVenture: ''}
     }
 
     case GET_VENTURE_VOTE_LIST: {
