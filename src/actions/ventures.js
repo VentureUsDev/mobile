@@ -11,6 +11,7 @@ import {
   DELETE_VENTURE_SUCCESS,
   GET_VENTURE_VOTE_LIST,
   VENTURE_MATCH,
+  GET_MORE_VENTURES,
   CLEAR_VENTURE
 } from './util'
 import { generateUUID } from '../helpers/venture'
@@ -93,19 +94,24 @@ export const completedVentures = () => {
     db.collection('users').doc(currentUser.uid).collection('completedVentures')
     .onSnapshot(snapshot => {
       snapshot.docChanges().forEach(venture => {
+        const { users } = venture.doc.data()
         const ventureId = venture.doc.id
         if (venture.type === "added") {
           completedVenture(dispatch, venture.doc.data())
-          db.collection('users').doc(currentUser.uid).collection('ventures').doc('pending').set({
-            pending: firebase.firestore.FieldValue.arrayRemove(ventureId)
-          }, { merge: true })
-          db.collection('users').doc(currentUser.uid).collection('completedVentures').doc(ventureId).delete()
-          .then(
-            db.collection('users').doc(currentUser.uid).collection('ventures').doc('completed').set({
-              completed: firebase.firestore.FieldValue.arrayUnion(venture.doc.data())
+          db.collection('ventures').doc(ventureId).collection('allVentures').doc('ventureList').delete()
+          .then(db.collection('ventures').doc(ventureId).delete())
+          return users.map(userId => {
+            db.collection('users').doc(userId).collection('ventures').doc('pending').set({
+              pending: firebase.firestore.FieldValue.arrayRemove(ventureId)
             }, { merge: true })
-          )
-          .catch(error => console.log('error', error))
+            db.collection('users').doc(userId).collection('completedVentures').doc(ventureId).delete()
+            .then(
+              db.collection('users').doc(userId).collection('ventures').doc('completed').set({
+                completed: firebase.firestore.FieldValue.arrayUnion(venture.doc.data())
+              }, { merge: true })
+            )
+            .catch(error => console.log('error', error))
+          })
         }
       })
     })
@@ -121,23 +127,25 @@ export const ventureSwipe = (index, ventureId, venture) => {
           const { acceptedVenture, userIndex } = ventures.data()
           const ventureExists = _.find(acceptedVenture, { id: venture.id })
           if (ventureExists) {
-            const userIds = Object.keys(userIndex)
-            userIds.map(userId => {
-              db.collection('users').doc(userId).collection('completedVentures').doc(ventureId).set({
-                ...venture
+            db.collection('ventures').doc(ventureId).get().then(data => {
+              const { users } = data.data()
+              return users.map(user => {
+                db.collection('users').doc(user.uid).collection('completedVentures').doc(ventureId).set({
+                  ...venture,
+                  users: [user.uid]
+                }, { merge: true })
               })
             })
           } else {
             db.collection('ventures').doc(ventureId).collection('allVentures').doc('ventureList').set({
               acceptedVenture: firebase.firestore.FieldValue.arrayUnion(venture),
-              userIndex: {[currentUser.uid]: index}
+              userIndex: {[currentUser.uid]: index + 1}
             }, { merge: true })
           }
-
         })
     } else {
       db.collection('ventures').doc(ventureId).collection('allVentures').doc('ventureList').set({
-        userIndex: {[currentUser.uid]: index}
+        userIndex: {[currentUser.uid]: index + 1}
       }, { merge: true })
     }
   }
@@ -163,7 +171,9 @@ export const getMoreVentures = (venture, voteList, page) => {
         db.collection('ventures').doc(uid).collection('allVentures').doc('ventureList').set({
           ventureList: updatedVentureList,
           page: page + 1
-        })
+        }, { merge: true })
+        .then(getMoreVenturesSuccess(dispatch, updatedVentureList))
+        .catch(error => console.log('error', error))
       })
       .catch(error => console.log('error', error))
   }
@@ -234,6 +244,13 @@ export const createVenture = data => {
     .then(() => dispatch({ type: CREATE_VENTURE_SUCCESS }))
     .catch(error => console.log('error', error))
   }
+}
+
+const getMoreVenturesSuccess = (dispatch, ventures) => {
+  dispatch({
+    type: GET_MORE_VENTURES,
+    payload: ventures
+  })
 }
 
 const completedVenture = (dispatch, venture) => {

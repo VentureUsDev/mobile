@@ -10,17 +10,13 @@ class Venture extends Component {
   componentDidMount() {
     this.props.completedVentures()
   }
-
-  getMoreVentures = () => {
-    const { page, navigation: { state }, getMoreVentures, ventureVoteList } = this.props
-    getMoreVentures(state.params.venture, ventureVoteList, page)
-  }
   render() {
     const { ventureVoteList, userIndex, completedVenture, clearVenture } = this.props
     return (
       <View style={[s.container, s.loading]}>
         {ventureVoteList
           ? <Swiper
+              ref={swiper => this.swiper = swiper}
               disableTopSwipe
               disableBottomSwipe
               cards={ventureVoteList}
@@ -42,9 +38,14 @@ class Venture extends Component {
                     </CardSection>
                     <CardSection>
                       <Button
-                        onPress={() => console.log('HI~')}
-                        title="ACCEPT INVITATION"
-                        color="#007aff"
+                        onPress={() => this.swiper.swipeLeft()}
+                        title="No"
+                        color="tomato"
+                      />
+                      <Button
+                        title="Yes"
+                        onPress={() => this.swiper.swipeRight()}
+                        color="limegreen"
                       />
                     </CardSection>
                   </Card>
@@ -52,8 +53,8 @@ class Venture extends Component {
               }}
               onSwipedLeft={this.onSwipeLeft}
               onSwipedRight={this.onSwipeRight}
-              onSwipedAll={() => {console.log('onSwipedAll')}}
-              cardIndex={userIndex + 1}
+              onSwipedAll={() => this.getMoreVentures()}
+              cardIndex={userIndex}
               backgroundColor={'gainsboro'}
             >
             </Swiper>
@@ -94,6 +95,10 @@ class Venture extends Component {
         }
       </View>
     )
+  }
+  getMoreVentures = () => {
+    const { page, navigation: { state }, getMoreVentures, ventureVoteList } = this.props
+    getMoreVentures(state.params.venture, ventureVoteList, page)
   }
   onSwipeRight = cardIndex => {
     const { ventureSwipe, ventureVoteList, navigation } = this.props

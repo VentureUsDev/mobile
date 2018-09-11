@@ -8,6 +8,7 @@ import {
   GET_VENTURE_SUCCESS,
   GET_VENTURE_VOTE_LIST,
   VENTURE_MATCH,
+  GET_MORE_VENTURES,
   CLEAR_VENTURE
 } from '../actions/util'
 
@@ -50,6 +51,10 @@ export default function venturesReducer(state = initialState, action) {
 
     case VENTURE_MATCH: {
       return {...state, completedVenture: action.payload }
+    }
+
+    case GET_MORE_VENTURES: {
+      return {...state, ventureVoteList: action.payload, userIndex: state.userIndex + 20 }
     }
 
     case CLEAR_VENTURE: {
