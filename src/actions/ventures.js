@@ -94,22 +94,31 @@ export const completedVentures = () => {
     db.collection('users').doc(currentUser.uid).collection('completedVentures')
     .onSnapshot(snapshot => {
       snapshot.docChanges().forEach(venture => {
-        const { users } = venture.doc.data()
+        const { users, category, date, id } = venture.doc.data()
         const ventureId = venture.doc.id
         if (venture.type === "added") {
           completedVenture(dispatch, venture.doc.data())
           db.collection('ventures').doc(ventureId).collection('allVentures').doc('ventureList').delete()
           .then(db.collection('ventures').doc(ventureId).delete())
           return users.map(userId => {
+            let totalVenturesCount
+            db.collection('users').doc(userId).get()
+            .then(data => {
+              const { totalVentures } = data.data()
+              totalVenturesCount = totalVentures
+            })
             db.collection('users').doc(userId).collection('ventures').doc('pending').set({
               pending: firebase.firestore.FieldValue.arrayRemove(ventureId)
             }, { merge: true })
             db.collection('users').doc(userId).collection('completedVentures').doc(ventureId).delete()
-            .then(
+            .then(() => {
               db.collection('users').doc(userId).collection('ventures').doc('completed').set({
-                completed: firebase.firestore.FieldValue.arrayUnion(venture.doc.data())
+                completed: firebase.firestore.FieldValue.arrayUnion({id, date, category})
               }, { merge: true })
-            )
+              db.collection('users').doc(userId).set({
+                totalVentures: totalVenturesCount + 1
+              }, { merge: true })
+            })
             .catch(error => console.log('error', error))
           })
         }
@@ -128,11 +137,14 @@ export const ventureSwipe = (index, ventureId, venture) => {
           const ventureExists = _.find(acceptedVenture, { id: venture.id })
           if (ventureExists) {
             db.collection('ventures').doc(ventureId).get().then(data => {
-              const { users } = data.data()
+              const { users, category, date } = data.data()
+              const userIds = _.map(users, 'uid')
               return users.map(user => {
                 db.collection('users').doc(user.uid).collection('completedVentures').doc(ventureId).set({
                   ...venture,
-                  users: [user.uid]
+                  users: userIds,
+                  category,
+                  date,
                 }, { merge: true })
               })
             })
