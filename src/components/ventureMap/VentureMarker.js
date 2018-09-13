@@ -13,7 +13,7 @@ export default class VentureMarker extends React.Component {
         latitude,
         longitude
       },
-      image_url,
+      photos,
       name
     } = this.props.markerData
     return (
@@ -29,7 +29,7 @@ export default class VentureMarker extends React.Component {
             <View style={m.calloutContainer}>
               <Image
                 style={m.calloutImage}
-                source={{ uri: image_url }}
+                source={{ uri: photos[0] }}
               />
               <View style={m.calloutHeader}>
                 <Text style={m.calloutTitle}>{name}</Text>
