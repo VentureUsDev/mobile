@@ -1,58 +1,29 @@
-import React from 'react'
-import { View, Text, Image, Dimensions, ScrollView, StyleSheet } from 'react-native'
-import { MapView } from 'expo'
+import { connect } from 'react-redux'
+import { MapView, Location, Permissions } from 'expo'
+import { getVentureMarkers } from '../../actions'
 import Header from '../common/Header'
 import VentureMarker from './VentureMarker'
-
 import { mapStyles as m } from './style'
 
 const { width, height } = Dimensions.get('window')
 
-const markerData = [{
-    region: {
-      latitude: 37.78825,
-      longitude: -122.4324,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0922 * width / height
-    },
-    image: 'https://cdnb.artstation.com/p/assets/images/images/005/093/139/medium/carmen-carballo-wandakun-overwatchmovie-wandakun2.jpg?1488406121',
-    name: 'MCDIZZLEZ',
-    venturists: 'Nick, La, Puppies',
-  }, {
-    region: {
-      latitude: 37.78825,
-      longitude: -122.4424,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0922 * width / height
-  },
-    image: 'https://cdnb.artstation.com/p/assets/images/images/005/093/139/medium/carmen-carballo-wandakun-overwatchmovie-wandakun2.jpg?1488406121',
-    name: 'MCDIZZLEZ',
-    venturists: 'Nick, La, Puppies',
-  }, {
-    region: {
-      latitude: 37.79825,
-      longitude: -122.4524,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0922 * width / height
-  },
-    image: 'https://cdnb.artstation.com/p/assets/images/images/005/093/139/medium/carmen-carballo-wandakun-overwatchmovie-wandakun2.jpg?1488406121',
-    name: 'MCDIZZLEZ',
-    venturists: 'Nick, La, Puppies',
-  }
-]
-
-export default class VentureMap extends React.Component {
+class VentureMap extends Component {
   state = {
-    // TODO: set with current location
     region: {
-      latitude: 37.78825,
-      longitude: -122.4324,
+      latitude: 0,
+      longitude: 0,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0922 * width / height,
     },
   }
 
+  componentDidMount() {
+    this.getLocationAsync()
+    this.props.getVentureMarkers()
+  }
+
   render() {
+    const { ventureMarkers } = this.props
     return (
       <View style={m.outerContainer}>
         <View style={m.innerContainer}>
@@ -66,9 +37,9 @@ export default class VentureMap extends React.Component {
               zoomEnabled={true}
               pitchEnabled={true}
               rotateEnabled={true}
-              initialRegion={this.state.region}
+              region={this.state.region}
             >
-              {markerData.map((marker, index) => (
+              {ventureMarkers.map((marker, index) => (
                 <VentureMarker
                   key={index}
                   markerData={marker}
@@ -80,5 +51,37 @@ export default class VentureMap extends React.Component {
       </View>
     )
   }
+  getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION)
+    if (status !== 'granted') {
+      this.setState({
+        region: {
+          latitude: 0,
+          longitude: 0,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0922 * width / height
+        }
+      })
+    }
+
+    let location = await Location.getCurrentPositionAsync({})
+    const { coords: { latitude, longitude } } = location
+    this.setState({
+      region: {
+        latitude,
+        longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0922 * width / height
+      }
+    })
+  }
 }
 
+const mapStateToProps = state => {
+  const { ventureMap } = state
+  return {
+    ventureMarkers: ventureMap.ventureMarkers
+  }
+}
+
+export default connect(mapStateToProps, { getVentureMarkers })(VentureMap)

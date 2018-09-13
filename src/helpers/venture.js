@@ -8,9 +8,9 @@ export const categories = [
 ]
 
 export const dateOptions = {
-  weekday: 'long',
   month: 'long',
-  day: 'numeric'
+  day: 'numeric',
+  year: 'numeric'
 }
 
 
