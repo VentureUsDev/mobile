@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Swiper from 'react-native-deck-swiper'
-import { Modal } from 'react-native'
+import { Modal, Linking } from 'react-native'
 import Card from '../common/Card'
 import CardSection from '../common/CardSection'
 import { homeStyles as s } from './style'
@@ -84,7 +84,12 @@ class Venture extends Component {
                 </CardSection>
                 <CardSection>
                   <Button
-                    onPress={clearVenture}
+                    onPress={this.dismiss}
+                    title="DISMISS"
+                    color="black"
+                  />
+                  <Button
+                    onPress={this.getDirections}
                     title="GET DIRECTIONS"
                     color="#007aff"
                   />
@@ -95,6 +100,26 @@ class Venture extends Component {
         }
       </View>
     )
+  }
+  getDirections = () => {
+    const {
+      clearVenture,
+      navigation,
+      completedVenture: {
+        coordinates: {
+          latitude,
+          longitude
+        }
+      }
+    } = this.props
+    clearVenture()
+    Linking.openURL(`maps://app?daddr=${latitude}+${longitude}`)
+    navigation.goBack()
+  }
+  dismiss = () => {
+    const { clearVenture, navigation } = this.props
+    clearVenture()
+    navigation.goBack()
   }
   getMoreVentures = () => {
     const { page, navigation: { state }, getMoreVentures, ventureVoteList } = this.props

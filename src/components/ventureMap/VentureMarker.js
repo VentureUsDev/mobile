@@ -45,6 +45,6 @@ export default class VentureMarker extends React.Component {
   }
   getColor = category => {
     const object = categories.filter(obj => obj.name === category)
-    return object[0].color
+    return object[0] && object[0].color || '#A69BF9'
   }
 }
