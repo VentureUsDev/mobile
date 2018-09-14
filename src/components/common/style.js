@@ -158,4 +158,44 @@ export const commonStyles = StyleSheet.create({
   uploadImageText: {
     color: 'gray',
   },
+  yelpContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    flex: 1
+  },
+  yelpTitle: {
+    fontSize: 20,
+    fontWeight: '600'
+  },
+  addressContainer: {
+    paddingVertical: 3
+  },
+  addressTxt: {
+    color: 'gray'
+  },
+  yelpContent: {
+    paddingTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  yelpRating: {
+    paddingLeft: 10
+  },
+  yelpReviewTxt: {
+    color: '#999999',
+    paddingTop: 3
+  },
+  yelpLink: {
+    height: 40,
+    width: 80,
+    position: 'absolute',
+    right: -10
+  },
+  yelpLinkImg: {
+    width: '100%',
+    height: '100%'
+  }
 });

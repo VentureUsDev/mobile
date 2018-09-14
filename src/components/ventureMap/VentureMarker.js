@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, Image, Text } from 'react-native'
 import { MapView } from 'expo'
-import { categories, dateOptions } from '../../helpers/venture'
+import { categories, dateOptions, getSmallYelpStars } from '../../helpers/venture'
 import { mapStyles as m } from './style'
 
-export default class VentureMarker extends React.Component {
+export default class VentureMarker extends Component {
   render() {
     const {
       category,
@@ -14,7 +14,10 @@ export default class VentureMarker extends React.Component {
         longitude
       },
       photos,
-      name
+      name,
+      rating,
+      review_count,
+      url
     } = this.props.markerData
     return (
       <MapView.Marker
@@ -25,17 +28,32 @@ export default class VentureMarker extends React.Component {
         pinColor={this.getColor(category)}
       >
         <MapView.Callout>
-          <View>
-            <View style={m.calloutContainer}>
-              <Image
-                style={m.calloutImage}
-                source={{ uri: photos[0] }}
-              />
-              <View style={m.calloutHeader}>
+          <View style={m.calloutContainer}>
+            <Image
+              style={m.calloutImage}
+              source={{ uri: photos[0] }}
+            />
+            <View style={m.calloutHeader}>
+              <View>
                 <Text style={m.calloutTitle}>{name}</Text>
-                <Text style={m.calloutVenturists}>
+                <Text style={m.date}>
                   {date.toDate().toLocaleDateString('en-US', dateOptions)}
                 </Text>
+              </View>
+              <View style={m.yelpContent}>
+                <View>
+                  <Image style={m.yelpRating} source={getSmallYelpStars(rating)} />
+                  <Text style={m.yelpReviewTxt}>{review_count} Reviews</Text>
+                </View>
+                <TouchableOpacity
+                  onPress={() => Linking.openURL(url)}
+                  style={m.yelpLink}
+                >
+                  <Image
+                    style={m.yelpLinkImg}
+                    source={require('../../assets/Yelp_trademark_RGB.png')}
+                  />
+                </TouchableOpacity>
               </View>
             </View>
           </View>

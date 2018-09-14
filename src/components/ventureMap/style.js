@@ -23,18 +23,44 @@ export const mapStyles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   calloutImage: {
-    height: 40,
-    width: 40,
-    borderRadius: 20,
+    height: 70,
+    width: 70,
+    borderRadius: 35,
   },
   calloutHeader: {
-    justifyContent: 'space-around',
     marginLeft: 10,
   },
   calloutTitle: {
+    fontSize: 18,
+    fontWeight: '600'
+  },
+  date: {
+    color: 'gray',
     fontSize: 16,
   },
-  calloutVenturists: {
-    color: 'gray',
+  yelpRating: {
+    paddingLeft: 10
   },
+  yelpReviewTxt: {
+    color: '#999999',
+    paddingTop: 3
+  },
+  yelpContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingTop: 10,
+    width: 200
+  },
+  yelpLink: {
+    height: 45,
+    width: 90,
+    position: 'absolute',
+    right: -10,
+    bottom: 5
+  },
+  yelpLinkImg: {
+    width: '100%',
+    height: '100%'
+  }
 })

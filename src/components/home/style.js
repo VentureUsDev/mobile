@@ -7,14 +7,6 @@ export const homeStyles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 20,
   },
-  headerContent: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-  },
-  headerText: {
-    fontSize: 20,
-    fontWeight: '600'
-  },
   thumbnail: {
     height: 30,
     width: 30,
@@ -27,7 +19,7 @@ export const homeStyles = StyleSheet.create({
     marginRight: 10,
   },
   image: {
-    height: 300,
+    height: 250,
     flex: 1,
     width: null,
   },
@@ -165,6 +157,10 @@ export const homeStyles = StyleSheet.create({
     height: 80,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  headerText: {
+    fontWeight: '600',
+    fontSize: 16
   },
   locationTxt: {
     fontSize: 14,

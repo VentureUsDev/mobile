@@ -15,7 +15,7 @@
             },
             {"path": "react-native",
               "members": [
-                "Image", "Platform", "StyleSheet", "Dimensions", "View", "ScrollView", "FlatList",
+                "Image", "Platform", "StyleSheet", "Dimensions", "View", "ScrollView", "FlatList", "Linking",
                 "Text", "TextInput", "Switch", "Picker", "CheckBox", "Alert", "TouchableWithoutFeedback",
                 "Button", "ActivityIndicator", "TouchableOpacity", "Switch", "DatePickerIOS"
               ]

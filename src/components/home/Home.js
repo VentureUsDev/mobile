@@ -90,7 +90,7 @@ class App extends Component {
                 >
                   <Icon name="clear" style={s.ventureRejectIcon} />
                 </TouchableOpacity>
-                <Text style={s.ventureUser}>w/ {user.username}</Text>
+                <Text numberOfLines={1} style={s.ventureUser}>w/ {user.username}</Text>
               </View>
             </View>
           </CardSection>

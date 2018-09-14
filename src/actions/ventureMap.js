@@ -2,6 +2,7 @@ import axios from 'axios'
 import firebase, { db } from '../components/firebase'
 import { GET_VENTURE_MAP_MARKERS_SUCCESS } from './util'
 import fetch from 'isomorphic-fetch'
+import { API_KEY } from '../config/env'
 
 export const getVentureMarkers = () => {
   const { currentUser } = firebase.auth()
@@ -36,7 +37,7 @@ export const getVentureMarkers = () => {
        fetch('https://api.yelp.com/v3/graphql', {
           method: 'POST',
           headers: {
-
+            'Authorization': API_KEY,
             'Content-Type': 'application/json',
             'Accept-Language': 'en_US'
           },

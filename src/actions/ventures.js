@@ -15,6 +15,7 @@ import {
   CLEAR_VENTURE
 } from './util'
 import { generateUUID } from '../helpers/venture'
+import { API_KEY } from '../config/env'
 
 export const setCategory = category => {
   return {
@@ -166,7 +167,7 @@ export const ventureSwipe = (index, ventureId, venture) => {
 export const getMoreVentures = (venture, voteList, page) => {
   const { location: { latitude, longitude, text}, category, uid } = venture
   let config = {
-
+    headers: {'Authorization': API_KEY},
     params: {
       term: category,
       [latitude ? 'latitude' : 'location']: latitude ? latitude : text,
@@ -195,7 +196,7 @@ export const acceptVenture = venture => {
   const { currentUser } = firebase.auth()
   const { location: { latitude, longitude, text}, category, uid } = venture
   let config = {
-
+    headers: {'Authorization': API_KEY},
     params: {
       term: category,
       [latitude ? 'latitude' : 'location']: latitude ? latitude : text,

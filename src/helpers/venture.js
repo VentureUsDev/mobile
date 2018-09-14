@@ -13,6 +13,32 @@ export const dateOptions = {
   year: 'numeric'
 }
 
+export const getYelpStars = rating => {
+  if (rating === 5) return require('../assets/regular_5.png')
+  if (rating === 4.5) return require('../assets/regular_4_half.png')
+  if (rating === 4) return require('../assets/regular_4.png')
+  if (rating === 3.5) return require('../assets/regular_3_half.png')
+  if (rating === 3) return require('../assets/regular_3.png')
+  if (rating === 2.5) return require('../assets/regular_2_half.png')
+  if (rating === 2) return require('../assets/regular_2.png')
+  if (rating === 1.5) return require('../assets/regular_1_half.png')
+  if (rating === 1) return require('../assets/regular_1.png')
+  if (rating === 0) return require('../assets/regular_0.png')
+}
+
+export const getSmallYelpStars = rating => {
+  if (rating === 5) return require('../assets/small_5.png')
+  if (rating === 4.5) return require('../assets/small_4_half.png')
+  if (rating === 4) return require('../assets/small_4.png')
+  if (rating === 3.5) return require('../assets/small_3_half.png')
+  if (rating === 3) return require('../assets/small_3.png')
+  if (rating === 2.5) return require('../assets/small_2_half.png')
+  if (rating === 2) return require('../assets/small_2.png')
+  if (rating === 1.5) return require('../assets/small_1_half.png')
+  if (rating === 1) return require('../assets/small_1.png')
+  if (rating === 0) return require('../assets/small_0.png')
+}
+
 
 // copypasta for now, but never follow the world blindly.
 export const generateUUID = () => {
