@@ -97,9 +97,9 @@ export const commonStyles = StyleSheet.create({
   userDetails: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginLeft: 30,
-    marginRight: 30,
-    paddingTop: 15,
+    marginLeft: 40,
+    marginRight: 40,
+    paddingTop: 25,
   },
   userDetailTitle: {
     color: 'gray',

@@ -39,6 +39,19 @@ export const getSmallYelpStars = rating => {
   if (rating === 0) return require('../assets/small_0.png')
 }
 
+export const getUserDetails = totalVentures => {
+  if (totalVentures <= 5) return {level: 1, title: 'Noob'}
+  if (totalVentures <= 10) return {level: 2, title: 'Journeyman'}
+  if (totalVentures <= 15) return {level: 3, title: 'Traveler'}
+  if (totalVentures <= 20) return {level: 4, title: 'Explorer'}
+  if (totalVentures <= 25) return {level: 5, title: 'Adventurer'}
+  if (totalVentures <= 30) return {level: 6, title: 'Wanderer'}
+  if (totalVentures <= 35) return {level: 7, title: 'Voyager'}
+  if (totalVentures <= 40) return {level: 8, title: 'Pioneer'}
+  if (totalVentures <= 45) return {level: 9, title: 'WanderLuster'}
+  if (totalVentures <= 50) return {level: 10, title: 'Christopher Columbus'}
+}
+
 
 // copypasta for now, but never follow the world blindly.
 export const generateUUID = () => {

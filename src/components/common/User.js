@@ -1,4 +1,5 @@
 import ProfileImage from './ProfileImage'
+import { getUserDetails } from '../../helpers/venture'
 import { commonStyles as c } from './style'
 
 export default class User extends React.Component {
@@ -12,49 +13,42 @@ export default class User extends React.Component {
         </View>
         <View>
           {this.renderDetails()}
-          {this.renderPartners()}
         </View>
       </View>
     )
   }
   renderDetails = () => {
-    const { username, level, totalVentures } = this.props.user
+    const { username, level, totalVentures, categories } = this.props.user
+    const favoriteCategory = () => {
+      if (!!categories && categories.length > 0) {
+        const allCategories = _.groupBy(categories, category => Object.keys(category))
+        return Object.keys(allCategories).reduce((a, b) => {
+          return allCategories[a] > allCategories[b] ? a : b
+        })
+      } else {
+        return 'N/A'
+      }
+    }
+    const venturistDetails = getUserDetails(totalVentures)
     return (
       <View>
         <View>
           <Text style={c.name}>{username}</Text>
-          <Text style={c.level}>{`Level: ${level}`}</Text>
+          <Text style={c.level}>{`Lvl. ${venturistDetails.level}`}</Text>
         </View>
-
         <View style={c.userDetailContainer}>
+          <View style={c.userDetails}>
+            <Text style={c.userDetailTitle}>title:</Text>
+            <Text style={c.userDetail}>{venturistDetails.title}</Text>
+          </View>
           <View style={c.userDetails}>
             <Text style={c.userDetailTitle}>total ventures:</Text>
             <Text style={c.userDetail}>{totalVentures}</Text>
           </View>
-        </View>
-      </View>
-    )
-  }
-
-  renderPartners = () => {
-    const partners = [
-      'http://wallpaper-gallery.net/images/beautiful-girls-hd-wallpapers-free-download/beautiful-girls-hd-wallpapers-free-download-11.jpg',
-      'http://www.beautifulhameshablog.com/wp-content/uploads/2017/09/Beautiful-girls-in-India-Taapsee-Pannu-beautiful-indian-girl-image-beautiful-girl-image-indian-girls-photos-indian-girls-images.jpg',
-      'https://lh3.googleusercontent.com/hqPedkBv844AQwHO9Xgv7LQKjlHr3njiyi413NnckukQ5GDizy8tbvJ01svUaO-7sw=w300'
-    ]
-    return (
-      <View>
-        <View style={c.partnersTitle}>
-          <Text style={c.userDetailTitle}>partners in crime:</Text>
-        </View>
-        <View style={c.partnersImageContainer}>
-          {partners.map((partner, index) => (
-            <Image
-              key={index}
-              style={c.partnersImage}
-              source={{uri: partner}}
-            />
-          ))}
+          <View style={c.userDetails}>
+            <Text style={c.userDetailTitle}>favorite category:</Text>
+            <Text style={c.userDetail}>{favoriteCategory()}</Text>
+          </View>
         </View>
       </View>
     )

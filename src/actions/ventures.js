@@ -117,7 +117,8 @@ export const completedVentures = () => {
                 completed: firebase.firestore.FieldValue.arrayUnion({id, date, category})
               }, { merge: true })
               db.collection('users').doc(userId).set({
-                totalVentures: totalVenturesCount + 1
+                totalVentures: totalVenturesCount + 1,
+                categories: firebase.firestore.FieldValue.arrayUnion({ [category]: id })
               }, { merge: true })
             })
             .catch(error => console.log('error', error))

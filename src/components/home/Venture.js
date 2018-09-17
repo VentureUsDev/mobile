@@ -54,7 +54,7 @@ class Venture extends Component {
               onSwipedLeft={this.onSwipeLeft}
               onSwipedRight={this.onSwipeRight}
               onSwipedAll={() => this.getMoreVentures()}
-              cardIndex={13}
+              cardIndex={userIndex}
               showSecondCard
               stackSize={3}
               backgroundColor="gainsboro"
