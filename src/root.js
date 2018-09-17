@@ -7,7 +7,6 @@ import AppContainer from './components';
 import { ThemeProvider } from 'react-native-material-ui'
 
 const store = configureStore();
-
 export default class ConnectedApp extends Component {
   render() {
     return (

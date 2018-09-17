@@ -1,7 +1,7 @@
 import axios from 'axios'
 import firebase, { db } from '../components/firebase'
 import { GET_VENTURE_MAP_MARKERS_SUCCESS } from './util'
-import fetch from 'isomorphic-fetch'
+import fetch from 'cross-fetch'
 import { API_KEY } from '../config/env'
 
 export const getVentureMarkers = () => {

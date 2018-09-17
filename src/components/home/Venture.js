@@ -14,7 +14,7 @@ class Venture extends Component {
   render() {
     const { ventureVoteList, userIndex, completedVenture, clearVenture } = this.props
     return (
-      <View style={[s.container, s.loading]}>
+      <View style={{flex: 1}}>
         {ventureVoteList
           ? <Swiper
               ref={swiper => this.swiper = swiper}
@@ -23,10 +23,11 @@ class Venture extends Component {
               cards={ventureVoteList}
               renderCard={(card) => {
                 return (
-                  <Card style={{alignSelf: 'center', justifyContent: 'center', width: '100%', backgroundColor: 'white'}}>
+                  <Card style={s.card}>
                     <CardSection image={true}>
                       <Image
                         style={s.image}
+                        resizeMode="cover"
                         source={{ uri: card.image_url }}
                       />
                     </CardSection>
@@ -39,17 +40,31 @@ class Venture extends Component {
                         url={card.url}
                       />
                     </CardSection>
+                    <View style={s.btnContainer}>
+                      <TouchableOpacity onPress={() => this.swiper.swipeLeft()} style={s.leftBtn}>
+                        <Text style={s.leftBtnTxt}>NO</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={() => this.swiper.swipeRight()} style={s.rightBtn}>
+                        <Text style={s.rightBtnTxt}>YES</Text>
+                      </TouchableOpacity>
+                    </View>
                   </Card>
                 )
               }}
               onSwipedLeft={this.onSwipeLeft}
               onSwipedRight={this.onSwipeRight}
               onSwipedAll={() => this.getMoreVentures()}
-              cardIndex={userIndex}
-              backgroundColor={'gainsboro'}
+              cardIndex={13}
+              showSecondCard
+              stackSize={3}
+              backgroundColor="gainsboro"
+              cardVerticalMargin={0}
+              cardStyle={s.cardStyles}
             >
-            </Swiper>
-          : <ActivityIndicator size="large" />
+          </Swiper>
+          : <View style={s.loading}>
+              <ActivityIndicator size="large" />
+            </View>
         }
         {completedVenture &&
           <Modal
@@ -58,8 +73,8 @@ class Venture extends Component {
             visible={!!completedVenture}
           >
             <View style={s.modalOverlay}>
-              <Text style={{color: 'white', fontSize: 24, fontWeight: '600'}}>You've got a Venture!</Text>
-              <Card style={{justifyContent: 'center', backgroundColor: 'white', width: '95%'}}>
+              <Text style={s.congratTxt}>You've got a Venture!</Text>
+              <Card style={s.successCard}>
                 <CardSection image={true}>
                   <Image
                     style={s.image}
@@ -75,20 +90,14 @@ class Venture extends Component {
                     url={completedVenture.url}
                   />
                 </CardSection>
-                <CardSection>
-                  <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
-                    <Button
-                      onPress={this.dismiss}
-                      title="DISMISS"
-                      color="black"
-                    />
-                    <Button
-                      onPress={this.getDirections}
-                      title="DIRECTIONS"
-                      color="#007aff"
-                    />
-                  </View>
-                </CardSection>
+                <View style={s.btnContainer}>
+                  <TouchableOpacity onPress={this.dismiss} style={s.leftBtn}>
+                    <Text style={s.leftBtnTxt}>DISMISS</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={this.getDirections} style={s.rightBtn}>
+                    <Text style={s.rightBtnTxt}>DIRECTIONS</Text>
+                  </TouchableOpacity>
+                </View>
               </Card>
             </View>
           </Modal>
@@ -108,7 +117,14 @@ class Venture extends Component {
       }
     } = this.props
     clearVenture()
-    Linking.openURL(`maps://app?daddr=${latitude}+${longitude}`)
+    Linking.canOpenURL(`google.navigation:q=${latitude}+${longitude}`)
+    .then((canOpen) => {
+      if (canOpen) {
+        Linking.openURL(`google.navigation:q=${latitude}+${longitude}`)
+      } else {
+        Linking.openURL(`maps://app?daddr=${latitude}+${longitude}`)
+      }
+    })
     navigation.goBack()
   }
   dismiss = () => {
@@ -143,15 +159,3 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, { getMoreVentures, ventureSwipe, completedVentures, clearVenture })(Venture)
-//<CardSection>
-//  <Button
-//    onPress={() => this.swiper.swipeLeft()}
-//    title="No"
-//    color="tomato"
-//  />
-//  <Button
-//    title="Yes"
-//    onPress={() => this.swiper.swipeRight()}
-//    color="limegreen"
-//  />
-//</CardSection>

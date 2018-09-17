@@ -12,7 +12,7 @@ class NewVenture extends Component {
 
   render() {
     return (
-      <ScrollView style={style.newVentureContainer}>
+      <ScrollView contentContainerStyle={style.newVentureContainer}>
         <Card>
           <View style={style.formContainer}>
             <View style={style.categoryTexts}>

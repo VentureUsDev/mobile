@@ -19,13 +19,15 @@ export const homeStyles = StyleSheet.create({
     marginRight: 10,
   },
   image: {
-    height: 250,
+    height: 300,
     flex: 1,
     width: null,
   },
   newVentureContainer: {
     flex: 1,
     padding: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   formContainer: {
     padding: 15,
@@ -111,6 +113,11 @@ export const homeStyles = StyleSheet.create({
     marginHorizontal: 30,
     textAlign: 'center'
   },
+  cardStyles: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%'
+  },
   cardContainer: {
     backgroundColor: 'white',
     paddingBottom: 15,
@@ -139,6 +146,23 @@ export const homeStyles = StyleSheet.create({
   confirmDetail: {
     fontSize: 16,
     fontWeight: '600'
+  },
+  card: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: '100%',
+    backgroundColor: 'white',
+    top: 0
+  },
+  congratTxt: {
+    color: 'white',
+    fontSize: 24,
+    fontWeight: '600'
+  },
+  successCard: {
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    width: '95%'
   },
   ventureCard: {
     flex: 1,
@@ -191,4 +215,31 @@ export const homeStyles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 40
   },
+  btnContainer: {
+    borderTopWidth: 0.5,
+    borderTopColor: 'gainsboro',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  leftBtn: {
+    alignItems: 'center',
+    flex: 1,
+    borderRightWidth: 1,
+    borderRightColor: 'gainsboro'
+  },
+  leftBtnTxt: {
+    color: 'tomato',
+    fontSize: 20,
+    padding: 15
+  },
+  rightBtn: {
+    alignItems: 'center',
+    flex: 1
+  },
+  rightBtnTxt: {
+    color: 'limegreen',
+    fontSize: 20,
+    padding: 15
+  }
 });
