@@ -11,6 +11,7 @@ class AllVenturists extends Component {
   }
   render() {
     const { allUsers, fetchingUsers } = this.props
+    console.log(this.props)
     return (
       <View style={{flex: 1}}>
         {fetchingUsers
@@ -27,9 +28,7 @@ class AllVenturists extends Component {
                     />
                   </ScrollView>
                 : <View style={style.noUserContainer}>
-                    <Text style={style.noUserText}>
-                      We're... pretty lonley here. Tell some people, you know what I'm sayin, and tell them to tell some more people, get that "multi-level marketing" going.
-                    </Text>
+                    <ActivityIndicator size="large" />
                   </View>
               }
             </View>

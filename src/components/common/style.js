@@ -134,7 +134,10 @@ export const commonStyles = StyleSheet.create({
   noImage: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 280
+    height: 280,
+    backgroundColor: '#fcfcfc',
+    borderBottomColor: '#f2efef',
+    borderBottomWidth: 0.5
   },
   uploadImageLoadingOverlay: {
     height: 280,
