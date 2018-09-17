@@ -39,6 +39,7 @@
     "redux": "^3.7.2",
     "redux-persist": "^5.6.8",
     "redux-thunk": "^2.2.0",
-    "updeep": "^1.0.0"
+    "updeep": "^1.0.0",
+    "whatwg-fetch": "^2.0.4"
   }
 }

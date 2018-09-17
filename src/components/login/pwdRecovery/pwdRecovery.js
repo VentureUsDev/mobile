@@ -28,33 +28,41 @@ export default class extends Component {
   render() {
     const { email, error, loading } = this.state
     return (
-      <View style={style.container}>
-        <Text style={style.title}>What's your password, Michael?</Text>
-        <Text style={style.subtitle}>Oh, umm...</Text>
-        <Card style={style.cardContainer}>
-          <View style={style.inputContainer}>
-            <Text style={style.inputTitle}>EMAIL</Text>
-            <TextInput
-              style={style.textInput}
-              placeholder="1, 2, 3, 4"
-              value={email}
-              autoCorrect={false}
-              onChangeText={this.handleEmailChange}
-            />
+      <KeyboardAvoidingView
+        behavior="padding"
+        enabled
+        style={style.container}
+      >
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <View>
+            <Text style={style.title}>What's your password, Michael?</Text>
+            <Text style={style.subtitle}>Oh, umm...</Text>
+            <Card style={style.cardContainer}>
+              <View style={style.inputContainer}>
+                <Text style={style.inputTitle}>EMAIL</Text>
+                <TextInput
+                  style={style.textInput}
+                  placeholder="1, 2, 3, 4"
+                  value={email}
+                  autoCorrect={false}
+                  onChangeText={this.handleEmailChange}
+                />
+              </View>
+              <Text style={style.errorText}>{error}</Text>
+              <TouchableOpacity
+                style={!email ? [style.loginBtn, style.disabled] : style.loginBtn}
+                onPress={this.resetPassword}
+                disabled={!email}
+              >
+                {loading
+                  ? <ActivityIndicator size="small" color="white" />
+                  : <Text style={style.loginTxt}>Reset Password</Text>
+                }
+              </TouchableOpacity>
+            </Card>
           </View>
-          <Text style={style.errorText}>{error}</Text>
-          <TouchableOpacity
-            style={!email ? [style.loginBtn, style.disabled] : style.loginBtn}
-            onPress={this.resetPassword}
-            disabled={!email}
-          >
-            {loading
-              ? <ActivityIndicator size="small" color="white" />
-              : <Text style={style.loginTxt}>Reset Password</Text>
-            }
-          </TouchableOpacity>
-        </Card>
-      </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     )
   }
 }

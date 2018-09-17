@@ -27,24 +27,30 @@ class SetLocation extends Component {
   render() {
     const { currentLocation, error } = this.state
     return (
-      <View style={style.locationContainer}>
-        <Card style={style.location}>
-          <View style={style.inputContainer}>
-            <Text style={style.inputTitle}>SET VENTURE LOCATION</Text>
-            <TextInput
-              style={style.textInput}
-              placeholder="Home is where the trouble is"
-              value={currentLocation ? currentLocation.text : this.props.location}
-              autoCorrect={false}
-              onChangeText={this.handleLocationChange}
-            />
-          </View>
-          <Text style={style.errorTxt}>{error}</Text>
-          <TouchableOpacity onPress={this.onButtonPress}>
-            <Text style={style.inputButton}>NEXT</Text>
-          </TouchableOpacity>
-        </Card>
-      </View>
+      <KeyboardAvoidingView
+        behavior="padding"
+        enabled
+        style={style.locationContainer}
+      >
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <Card style={style.location}>
+            <View style={style.inputContainer}>
+              <Text style={style.inputTitle}>SET VENTURE LOCATION</Text>
+              <TextInput
+                style={style.textInput}
+                placeholder="Home is where the trouble is"
+                value={currentLocation ? currentLocation.text : this.props.location}
+                autoCorrect={false}
+                onChangeText={this.handleLocationChange}
+              />
+            </View>
+            <Text style={style.errorTxt}>{error}</Text>
+            <TouchableOpacity onPress={this.onButtonPress}>
+              <Text style={style.inputButton}>NEXT</Text>
+            </TouchableOpacity>
+          </Card>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     )
   }
 

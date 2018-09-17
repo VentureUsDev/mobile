@@ -27,59 +27,67 @@ export default class extends Component {
     const goToPasswordReset = () => navigate('PasswordReset')
 
     return (
-      <View style={style.container}>
-        <Text style={style.title}>You miss 100% of the shots you don't take.</Text>
-        <Text style={style.subtitle}>-Wayne Gretzsky, Michael Scott</Text>
-        <Card style={style.cardContainer}>
-          <View style={style.inputContainer}>
-            <Text style={style.inputTitle}>EMAIL</Text>
-            <TextInput
-              style={style.textInput}
-              placeholder="Email"
-              value={email}
-              autoCorrect={false}
-              onChangeText={this.handleEmailChange}
-            />
-          </View>
-          <View style={style.inputContainer}>
-            <Text style={style.inputTitle}>PASSWORD</Text>
-            <TextInput
-              style={style.textInput}
-              secureTextEntry
-              autoCorrect={false}
-              placeholder="Top Secret Word"
-              value={password}
-              onChangeText={this.handlePasswordChange}
-            />
-          </View>
-          <Text style={style.errorText}>{error}</Text>
-          <TouchableOpacity
-            style={!email || !password ? [style.loginBtn, style.disabled] : style.loginBtn}
-            onPress={this.login}
-            disabled={!email || !password}
-          >
-            {loading
-              ? <ActivityIndicator size="small" color="white" />
-              : <Text style={style.loginTxt}>Login</Text>
-            }
-          </TouchableOpacity>
-          <TouchableOpacity style={style.forgotPw} onPress={goToPasswordReset}>
-            <Text style={style.forgotPwTxt}>Forgot Password?</Text>
-          </TouchableOpacity>
-        </Card>
-
-        <View style={style.br} />
-        <View style={style.noAccount}>
-          <TouchableOpacity onPress={goToSignUp} >
-            <View style={style.noAccountContainer}>
-              <Text style={style.noAccountMsg}>Don't got no account?</Text>
-              <View style={style.noAccountAction}>
-                <Text style={style.noAccountActionTxt}>Sign up.</Text>
+      <KeyboardAvoidingView
+        behavior="padding"
+        enabled
+        style={style.container}
+      >
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <View>
+            <Text style={style.title}>You miss 100% of the shots you don't take.</Text>
+            <Text style={style.subtitle}>-Wayne Gretzsky, Michael Scott</Text>
+            <Card style={style.cardContainer}>
+              <View style={style.inputContainer}>
+                <Text style={style.inputTitle}>EMAIL</Text>
+                <TextInput
+                  style={style.textInput}
+                  placeholder="Email"
+                  value={email}
+                  autoCorrect={false}
+                  onChangeText={this.handleEmailChange}
+                />
               </View>
+              <View style={style.inputContainer}>
+                <Text style={style.inputTitle}>PASSWORD</Text>
+                <TextInput
+                  style={style.textInput}
+                  secureTextEntry
+                  autoCorrect={false}
+                  placeholder="Top Secret Word"
+                  value={password}
+                  onChangeText={this.handlePasswordChange}
+                />
+              </View>
+              <Text style={style.errorText}>{error}</Text>
+              <TouchableOpacity
+                style={!email || !password ? [style.loginBtn, style.disabled] : style.loginBtn}
+                onPress={this.login}
+                disabled={!email || !password}
+              >
+                {loading
+                  ? <ActivityIndicator size="small" color="white" />
+                  : <Text style={style.loginTxt}>Login</Text>
+                }
+              </TouchableOpacity>
+              <TouchableOpacity style={style.forgotPw} onPress={goToPasswordReset}>
+                <Text style={style.forgotPwTxt}>Forgot Password?</Text>
+              </TouchableOpacity>
+            </Card>
+
+            <View style={style.br} />
+            <View style={style.noAccount}>
+              <TouchableOpacity onPress={goToSignUp} >
+                <View style={style.noAccountContainer}>
+                  <Text style={style.noAccountMsg}>Don't got no account?</Text>
+                  <View style={style.noAccountAction}>
+                    <Text style={style.noAccountActionTxt}>Sign up.</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
-        </View>
-      </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     )
   }
 }
