@@ -35,11 +35,9 @@ class Venturists extends React.Component {
                   </View>
               }
               {!select &&
-                <ActionButton buttonColor="black">
-                  <ActionButton.Item buttonColor='#9b59b6' title="Find Friends" onPress={() => this.props.navigation.navigate('AllVenturists')}>
-                    <Icon name="person-add" style={style.iconStyle} />
-                  </ActionButton.Item>
-                </ActionButton>
+                <ActionButton buttonColor="black"
+                  onPress={() => this.props.navigation.navigate('AllVenturists')}
+                />
               }
             </View>
         }
@@ -47,7 +45,7 @@ class Venturists extends React.Component {
     )
   }
   renderUser = data => {
-    return <Venturist user={data.item} friend {...this.props} />
+    return !!data.item && <Venturist user={data.item} friend {...this.props} />
   }
 }
 

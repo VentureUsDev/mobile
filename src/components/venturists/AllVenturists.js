@@ -27,7 +27,9 @@ class AllVenturists extends Component {
                     />
                   </ScrollView>
                 : <View style={style.noUserContainer}>
-                    <ActivityIndicator size="large" />
+                    <Text style={style.noUserText}>
+                      We're... pretty lonley here. Tell some people, you know what I'm sayin, and tell them to tell some more people, get that "multi-level marketing" going.
+                    </Text>
                   </View>
               }
             </View>
