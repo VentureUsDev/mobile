@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { setVenturist } from '../../actions'
-import { ListItem, Avatar, Checkbox } from 'react-native-material-ui'
+import { ListItem, Avatar, Icon } from 'react-native-material-ui'
 import { getUserDetails } from '../../helpers/venture'
 
 import { venturistStyles as v } from './style'
@@ -8,13 +8,12 @@ import { venturistStyles as v } from './style'
 class Venturist extends Component {
   state = { checked: false }
 
-  onCheck = () => {
-    this.setState({ checked: !this.state.checked })
-  }
-
   render() {
-    const { user: { username, image, totalVentures, level }, user, friend, navigation, select } = this.props
+    const { user: { username, image, totalVentures, level }, user, friend, navigation, select, users } = this.props
     const venturistDetails = getUserDetails(totalVentures)
+    const selected = _.find(users, userObj => {
+      return userObj.uid === user.uid && true
+    })
     return (
       <ListItem
         divider
@@ -26,10 +25,18 @@ class Venturist extends Component {
         leftElement={ <Avatar text={username.charAt(0)} /> }
         centerElement={{primaryText: username, secondaryText: `${venturistDetails.title}` }}
         rightElement={
-          <View style={v.level}>
-            <Text>Lv. {venturistDetails.level}</Text>
-            <Text style={v.totalVentures}>ventures: {totalVentures}</Text>
-          </View>
+          select
+            ? <View style={{alignItems: 'flex-end', justifyContent: 'center', marginRight: 10}}>
+                {selected
+                  ? <Icon name="radio-button-checked" style={{fontSize: 25, color: '#007aff'}} />
+                  : <Icon name="radio-button-unchecked" style={{fontSize: 25, color: 'gray'}} />
+                }
+
+              </View>
+            : <View style={v.level}>
+                <Text>Lv. {venturistDetails.level}</Text>
+                <Text style={v.totalVentures}>ventures: {totalVentures}</Text>
+              </View>
         }
       />
     )
@@ -38,8 +45,14 @@ class Venturist extends Component {
   selectVenturist = () => {
     const { user, setVenturist, navigation } = this.props
     setVenturist(user)
-    navigation.navigate('ConfirmVenture')
   }
 }
 
-export default connect(null, { setVenturist })(Venturist)
+const mapStateToProps = state => {
+  const { ventures } = state
+  return {
+    users: ventures.users
+  }
+}
+
+export default connect(mapStateToProps, { setVenturist })(Venturist)

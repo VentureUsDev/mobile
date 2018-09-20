@@ -137,22 +137,33 @@ export const ventureSwipe = (index, ventureId, venture) => {
         .then(ventures => {
           const { acceptedVenture, userIndex } = ventures.data()
           const ventureExists = _.find(acceptedVenture, { id: venture.id })
+          const ventureIndex = _.findIndex(acceptedVenture, { id: venture.id })
           if (ventureExists) {
             db.collection('ventures').doc(ventureId).get().then(data => {
               const { users, category, date } = data.data()
               const userIds = _.map(users, 'uid')
-              return users.map(user => {
-                db.collection('users').doc(user.uid).collection('completedVentures').doc(ventureId).set({
-                  ...venture,
-                  users: userIds,
-                  category,
-                  date,
-                }, { merge: true })
-              })
+              const votePassed = ventureExists.vote === users.length - 1
+              if (votePassed) {
+                return users.map(user => {
+                  db.collection('users').doc(user.uid).collection('completedVentures').doc(ventureId).set({
+                    ...venture,
+                    users: userIds,
+                    category,
+                    date,
+                  }, { merge: true })
+                })
+              } else {
+                let accepted = acceptedVenture
+                accepted.splice(ventureIndex, 1, {...ventureExists, vote: ventureExists.vote + 1})
+                db.collection('ventures').doc(ventureId).collection('allVentures').doc('ventureList').update({
+                  acceptedVenture: accepted,
+                  userIndex: {[currentUser.uid]: index + 1}
+                })
+              }
             })
           } else {
             db.collection('ventures').doc(ventureId).collection('allVentures').doc('ventureList').set({
-              acceptedVenture: firebase.firestore.FieldValue.arrayUnion(venture),
+              acceptedVenture: firebase.firestore.FieldValue.arrayUnion({...venture, vote: 1}),
               userIndex: {[currentUser.uid]: index + 1}
             }, { merge: true })
           }
@@ -236,20 +247,25 @@ export const acceptVenture = venture => {
 }
 
 export const createVenture = data => {
-  const { user, location, category, currentUser } = data
+  const { users, location, category, currentUser } = data
+  let allUsers = []
+  allUsers.push(users, currentUser)
+  allUsers = _.flatten(allUsers)
   const ventureId = generateUUID()
   return (dispatch) => {
     db.collection('users').doc(currentUser.uid).collection('ventures').doc('pending').set({
       pending: firebase.firestore.FieldValue.arrayUnion(ventureId)
     }, { merge: true })
-    db.collection('users').doc(user.uid).collection('ventures').doc('pending').set({
-      pending: firebase.firestore.FieldValue.arrayUnion(ventureId)
-    }, { merge: true })
+    users.map(user => {
+      db.collection('users').doc(user.uid).collection('ventures').doc('pending').set({
+        pending: firebase.firestore.FieldValue.arrayUnion(ventureId)
+      }, { merge: true })
+    })
     db.collection('ventures').doc(ventureId).set({
       uid: ventureId,
       category,
       date: new Date(),
-      users: [user, currentUser],
+      users: allUsers,
       location:
         typeof(location) === 'object'
           ? {...location}

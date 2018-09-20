@@ -17,7 +17,7 @@ import firebase from '../components/firebase'
 export const initialState = {
   category: '',
   location: '',
-  user: {},
+  users: [],
   loading: true,
   pendingVentures: [],
   page: ''
@@ -34,7 +34,14 @@ export default function venturesReducer(state = initialState, action) {
     }
 
     case SET_VENTURIST: {
-      return {...state, user: action.payload}
+      if (_.find(state.users, action.payload)) {
+        const filterUsers = _.filter(state.users, user => {
+          return user.uid !== action.payload.uid
+        })
+        return {...state, users: filterUsers}
+      } else {
+        return {...state, users: [...state.users, action.payload]}
+      }
     }
 
     case GET_PENDING_VENTURES: {
@@ -46,7 +53,7 @@ export default function venturesReducer(state = initialState, action) {
     }
 
     case CREATE_VENTURE_SUCCESS: {
-      return {...state, category: '', location: '', user: {}}
+      return {...state, category: '', location: '', users: []}
     }
 
     case VENTURE_MATCH: {

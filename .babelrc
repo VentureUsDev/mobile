@@ -8,7 +8,7 @@
           {"path": "lodash",
             "default": "_",
             "members": [
-              "map", "filter", "reduce", "difference", "uniqueId", "remove", "isEmpty", "find", "omit", "groupBy"
+              "map", "filter", "reduce", "difference", "uniqueId", "remove", "isEmpty", "find", "omit", "groupBy", "findIndex", "flatten"
             ]
           },
           {"path": "react-native",

@@ -5,7 +5,7 @@ import Header from '../common/Header'
 import Card from '../common/Card'
 import CardSection from '../common/CardSection'
 import ActionButton from 'react-native-action-button'
-import { Icon } from 'react-native-material-ui'
+import { Icon, Avatar } from 'react-native-material-ui'
 import { categories } from '../../helpers/venture'
 
 import { homeStyles as s } from './style'
@@ -58,10 +58,9 @@ class App extends Component {
     const { category, date, location: { text }, users } = venture.item
     // move this stuff to reduer?
     const { currentUser } = firebase.auth()
-    let user = _.filter(users, user => {
+    const filteredUsers = _.filter(users, user => {
       return user.uid !== currentUser.uid
     })
-    user = user[0]
     const iconData = _.find(categories, ({name}) => {
       return name === category || name === 'Custom'
     })
@@ -90,7 +89,17 @@ class App extends Component {
                 >
                   <Icon name="clear" style={s.ventureRejectIcon} />
                 </TouchableOpacity>
-                <Text numberOfLines={1} style={s.ventureUser}>w/ {user.username}</Text>
+                <View style={s.avatars}>
+                  {filteredUsers.map(user =>
+                    <View key={user.uid} style={{paddingLeft: 7}}>
+                      <Avatar
+                        style={{container: {backgroundColor: iconData.color}, content: {fontWeight: '600'}}}
+                        size={30}
+                        text={user.username.charAt(0)}
+                      />
+                    </View>
+                  )}
+                </View>
               </View>
             </View>
           </CardSection>

@@ -216,8 +216,6 @@ export const homeStyles = StyleSheet.create({
     paddingHorizontal: 40
   },
   btnContainer: {
-    borderTopWidth: 0.5,
-    borderTopColor: 'gainsboro',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'
@@ -226,7 +224,7 @@ export const homeStyles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     borderRightWidth: 1,
-    borderRightColor: 'gainsboro'
+    borderRightColor: '#ddd'
   },
   leftBtnTxt: {
     color: 'tomato',
@@ -241,5 +239,13 @@ export const homeStyles = StyleSheet.create({
     color: 'limegreen',
     fontSize: 20,
     padding: 15
+  },
+  disabled: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  avatars: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
   }
 });

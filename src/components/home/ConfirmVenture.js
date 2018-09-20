@@ -5,7 +5,7 @@ import { homeStyles as style } from './style'
 
 class ConfirmVenture extends Component {
   render() {
-    const { category, location, user, loading } = this.props
+    const { category, location, users, loading, navigation } = this.props
     const ventureLocation = typeof(location) === 'object' ? location.text : location
     return (
       <View style={style.locationContainer}>
@@ -20,13 +20,19 @@ class ConfirmVenture extends Component {
               <Text style={style.confirmDetail}>{ventureLocation}</Text>
             </View>
             <View style={style.confirmDetailContainer}>
-              <Text style={style.inputTitle}>VENTURIST</Text>
-              <Text style={style.confirmDetail}>{user.username}</Text>
+              <Text style={style.inputTitle}>VENTURIST(s)</Text>
+              {users.length > 0
+                ? this.renderVenturists()
+                : <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Text style={[style.confirmDetail, {color: 'red'}]}>Please Select a User</Text>
+                  </TouchableOpacity>
+              }
             </View>
           </View>
           <TouchableOpacity
-            style={style.confirmBtn}
+            style={users.length === 0 ? [style.confirmBtn, style.disabled] : style.confirmBtn}
             onPress={this.onButtonPress}
+            disabled={users.length === 0}
           >
             {loading
               ? <ActivityIndicator size="small" color="white" />
@@ -37,19 +43,26 @@ class ConfirmVenture extends Component {
       </View>
     )
   }
+  renderVenturists = () => {
+    return (
+      <View>
+        {this.props.users.map(user => <Text style={[style.confirmDetail, {alignSelf: 'flex-end'}]}>{user.username}</Text>)}
+      </View>
+    )
+  }
   onButtonPress = () => {
-    const { category, location, user, createVenture, currentUser, navigation } = this.props
-    createVenture({category, location, user, currentUser})
+    const { category, location, users, createVenture, currentUser, navigation } = this.props
+    createVenture({category, location, users, currentUser})
     navigation.replace('Home')
   }
 }
 
 const mapStateToProps = state => {
-  const { ventures: { category, location, user }, account } = state
+  const { ventures: { category, location, users }, account } = state
   return {
     category,
     location,
-    user,
+    users,
     currentUser: account.user
   }
 }
