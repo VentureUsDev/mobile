@@ -14,7 +14,7 @@ class VenturistDetail extends Component {
       const { uid } = user
       if (!friend) {
         addFriend(uid)
-        goBack()
+        navigation.popToTop()
       } else {
         removeFriend(uid)
         goBack()

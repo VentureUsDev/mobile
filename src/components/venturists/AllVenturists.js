@@ -42,16 +42,11 @@ class AllVenturists extends Component {
   }
 }
 
-// refactor friends list to be a document which is an array of friend uids
 const mapStateToProps = state => {
   const { account, friends } = state
-  const users = _.filter(account.allUsers, user => {
-    return !_.map(friends.friendsList, 'uid').includes(user.uid)
-  })
-
   return {
-    allUsers: users,
-    fetchingUsers: account.fetchingUsers
+    allUsers: friends.allUsers,
+    fetchingUsers: friends.fetchingAllUsers
   }
 }
 

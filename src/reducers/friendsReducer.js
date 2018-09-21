@@ -1,16 +1,29 @@
+import firebase from '../components/firebase'
 import {
   FRIENDS_FETCH_SUCCESS,
   NO_FRIENDS_FETCHED,
-  REMOVE_FRIEND
+  REMOVE_FRIEND,
+  ALL_USERS_FETCH_SUCCESS
 } from '../actions/util'
 
 export const initialState = {
   friendsList: {},
+  allUsers: {},
   fetchingUsers: true,
+  fetchingAllUsers: true
 }
 
 export default function friendsReducer(state = initialState, action) {
   switch (action.type) {
+    case ALL_USERS_FETCH_SUCCESS: {
+      const { email } = firebase.auth().currentUser
+      const allUsers = action.payload.filter(user => user.email !== email)
+      const users = _.filter(allUsers, user => {
+        return !_.map(state.friendsList, 'uid').includes(user.uid)
+      })
+      return {...state, allUsers: users, fetchingAllUsers: false}
+    }
+
     case FRIENDS_FETCH_SUCCESS: {
       return {...state, friendsList: action.payload, fetchingUsers: false}
     }
