@@ -17,12 +17,25 @@ class Venturist extends Component {
     return (
       <ListItem
         divider
+        style={{ centerElementContainer: { paddingLeft: 10 } }}
         onPress={
           select
             ? () => this.selectVenturist()
             : () => navigation.navigate('VenturistProfile', { user, friend })
         }
-        leftElement={ <Avatar text={username.charAt(0)} /> }
+        leftElement={
+          image
+            ? <Avatar
+                size={50}
+                image={
+                  <Image
+                    source={{ uri: image }}
+                    style={{width: 50, height: 50, borderRadius: 25}}
+                  />
+                }
+              />
+            : <Avatar size={50} text={username.charAt(0).toUpperCase()} />
+        }
         centerElement={{primaryText: username, secondaryText: `${venturistDetails.title}` }}
         rightElement={
           select

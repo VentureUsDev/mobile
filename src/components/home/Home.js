@@ -92,11 +92,22 @@ class App extends Component {
                 <View style={s.avatars}>
                   {filteredUsers.map(user =>
                     <View key={user.uid} style={{paddingLeft: 7}}>
-                      <Avatar
-                        style={{container: {backgroundColor: iconData.color}, content: {fontWeight: '600'}}}
-                        size={30}
-                        text={user.username.charAt(0)}
-                      />
+                      {user.image
+                        ? <Avatar
+                            size={40}
+                            image={
+                              <Image
+                                source={{ uri: user.image }}
+                                style={{width: 40, height: 40, borderRadius: 20}}
+                              />
+                            }
+                          />
+                        : <Avatar
+                            style={{container: {backgroundColor: iconData.color}, content: {fontWeight: '600'}}}
+                            size={40}
+                            text={user.username.charAt(0).toUpperCase()}
+                          />
+                      }
                     </View>
                   )}
                 </View>
