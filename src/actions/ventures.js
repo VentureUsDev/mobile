@@ -12,7 +12,9 @@ import {
   GET_VENTURE_VOTE_LIST,
   VENTURE_MATCH,
   GET_MORE_VENTURES,
-  CLEAR_VENTURE
+  CLEAR_VENTURE,
+  SEND_VENTURE_NOTE,
+  CLEAR_NOTE
 } from './util'
 import { generateUUID } from '../helpers/venture'
 import { API_KEY } from '../config/env'
@@ -246,6 +248,23 @@ export const acceptVenture = venture => {
   }
 }
 
+export const noteWatch = () => {
+  const { currentUser } = firebase.auth()
+  return (dispatch) => {
+    db.collection('users').doc(currentUser.uid).collection('note')
+    .onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(note => {
+        if (note.type === "added") {
+          sendNote(dispatch, note.doc.data())
+          db.collection('users').doc(currentUser.uid).collection('note').doc(note.doc.data().uid).delete()
+          .then(dispatch({ type: CLEAR_NOTE }))
+          .catch(error => console.log('error', error))
+        }
+      })
+    })
+  }
+}
+
 export const createVenture = data => {
   const { users, location, category, currentUser } = data
   let allUsers = []
@@ -253,6 +272,16 @@ export const createVenture = data => {
   allUsers = _.flatten(allUsers)
   const ventureId = generateUUID()
   return (dispatch) => {
+    const ventureData = {
+      uid: ventureId,
+      category,
+      date: new Date(),
+      users: allUsers,
+        location:
+          typeof(location) === 'object'
+            ? {...location}
+            : {text: location}
+    }
     db.collection('users').doc(currentUser.uid).collection('ventures').doc('pending').set({
       pending: firebase.firestore.FieldValue.arrayUnion(ventureId)
     }, { merge: true })
@@ -260,17 +289,10 @@ export const createVenture = data => {
       db.collection('users').doc(user.uid).collection('ventures').doc('pending').set({
         pending: firebase.firestore.FieldValue.arrayUnion(ventureId)
       }, { merge: true })
+      .then(db.collection('users').doc(user.uid).collection('note').doc(ventureId).set(ventureData))
+      .catch(error => console.log('error', error))
     })
-    db.collection('ventures').doc(ventureId).set({
-      uid: ventureId,
-      category,
-      date: new Date(),
-      users: allUsers,
-      location:
-        typeof(location) === 'object'
-          ? {...location}
-          : {text: location}
-    })
+    db.collection('ventures').doc(ventureId).set(ventureData)
     .then(() => dispatch({ type: CREATE_VENTURE_SUCCESS }))
     .catch(error => console.log('error', error))
   }
@@ -301,6 +323,13 @@ const getVentureVoteList = (dispatch, ventureData) => {
   dispatch({
     type: GET_VENTURE_VOTE_LIST,
     payload: ventureData
+  })
+}
+
+const sendNote = (dispatch, noteData) => {
+  dispatch({
+    type: SEND_VENTURE_NOTE,
+    payload: noteData
   })
 }
 

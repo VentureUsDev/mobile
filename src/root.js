@@ -12,11 +12,13 @@ export default class ConnectedApp extends Component {
     return (
       <Provider store={store}>
         <ThemeProvider>
-          <StatusBar
-            backgroundColor="white"
-            barStyle="dark-content"
-          />
-          <AppContainer />
+          <View style={{flex: 1}}>
+            <StatusBar
+              backgroundColor="white"
+              barStyle="dark-content"
+            />
+            <AppContainer />
+          </View>
         </ThemeProvider>
       </Provider>
     )

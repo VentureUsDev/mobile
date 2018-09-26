@@ -98,7 +98,7 @@ class App extends Component {
                             image={
                               <Image
                                 source={{ uri: user.image }}
-                                style={{width: 40, height: 40, borderRadius: 20}}
+                                style={{width: 40, height: 40, borderRadius: 20, borderWidth: 1, borderColor: 'gainsboro'}}
                               />
                             }
                           />

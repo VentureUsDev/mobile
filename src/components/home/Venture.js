@@ -12,7 +12,7 @@ class Venture extends Component {
     this.props.completedVentures()
   }
   render() {
-    const { ventureVoteList, userIndex, completedVenture, clearVenture } = this.props
+    const { ventureVoteList, userIndex, completedVenture, clearVenture, navigation } = this.props
     return (
       <View style={{flex: 1}}>
         {ventureVoteList
@@ -66,72 +66,11 @@ class Venture extends Component {
               <ActivityIndicator size="large" />
             </View>
         }
-        {completedVenture &&
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={!!completedVenture}
-          >
-            <View style={s.modalOverlay}>
-              <Text style={s.congratTxt}>You've got a Venture!</Text>
-              <Card style={s.successCard}>
-                <CardSection image={true}>
-                  <Image
-                    style={s.image}
-                    source={{ uri: completedVenture.image_url }}
-                  />
-                </CardSection>
-                <CardSection>
-                  <YelpSection
-                    name={completedVenture.name}
-                    location={completedVenture.location}
-                    rating={completedVenture.rating}
-                    review_count={completedVenture.review_count}
-                    url={completedVenture.url}
-                  />
-                </CardSection>
-                <View style={s.btnContainer}>
-                  <TouchableOpacity onPress={this.dismiss} style={s.leftBtn}>
-                    <Text style={s.leftBtnTxt}>DISMISS</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={this.getDirections} style={s.rightBtn}>
-                    <Text style={s.rightBtnTxt}>DIRECTIONS</Text>
-                  </TouchableOpacity>
-                </View>
-              </Card>
-            </View>
-          </Modal>
-        }
+        {completedVenture && navigation.goBack()}
       </View>
     )
   }
-  getDirections = () => {
-    const {
-      clearVenture,
-      navigation,
-      completedVenture: {
-        coordinates: {
-          latitude,
-          longitude
-        }
-      }
-    } = this.props
-    clearVenture()
-    Linking.canOpenURL(`google.navigation:q=${latitude}+${longitude}`)
-    .then((canOpen) => {
-      if (canOpen) {
-        Linking.openURL(`google.navigation:q=${latitude}+${longitude}`)
-      } else {
-        Linking.openURL(`maps://app?daddr=${latitude}+${longitude}`)
-      }
-    })
-    navigation.goBack()
-  }
-  dismiss = () => {
-    const { clearVenture, navigation } = this.props
-    clearVenture()
-    navigation.goBack()
-  }
+
   getMoreVentures = () => {
     const { page, navigation: { state }, getMoreVentures, ventureVoteList } = this.props
     getMoreVentures(state.params.venture, ventureVoteList, page)

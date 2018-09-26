@@ -9,7 +9,9 @@ import {
   GET_VENTURE_VOTE_LIST,
   VENTURE_MATCH,
   GET_MORE_VENTURES,
-  CLEAR_VENTURE
+  CLEAR_VENTURE,
+  SEND_VENTURE_NOTE,
+  CLEAR_NOTE
 } from '../actions/util'
 
 import firebase from '../components/firebase'
@@ -20,7 +22,9 @@ export const initialState = {
   users: [],
   loading: true,
   pendingVentures: [],
-  page: ''
+  page: '',
+  ventureVoteList: '',
+  ventureNote: ''
 }
 
 export default function venturesReducer(state = initialState, action) {
@@ -65,7 +69,15 @@ export default function venturesReducer(state = initialState, action) {
     }
 
     case CLEAR_VENTURE: {
-      return {...state, completedVenture: ''}
+      return {...state, completedVenture: '', ventureVoteList: ''}
+    }
+
+    case SEND_VENTURE_NOTE: {
+      return {...state, ventureNote: action.payload}
+    }
+
+    case CLEAR_NOTE: {
+      return {...state, ventureNote: ''}
     }
 
     case GET_VENTURE_VOTE_LIST: {

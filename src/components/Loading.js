@@ -8,7 +8,7 @@ class Loading extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         getUser(user)
-        navigation.navigate('Routes')
+        navigation.navigate('Router')
       } else {
         navigation.navigate('LoginRoutes')
       }

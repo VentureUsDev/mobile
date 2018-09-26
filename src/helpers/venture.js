@@ -49,7 +49,7 @@ export const getUserDetails = totalVentures => {
   if (totalVentures <= 35) return {level: 7, title: 'Voyager'}
   if (totalVentures <= 40) return {level: 8, title: 'Pioneer'}
   if (totalVentures <= 45) return {level: 9, title: 'WanderLuster'}
-  if (totalVentures <= 50) return {level: 10, title: 'Christopher Columbus'}
+  if (totalVentures >= 50) return {level: 10, title: 'Christopher Columbus'}
 }
 
 

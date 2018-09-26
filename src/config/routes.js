@@ -1,4 +1,4 @@
-import { TabNavigator, StackNavigator } from 'react-navigation'
+import { TabNavigator, StackNavigator, NavigationActions } from 'react-navigation'
 
 import HomeScreen from '../components/home/Home'
 import NewVentureScreen from '../components/home/NewVenture'
@@ -103,7 +103,7 @@ export const Routes = TabNavigator({
   Home: {
     screen: HomeTab,
     navigationOptions: {
-      tabBarIcon: ({tintColor}) => <Icon name="spa" color={tintColor} />
+      tabBarIcon: ({tintColor}) => <Icon name="spa" color={tintColor} />,
     }
   },
   Venturists: {
@@ -128,7 +128,24 @@ export const Routes = TabNavigator({
   tabBarOptions: {
     activeTintColor: '#007aff',
     inactiveTintColor: 'gray',
-  }
+  },
+  navigationOptions: ({navigation}) => ({
+    tabBarOnPress: ({ previousScene, scene }) => {
+      const tabRoute = scene.route.routeName
+      const prevRouteName = previousScene.routes[0].routeName
+      navigation.dispatch(NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({
+            routeName: prevRouteName
+          }),
+        ]
+      }))
+      navigation.dispatch(NavigationActions.navigate({
+          routeName: tabRoute
+      }))
+    }
+  })
 })
 
 export const LoginRoutes = StackNavigator({

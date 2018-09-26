@@ -1,12 +1,13 @@
 import React from 'react'
 import { SwitchNavigator, StackNavigator } from 'react-navigation'
-import { Routes, LoginRoutes } from '../config/routes'
+import { LoginRoutes } from '../config/routes'
+import Router from '../config/router'
 import Loading from './Loading'
 import Modal from './Modal'
 
 const RootStack = SwitchNavigator({
   Loading,
-  Routes,
+  Router,
   LoginRoutes,
 }, {
   initialRouteName: 'Loading'
