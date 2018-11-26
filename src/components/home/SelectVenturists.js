@@ -9,7 +9,7 @@ export default class SelectVenturists extends Component {
         <Button
           onPress={() => navigation.navigate('ConfirmVenture')}
           title="Next"
-          color="#157AFB"
+          color="white"
         />
       )
     }

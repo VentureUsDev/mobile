@@ -10,7 +10,7 @@ class Profile extends Component {
       <Button
         onPress={() => auth.signOut()}
         title="Logout"
-        color="#157AFB"
+        color="white"
       />
     )
   }

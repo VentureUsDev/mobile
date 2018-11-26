@@ -34,7 +34,7 @@ class VenturistDetail extends Component {
               )
             }
             title="Remove"
-            color="#157AFB"
+            color="white"
           />
         )
       } else {
@@ -49,7 +49,7 @@ class VenturistDetail extends Component {
              )
             }
             title="Add"
-            color="#157AFB"
+            color="white"
           />
         )
       }

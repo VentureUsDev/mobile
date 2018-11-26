@@ -1,4 +1,5 @@
 import { TabNavigator, StackNavigator, NavigationActions } from 'react-navigation'
+import Header from 'react-navigation/src/views/Header/Header'
 
 import HomeScreen from '../components/home/Home'
 import NewVentureScreen from '../components/home/NewVenture'
@@ -24,21 +25,36 @@ const headerStyles = {
   shadowOffset: { width: 0, height: 2 },
   shadowOpacity: 0.2,
   elevation: 2,
+  backgroundColor: 'rgba(255, 255, 255, .1)',
+  borderBottom: 0
 }
+
+const ImageHeader = props => (
+  <View style={{ marginBottom: 64}}>
+    <Image
+      style={{position: 'absolute', height: 64, width: '100%'}}
+      source={require('../assets/background.png')}
+      resizeMode="cover"
+    />
+    <View style={{position: 'absolute', backgroundColor: 'transparent', height: 64, width: '100%', zIndex: 3, backgroundColor: 'transparent'}}>
+    <Header {...props} />
+    </View>
+  </View>
+)
 
 const makeNavOptions = title => ({
   title,
   headerStyle: headerStyles,
-  headerTitleStyle: { fontSize: 20 },
+  headerTitleStyle: { fontSize: 26 },
+  headerTintColor: 'white',
+  header: (props) => <ImageHeader {...props} />
 })
 
 const HomeTab = StackNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
-      title: 'Venture',
-      headerStyle: headerStyles,
-      headerTitleStyle: { fontSize: 20 },
+      ...makeNavOptions('Ventures'),
       headerLeft: null
     },
   },
@@ -73,10 +89,8 @@ const VenturistsTab = StackNavigator({
   VenturistProfile: {
     screen: VenturistScreen,
     navigationOptions: ({navigation}) => ({
-      title: navigation.state.params.user.username,
-      headerBackTitle: null,
-      headerStyle: headerStyles,
-      headerTitleStyle: { fontSize: 20 }
+      ...makeNavOptions(navigation.state.params.user.username),
+      headerBackTitle: null
     }),
   },
   AllVenturists: {
