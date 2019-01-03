@@ -1,6 +1,7 @@
 import Card from '../../common/Card'
 import { signUp } from '../../../actions/account'
 import firebase, { auth, db } from '../../firebase'
+import { LinearGradient } from 'expo'
 
 import style from '../style'
 
@@ -35,7 +36,6 @@ export default class extends Component {
 
   render() {
     const { password, email, loading, error, username } = this.state
-    const { goBack } = this.props.navigation
 
     return (
       <KeyboardAvoidingView
@@ -45,11 +45,9 @@ export default class extends Component {
       >
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View>
-            <Text style={style.title}>Give us your data, watch us grow rich.</Text>
-            <Text style={style.subtitle}>Just kidding~</Text>
             <Card style={style.cardContainer}>
               <View style={style.inputContainer}>
-                <Text style={style.inputTitle}>EMAIL</Text>
+                <Text style={style.inputTitle}>Email</Text>
                 <TextInput
                   style={style.textInput}
                   autoCorrect={false}
@@ -59,7 +57,7 @@ export default class extends Component {
                 />
               </View>
               <View style={style.inputContainer}>
-                <Text style={style.inputTitle}>USERNAME</Text>
+                <Text style={style.inputTitle}>Username</Text>
                 <TextInput
                   style={style.textInput}
                   autoCorrect={false}
@@ -69,7 +67,7 @@ export default class extends Component {
                 />
               </View>
               <View style={style.inputContainer}>
-                <Text style={style.inputTitle}>PASSWORD</Text>
+                <Text style={style.inputTitle}>Password</Text>
                 <TextInput
                   style={style.textInput}
                   secureTextEntry
@@ -79,29 +77,22 @@ export default class extends Component {
                   onChangeText={this.handlePasswordChange}
                 />
               </View>
-              <Text style={style.errorText}>{error}</Text>
+              {error && <Text style={style.errorText}>{error}</Text>}
               <TouchableOpacity
-                style={!email || !password ? [style.loginBtn, style.disabled] : style.loginBtn}
                 onPress={this.signUp}
                 disabled={!email || !password}
               >
-                {loading
-                  ? <ActivityIndicator size="small" color="white" />
-                  : <Text style={style.loginTxt}>Sign Up</Text>
-                }
+                <LinearGradient
+                  colors={['#0065ff', '#21c0ff']}
+                  style={!email || !password ? [style.loginBtn, style.disabled] : style.loginBtn}
+                >
+                  {loading
+                    ? <ActivityIndicator size="small" color="white" />
+                    : <Text style={style.loginTxt}>Sign Up</Text>
+                  }
+                </LinearGradient>
               </TouchableOpacity>
             </Card>
-            <View style={style.br} />
-            <View style={style.noAccount}>
-              <TouchableOpacity onPress={() => goBack()}>
-                <View style={style.noAccountContainer}>
-                  <Text style={style.noAccountMsg}>Lied to us?</Text>
-                  <View style={style.noAccountAction}>
-                    <Text style={style.noAccountActionTxt}>Log in.</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            </View>
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>

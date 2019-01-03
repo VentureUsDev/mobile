@@ -1,5 +1,6 @@
 import Card from '../../common/Card'
 import firebase, { auth } from '../../firebase'
+import { LinearGradient } from 'expo'
 
 import style from '../style'
 
@@ -34,33 +35,36 @@ export default class extends Component {
         style={style.container}
       >
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <View>
-            <Text style={style.title}>What's your password, Michael?</Text>
-            <Text style={style.subtitle}>Oh, umm...</Text>
-            <Card style={style.cardContainer}>
-              <View style={style.inputContainer}>
-                <Text style={style.inputTitle}>EMAIL</Text>
-                <TextInput
-                  style={style.textInput}
-                  placeholder="1, 2, 3, 4"
-                  value={email}
-                  autoCorrect={false}
-                  onChangeText={this.handleEmailChange}
-                />
-              </View>
-              <Text style={style.errorText}>{error}</Text>
-              <TouchableOpacity
+          <Card style={style.cardContainer}>
+            <View style={{alignSelf: 'center', padding: 20}}>
+              <Image style={{height: 130, width: 150}} source={require('../../../assets/Login.png')}/>
+            </View>
+            <View style={style.inputContainer}>
+              <Text style={style.inputTitle}>Email</Text>
+              <TextInput
+                style={style.textInput}
+                placeholder="1, 2, 3, 4"
+                value={email}
+                autoCorrect={false}
+                onChangeText={this.handleEmailChange}
+              />
+            </View>
+            {error && <Text style={style.errorText}>{error}</Text>}
+            <TouchableOpacity
+              onPress={this.resetPassword}
+              disabled={!email}
+            >
+              <LinearGradient
+                colors={['#0065ff', '#21c0ff']}
                 style={!email ? [style.loginBtn, style.disabled] : style.loginBtn}
-                onPress={this.resetPassword}
-                disabled={!email}
               >
                 {loading
                   ? <ActivityIndicator size="small" color="white" />
                   : <Text style={style.loginTxt}>Reset Password</Text>
                 }
-              </TouchableOpacity>
-            </Card>
-          </View>
+              </LinearGradient>
+            </TouchableOpacity>
+          </Card>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     )

@@ -28,67 +28,69 @@ export default StyleSheet.create({
     marginVertical: 5,
   },
   inputTitle: {
-    fontSize: 10,
+    fontSize: 16,
     fontWeight: '600',
+    letterSpacing: 1,
+    color: '#180456'
   },
   textInput: {
     marginVertical: 10,
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'rgba(0, 0, 0, 0.9)',
-    height: 40,
-    fontSize: 16,
+    borderWidth: 2,
+    paddingHorizontal: 15,
+    borderRadius: 7,
+    borderColor: 'rgba(139, 178, 186, 0.2)',
+    height: 60,
+    fontSize: 14,
+    fontWeight: '600'
   },
   loginBtn: {
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    marginVertical: 10,
-    marginRight: 35,
-    marginLeft: 35,
-    padding: 10
+    marginVertical: 20,
+    marginRight: 65,
+    marginLeft: 65,
+    height: 60,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   disabled: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    opacity: 0.3,
   },
   loginTxt: {
     color: 'white',
-    textAlign: 'center',
-    fontSize: 18,
+    fontSize: 22,
+    fontWeight: '600'
   },
   forgotPw: {
-    paddingHorizontal: 20,
-    paddingTop: 20,
     alignSelf: 'flex-end',
-    marginRight: 15,
   },
   forgotPwTxt: {
-    color: 'gray',
-    fontWeight: '600',
-  },
-  br: {
-    height: 70,
+    color: 'gray'
   },
   noAccount: {
     alignSelf: 'center',
+    marginVertical: 15
   },
   noAccountContainer: {
     flexDirection: 'row',
   },
   noAccountMsg: {
-    color: 'darkgray',
+    color: '#180456',
   },
   noAccountAction: {
     borderBottomWidth: 1,
-    borderBottomColor: 'gray',
+    borderBottomColor: '#180456',
     marginLeft: 5,
   },
   noAccountActionTxt: {
-    color: 'gray',
-    fontWeight: '600',
+    color: '#180456',
+    fontWeight: '500',
   },
   padBot: {
     paddingBottom: 80,
   },
   errorText: {
     paddingHorizontal: 20,
+    paddingVertical: 10,
     color: 'red',
     fontSize: 14,
     alignSelf: 'center'

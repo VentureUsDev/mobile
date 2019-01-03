@@ -18,8 +18,8 @@ export const commonStyles = StyleSheet.create({
     zIndex: 5
   },
   cardContainer: {
-    borderWidth: 1,
-    borderRadius: 2,
+
+    borderRadius: 10,
     borderColor: '#ddd',
     borderBottomWidth: 0,
     shadowColor: '#000',

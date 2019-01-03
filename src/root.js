@@ -14,7 +14,6 @@ export default class ConnectedApp extends Component {
         <ThemeProvider>
           <View style={{flex: 1}}>
             <StatusBar
-              translucent
               barStyle="light-content"
             />
             <AppContainer />
