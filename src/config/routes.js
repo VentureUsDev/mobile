@@ -141,7 +141,7 @@ export const Routes = TabNavigator({
 }, {
   tabBarOptions: {
     activeTintColor: '#007aff',
-    inactiveTintColor: 'gray',
+    inactiveTintColor: '#c4c4c4',
   },
   navigationOptions: ({navigation}) => ({
     tabBarOnPress: ({ previousScene, scene }) => {

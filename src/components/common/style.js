@@ -18,14 +18,13 @@ export const commonStyles = StyleSheet.create({
     zIndex: 5
   },
   cardContainer: {
-
     borderRadius: 10,
     borderColor: '#ddd',
     borderBottomWidth: 0,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2},
     shadowOpacity: 0.2,
-    shadowRadius: 2,
+    shadowRadius: 8,
     elevation: 1,
     margin: 15,
   },
@@ -37,6 +36,7 @@ export const commonStyles = StyleSheet.create({
     flexDirection: 'row',
     borderColor: '#ddd',
     position: 'relative',
+    borderRadius: 8
   },
   cardImageSection: {
     borderBottomWidth: 1,

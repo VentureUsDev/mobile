@@ -36,7 +36,7 @@ class App extends Component {
                   </ScrollView>
               }
               <ActionButton
-                buttonColor="black"
+                buttonColor="#0065ff"
                 onPress={() => this.props.navigation.navigate('NewVenture')}
               />
             </View>
@@ -91,14 +91,17 @@ class App extends Component {
                 </TouchableOpacity>
                 <View style={s.avatars}>
                   {filteredUsers.map(user =>
-                    <View key={user.uid} style={{paddingLeft: 7}}>
+                    <View
+                      key={user.uid}
+                      style={s.avatarContainer}
+                    >
                       {user.image
                         ? <Avatar
                             size={40}
                             image={
                               <Image
                                 source={{ uri: user.image }}
-                                style={{width: 40, height: 40, borderRadius: 20, borderWidth: 1, borderColor: 'gainsboro'}}
+                                style={s.avatar}
                               />
                             }
                           />

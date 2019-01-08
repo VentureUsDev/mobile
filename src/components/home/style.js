@@ -1,7 +1,6 @@
 export const homeStyles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'gainsboro',
+    flex: 1
   },
   subheader: {
     alignItems: 'center',
@@ -167,7 +166,8 @@ export const homeStyles = StyleSheet.create({
   ventureCard: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'blue',
+    borderRadius: 10,
   },
   ventureCardContent: {
     flex: 1,
@@ -184,11 +184,11 @@ export const homeStyles = StyleSheet.create({
   },
   headerText: {
     fontWeight: '600',
-    fontSize: 16
+    fontSize: 20
   },
   locationTxt: {
     fontSize: 14,
-    color: 'gray',
+    color: '#0065ff',
     paddingTop: 5
   },
   ventureCardRight: {
@@ -198,8 +198,8 @@ export const homeStyles = StyleSheet.create({
     paddingRight: 5
   },
   ventureRejectIcon: {
-    color: 'tomato',
-    fontSize: 25
+    color: '#0065ff',
+    fontSize: 20
   },
   ventureUser: {
     paddingRight: 5
@@ -247,5 +247,23 @@ export const homeStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'flex-end'
+  },
+  avatarContainer: {
+    width: 46,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 46,
+    borderRadius: 23,
+    borderWidth: 4,
+    borderColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    elevation: 2
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20
   }
 });
