@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { setCategory } from '../../actions'
 import { Modal } from 'react-native'
 import Card from '../common/Card'
+import Input from '../common/Input'
 import { Icon } from 'react-native-material-ui'
 import { homeStyles as style } from './style'
 import { categories } from '../../helpers/venture'
@@ -13,31 +14,29 @@ class NewVenture extends Component {
   render() {
     return (
       <ScrollView contentContainerStyle={style.newVentureContainer}>
-        <Card>
-          <View style={style.formContainer}>
-            <View style={style.categoryTexts}>
-              <Text style={style.inputTitle}>SELECT CATEGORY:</Text>
-              <Text style={[style.formLabel, this.state.color && {color: this.state.color}]}>{this.props.category}</Text>
-            </View>
-            <View style={style.categoryContainer}>
-              {categories.map(category => {
-                return (
-                  <TouchableOpacity
-                    key={uniqueId()}
-                    onPress={
-                      () =>
-                        category.value === 'custom'
-                          ? this.toggleModal(true)
-                          : this.onButtonPress(category)}
-                    style={[style.category, {backgroundColor: category.color}]}>
-                    <Icon name={category.icon} style={style.icon} />
-                    <Text style={style.name}>{category.name}</Text>
-                  </TouchableOpacity>
-                )
-              })}
-            </View>
+        <View style={style.categoryTexts}>
+          <Text style={style.inputTitle}>Select a Category:</Text>
+          <Text style={[style.formLabel, this.state.color && {color: this.state.color}]}>{this.props.category}</Text>
+        </View>
+        <View style={style.formContainer}>
+          <View style={style.categoryContainer}>
+            {categories.map(category => {
+              return (
+                <TouchableOpacity
+                  key={uniqueId()}
+                  onPress={
+                    () =>
+                      category.value === 'custom'
+                        ? this.toggleModal(true)
+                        : this.onButtonPress(category)}
+                  style={[style.category, {backgroundColor: category.color}]}>
+                  <Image resizeMode="contain" source={category.image} style={{width: 55, height: 55}} />
+                  <Text style={style.name}>{category.name}</Text>
+                </TouchableOpacity>
+              )
+            })}
           </View>
-        </Card>
+        </View>
         <Modal
           animationType="slide"
           transparent={true}
@@ -46,10 +45,9 @@ class NewVenture extends Component {
           <View style={style.modalOverlay}>
             <View style={style.modal}>
               <View style={style.inputContainer}>
-                <Text style={style.inputTitle}>PLEASE TYPE CATEGORY</Text>
-                <TextInput
-                  style={style.textInput}
-                  placeholder="Fly like an eagle"
+                <Text style={style.inputTitle}>Custom Category</Text>
+                <Input
+                  placeholder="Keywords like pie"
                   autoCorrect={false}
                   value={this.props.category}
                   onChangeText={this.handleCategoryChange}

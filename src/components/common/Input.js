@@ -17,22 +17,22 @@ export default class Input extends Component {
 }
 const styles = {
   input: {
-    color: '#000',
-    paddingRight: 5,
-    paddingLeft: 5,
-    fontSize: 18,
-    lineHeight: 23,
-    flex: 2,
+    marginVertical: 10,
+    borderWidth: 2,
+    paddingHorizontal: 15,
+    borderRadius: 7,
+    borderColor: 'rgba(139, 178, 186, 0.2)',
+    height: 60,
+    fontSize: 14,
+    fontWeight: '600'
   },
   label: {
-    fontSize: 18,
-    paddingLeft: 20,
-    flex: 1,
+    fontSize: 16,
+    fontWeight: '600',
+    letterSpacing: 1,
+    color: '#180456'
   },
   container: {
-    height: 40,
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+    marginVertical: 5
   },
 }

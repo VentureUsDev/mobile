@@ -24,7 +24,6 @@ export default StyleSheet.create({
     justifyContent: 'space-around'
   },
   inputContainer: {
-    marginHorizontal: 35,
     marginVertical: 5,
   },
   inputTitle: {

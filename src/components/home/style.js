@@ -29,17 +29,19 @@ export const homeStyles = StyleSheet.create({
     alignItems: 'center'
   },
   formContainer: {
-    padding: 15,
-    backgroundColor: 'white',
+    padding: 15
   },
   formLabel: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
   },
   categoryTexts: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '100%',
+    paddingHorizontal: 15,
+    paddingVertical: 5
   },
   categoryContainer: {
     flexDirection: 'row',
@@ -52,8 +54,12 @@ export const homeStyles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     margin: 15,
-    height: 120,
-    width: 120
+    height: 150,
+    width: 150,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    elevation: 2
   },
   icon: {
     color: 'white',
@@ -61,7 +67,9 @@ export const homeStyles = StyleSheet.create({
   },
   name: {
     color: 'white',
-    fontSize: 20
+    fontSize: 22,
+    fontWeight: '600',
+    paddingTop: 10
   },
   modalOverlay: {
     flex: 1,
@@ -70,20 +78,20 @@ export const homeStyles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.4)'
   },
   modal: {
-    width: 300,
-    height: 150,
+    width: '90%',
+    height: '30%',
     backgroundColor: 'white',
     borderRadius: 5
   },
   locationContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   location: {
-    width: 300,
-    height: 180,
-    backgroundColor: 'white'
+    width: '90%',
+    height: '70%',
+    backgroundColor: 'white',
   },
   inputContainer: {
     marginHorizontal: 30,
@@ -91,8 +99,9 @@ export const homeStyles = StyleSheet.create({
     marginTop: 25
   },
   inputTitle: {
-    fontSize: 10,
+    fontSize: 18,
     fontWeight: '600',
+    color: '#180456'
   },
   textInput: {
     marginVertical: 10,
@@ -104,7 +113,8 @@ export const homeStyles = StyleSheet.create({
   inputButton: {
     fontSize: 16,
     textAlign: 'right',
-    marginRight: 30
+    marginRight: 30,
+    color: '#0065ff'
   },
   errorTxt: {
     color: 'red',
@@ -120,23 +130,25 @@ export const homeStyles = StyleSheet.create({
   cardContainer: {
     backgroundColor: 'white',
     paddingBottom: 15,
-    width: '80%',
+    width: '90%',
   },
   confirmBtn: {
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    padding: 10,
-    marginTop: 5,
-    marginHorizontal: 15,
+    marginVertical: 20,
+    marginRight: 65,
+    marginLeft: 65,
+    height: 60,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   confirmTxt: {
     color: 'white',
-    textAlign: 'center',
-    fontSize: 18,
+    fontSize: 22,
+    fontWeight: '600'
   },
   confirmDetailContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
+    minHeight: 65,
     paddingVertical: 15,
     borderBottomWidth: 1,
     borderBottomColor: 'gainsboro',
@@ -144,7 +156,8 @@ export const homeStyles = StyleSheet.create({
   },
   confirmDetail: {
     fontSize: 16,
-    fontWeight: '600'
+    fontWeight: '600',
+    alignSelf: 'flex-end'
   },
   card: {
     justifyContent: 'center',
@@ -177,14 +190,14 @@ export const homeStyles = StyleSheet.create({
   iconContainer: {
     marginHorizontal: 10,
     borderRadius: 5,
-    width: 80,
-    height: 80,
+    width: 85,
+    height: 85,
     justifyContent: 'center',
     alignItems: 'center'
   },
   headerText: {
     fontWeight: '600',
-    fontSize: 20
+    fontSize: 20,
   },
   locationTxt: {
     fontSize: 14,
@@ -241,7 +254,7 @@ export const homeStyles = StyleSheet.create({
     padding: 15
   },
   disabled: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    opacity: 0.3,
   },
   avatars: {
     flexDirection: 'row',
@@ -259,11 +272,37 @@ export const homeStyles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
-    elevation: 2
+    elevation: 2,
+    marginRight: 3
+  },
+  confirmAvatarContainer: {
+    width: 66,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 66,
+    borderRadius: 33,
+    borderWidth: 4,
+    borderColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    elevation: 2,
+    marginRight: 3
+  },
+  confirmAvatar: {
+    width: 60,
+    height: 60,
+    borderRadius: 30
   },
   avatar: {
     width: 40,
     height: 40,
     borderRadius: 20
+  },
+  iconCategory: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+    paddingTop: 5
   }
 });

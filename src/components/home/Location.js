@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { setLocation } from '../../actions'
 import Card from '../common/Card'
+import Input from '../common/Input'
 import { homeStyles as style } from './style'
 import { Location, Permissions } from 'expo'
 
@@ -34,10 +35,10 @@ class SetLocation extends Component {
       >
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <Card style={style.location}>
+            <Image resizeMode="contain" style={{height: 200, width: 150, alignSelf: 'center'}} source={require('../../assets/Location.png')}/>
             <View style={style.inputContainer}>
-              <Text style={style.inputTitle}>SET VENTURE LOCATION</Text>
-              <TextInput
-                style={style.textInput}
+              <Text style={style.inputTitle}>Set Venture Location</Text>
+              <Input
                 placeholder="Home is where the trouble is"
                 value={currentLocation ? currentLocation.text : this.props.location}
                 autoCorrect={false}

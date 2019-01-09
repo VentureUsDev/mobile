@@ -1,10 +1,10 @@
 export const categories = [
-  {name: 'Food', value: 'food', icon: 'restaurant', color: '#60C1E9'},
-  {name: 'Drinks', value: 'drinks', icon: 'local-bar', color: '#FECB2F'},
-  {name: 'Activities', value: 'activities', icon: 'beach-access', color: '#9CC348'},
-  {name: 'Date Night', value: 'datenight', icon: 'favorite', color: '#E35A3C'},
-  {name: 'Night Life', value: 'nightlife', icon: 'location-city', color: '#F87931'},
-  {name: 'Custom', value: 'custom', icon: 'spa', color: '#A69BF9'}
+  {name: 'Food', value: 'food', icon: 'restaurant', color: '#60C1E9', image: require('../assets/Food.png')},
+  {name: 'Drinks', value: 'drinks', icon: 'local-bar', color: '#FECB2F', image: require('../assets/Drinks.png')},
+  {name: 'Activities', value: 'activities', icon: 'beach-access', color: '#9CC348', image: require('../assets/Activities.png')},
+  {name: 'Date Night', value: 'datenight', icon: 'favorite', color: '#E35A3C', image: require('../assets/DateNight.png')},
+  {name: 'Night Life', value: 'nightlife', icon: 'location-city', color: '#F87931', image: require('../assets/NightLife.png')},
+  {name: 'Custom', value: 'custom', icon: 'spa', color: '#A69BF9', image: require('../assets/Custom.png')}
 ]
 
 export const dateOptions = {

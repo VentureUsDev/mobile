@@ -70,7 +70,7 @@ class App extends Component {
           <CardSection>
             <View style={s.ventureCardContent}>
               <View style={[s.iconContainer, { backgroundColor: iconData.color }]}>
-                <Icon name={iconData.icon} style={s.icon} />
+                <Image resizeMode="contain" source={iconData.image} style={{width: 55, height: 55}} />
               </View>
               <View>
                 <Text style={s.headerText}>{category}</Text>
