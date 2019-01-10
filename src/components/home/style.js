@@ -101,7 +101,8 @@ export const homeStyles = StyleSheet.create({
   inputTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#180456'
+    color: '#180456',
+    letterSpacing: 0.5
   },
   textInput: {
     marginVertical: 10,

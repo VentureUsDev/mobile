@@ -4,11 +4,18 @@ export const venturistStyles = StyleSheet.create({
   },
   level: {
     alignItems: 'flex-end',
-    marginRight: 10
+    marginRight: 10,
+  },
+  levelTxt: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: 'tomato'
   },
   totalVentures: {
     color: 'gray',
-    fontSize: 11,
+    fontSize: 12,
+    fontWeight: '500',
+    paddingTop: 3
   },
   iconStyle: {
     color: 'white',
@@ -23,5 +30,25 @@ export const venturistStyles = StyleSheet.create({
   },
   noUserText: {
     paddingHorizontal: 40,
+  },
+  subheaderContainer: {
+    backgroundColor: 'white',
+    borderBottomWidth: 0.5,
+    borderBottomColor: 'gainsboro'
+  },
+  subheaderText: {
+    color: '#180456',
+    fontSize: 18,
+    fontWeight: '600',
+    letterSpacing: 0.5
+  },
+  primaryText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  secondaryText: {
+    fontWeight: '500',
+    fontSize: 14,
+    color: 'gray'
   }
 });

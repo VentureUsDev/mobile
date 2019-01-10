@@ -74,14 +74,17 @@ export default StyleSheet.create({
   },
   noAccountMsg: {
     color: '#180456',
+    letterSpacing: 0.5
   },
   noAccountAction: {
     borderBottomWidth: 1,
     borderBottomColor: '#180456',
+    letterSpacing: 0.5,
     marginLeft: 5,
   },
   noAccountActionTxt: {
     color: '#180456',
+    letterSpacing: 0.5,
     fontWeight: '500',
   },
   padBot: {

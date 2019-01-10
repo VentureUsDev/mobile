@@ -17,7 +17,11 @@ class Venturist extends Component {
     return (
       <ListItem
         divider
-        style={{ centerElementContainer: { paddingLeft: 10 } }}
+        style={{
+          centerElementContainer: { paddingLeft: 10 },
+          primaryText: v.primaryText,
+          secondaryText: v.secondaryText
+        }}
         onPress={
           select
             ? () => this.selectVenturist()
@@ -47,8 +51,8 @@ class Venturist extends Component {
 
               </View>
             : <View style={v.level}>
-                <Text>Lv. {venturistDetails.level}</Text>
-                <Text style={v.totalVentures}>ventures: {totalVentures}</Text>
+                <Text style={v.levelTxt}>Lv. {venturistDetails.level}</Text>
+                <Text style={v.totalVentures}>Ventures: {totalVentures}</Text>
               </View>
         }
       />

@@ -27,7 +27,7 @@ class Venturists extends React.Component {
                       data={friendsList}
                       keyExtractor={() => uniqueId()}
                       renderItem={this.renderUser}
-                      ListHeaderComponent={<Subheader text="Friends" />}
+                      ListHeaderComponent={<Subheader style={{container: style.subheaderContainer, text: style.subheaderText}} text="Friends" />}
                     />
                   </ScrollView>
                 : <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
@@ -35,7 +35,7 @@ class Venturists extends React.Component {
                   </View>
               }
               {!select &&
-                <ActionButton buttonColor="black"
+                <ActionButton buttonColor="#0065ff"
                   onPress={() => this.props.navigation.navigate('AllVenturists')}
                 />
               }
