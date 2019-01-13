@@ -6,6 +6,7 @@ import CardSection from '../common/CardSection'
 import YelpSection from '../common/YelpSection'
 import { homeStyles as s } from './style'
 import { getMoreVentures, ventureSwipe, completedVentures, clearVenture } from '../../actions'
+import { LinearGradient } from 'expo'
 
 class Venture extends Component {
   componentDidMount() {
@@ -31,7 +32,7 @@ class Venture extends Component {
                         source={{ uri: card.image_url }}
                       />
                     </CardSection>
-                    <CardSection>
+                    <View style={s.yelpSection}>
                       <YelpSection
                         name={card.name}
                         location={card.location}
@@ -39,13 +40,20 @@ class Venture extends Component {
                         review_count={card.review_count}
                         url={card.url}
                       />
-                    </CardSection>
+                    </View>
                     <View style={s.btnContainer}>
-                      <TouchableOpacity onPress={() => this.swiper.swipeLeft()} style={s.leftBtn}>
-                        <Text style={s.leftBtnTxt}>NO</Text>
+                      <TouchableOpacity onPress={() => this.swiper.swipeLeft()}>
+                        <View style={s.noBtn}>
+                          <Text style={s.noBtnTxt}>NO</Text>
+                        </View>
                       </TouchableOpacity>
-                      <TouchableOpacity onPress={() => this.swiper.swipeRight()} style={s.rightBtn}>
-                        <Text style={s.rightBtnTxt}>YES</Text>
+                      <TouchableOpacity onPress={() => this.swiper.swipeRight()}>
+                        <LinearGradient
+                          colors={['#0065ff', '#21c0ff']}
+                          style={s.yesBtn}
+                        >
+                          <Text style={s.yesBtnTxt}>YES</Text>
+                        </LinearGradient>
                       </TouchableOpacity>
                     </View>
                   </Card>

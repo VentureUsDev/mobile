@@ -1,3 +1,5 @@
+const { width } = Dimensions.get('window')
+
 export const homeStyles = StyleSheet.create({
   container: {
     flex: 1
@@ -231,28 +233,45 @@ export const homeStyles = StyleSheet.create({
   },
   btnContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  leftBtn: {
+    justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
-    borderRightWidth: 1,
-    borderRightColor: '#ddd'
   },
-  leftBtnTxt: {
-    color: 'tomato',
-    fontSize: 20,
-    padding: 15
-  },
-  rightBtn: {
+  noBtn: {
+    marginVertical: 20,
+    marginHorizontal: 10,
+    height: 45,
+    borderRadius: 50,
+    justifyContent: 'center',
     alignItems: 'center',
-    flex: 1
+    width: width / 3.2,
+    borderWidth: 1,
+    borderColor: '#21c0ff'
   },
-  rightBtnTxt: {
-    color: 'limegreen',
-    fontSize: 20,
-    padding: 15
+  noBtnTxt: {
+    color: '#21c0ff',
+    fontSize: 16,
+    fontWeight: '600'
+  },
+  yelpSection: {
+    padding: 5,
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    position: 'relative',
+  },
+  yesBtn: {
+    marginVertical: 20,
+    marginHorizontal: 10,
+    height: 45,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: width / 3.2,
+  },
+  yesBtnTxt: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600'
   },
   disabled: {
     opacity: 0.3,
