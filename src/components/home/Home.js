@@ -4,13 +4,23 @@ import { getPendingVentures, deleteVenture, acceptVenture } from '../../actions'
 import Header from '../common/Header'
 import Card from '../common/Card'
 import CardSection from '../common/CardSection'
-import ActionButton from 'react-native-action-button'
 import { Icon, Avatar } from 'react-native-material-ui'
 import { categories } from '../../helpers/venture'
 
 import { homeStyles as s } from './style'
 
 class App extends Component {
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerRight: (
+        <Button
+          onPress={() => navigation.navigate('NewVenture')}
+          title="New Venture"
+          color="white"
+        />
+      )
+    }
+  }
   componentDidMount() {
     this.props.getPendingVentures()
   }
@@ -35,10 +45,6 @@ class App extends Component {
                     />
                   </ScrollView>
               }
-              <ActionButton
-                buttonColor="#0065ff"
-                onPress={() => this.props.navigation.navigate('NewVenture')}
-              />
             </View>
         }
       </View>

@@ -4,11 +4,21 @@ import { ListItem, Avatar, Subheader, Icon } from 'react-native-material-ui'
 import Header from '../common/Header'
 import { getFriends } from '../../actions'
 import Venturist from './Venturist'
-import ActionButton from 'react-native-action-button'
 
 import { venturistStyles as style } from './style'
 
 class Venturists extends React.Component {
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerRight: (
+        <Button
+          onPress={() => navigation.navigate('AllVenturists')}
+          title="Search"
+          color="white"
+        />
+      )
+    }
+  }
   componentDidMount() {
     this.props.getFriends()
   }
@@ -33,11 +43,6 @@ class Venturists extends React.Component {
                 : <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
                     <Text>A lone wolf will be devoured by the pack.</Text>
                   </View>
-              }
-              {!select &&
-                <ActionButton buttonColor="#0065ff"
-                  onPress={() => this.props.navigation.navigate('AllVenturists')}
-                />
               }
             </View>
         }
