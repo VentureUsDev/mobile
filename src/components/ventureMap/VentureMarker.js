@@ -45,7 +45,7 @@ export default class VentureMarker extends Component {
                   <Image style={m.yelpRating} source={getSmallYelpStars(rating)} />
                   <Text style={m.yelpReviewTxt}>{review_count} Reviews</Text>
                 </View>
-                <TouchableOpacity
+                {/*<TouchableOpacity
                   onPress={() => Linking.openURL(url)}
                   style={m.yelpLink}
                 >
@@ -53,7 +53,7 @@ export default class VentureMarker extends Component {
                     style={m.yelpLinkImg}
                     source={require('../../assets/Yelp_trademark_RGB.png')}
                   />
-                </TouchableOpacity>
+                </TouchableOpacity>*/}
               </View>
             </View>
           </View>

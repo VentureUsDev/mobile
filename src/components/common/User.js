@@ -34,19 +34,28 @@ export default class User extends React.Component {
       <View>
         <View>
           <Text style={c.name}>{username}</Text>
-          <Text style={c.level}>{`Lvl. ${venturistDetails.level}`}</Text>
+          <Text style={c.level}>{`Level ${venturistDetails.level}`}</Text>
         </View>
         <View style={c.userDetailContainer}>
           <View style={c.userDetails}>
-            <Text style={c.userDetailTitle}>title:</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{height: 10, width: 10, backgroundColor: '#FECB2F'}} />
+              <Text style={c.userDetailTitle}>Title</Text>
+            </View>
             <Text style={c.userDetail}>{venturistDetails.title}</Text>
           </View>
           <View style={c.userDetails}>
-            <Text style={c.userDetailTitle}>total ventures:</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{height: 10, width: 10, backgroundColor: '#E35A3C'}} />
+              <Text style={c.userDetailTitle}>Total Ventures</Text>
+            </View>
             <Text style={c.userDetail}>{totalVentures}</Text>
           </View>
           <View style={c.userDetails}>
-            <Text style={c.userDetailTitle}>favorite category:</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{height: 10, width: 10, backgroundColor: '#60C1E9'}} />
+              <Text style={c.userDetailTitle}>Favorite Category</Text>
+            </View>
             <Text style={c.userDetail}>{favoriteCategory()}</Text>
           </View>
         </View>

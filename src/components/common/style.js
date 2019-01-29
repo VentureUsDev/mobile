@@ -55,7 +55,7 @@ export const commonStyles = StyleSheet.create({
     position: 'relative',
   },
   image: {
-    height: 280,
+    height: 340,
     width: null,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4},
@@ -64,13 +64,17 @@ export const commonStyles = StyleSheet.create({
   name: {
     textAlign: 'center',
     fontSize: 24,
-    paddingTop: 10,
+    fontWeight: '600',
+    paddingTop: 20,
+    color: '#180456',
   },
   level: {
     textAlign: 'center',
-    color: 'gray',
+    color: 'tomato',
+    fontWeight: '500',
+    letterSpacing: 0.6,
     fontSize: 18,
-    paddingTop: 5,
+    paddingTop: 10,
   },
   imageContainer: {
     elevation: 1,
@@ -97,16 +101,22 @@ export const commonStyles = StyleSheet.create({
   userDetails: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginLeft: 40,
-    marginRight: 40,
+    marginLeft: '9%',
+    marginRight: '9%',
     paddingTop: 25,
   },
   userDetailTitle: {
-    color: 'gray',
+    color: '#180456',
+    letterSpacing: 0.6,
     fontSize: 16,
+    fontWeight: '600',
+    paddingLeft: 15,
   },
   userDetail: {
     fontSize: 17,
+    color: 'gray',
+    fontWeight: '500',
+    letterSpacing: 0.6
   },
   partnersTitle: {
     marginLeft: 30,
@@ -129,18 +139,18 @@ export const commonStyles = StyleSheet.create({
     borderColor: 'gainsboro',
   },
   uploadImageContainer: {
-    height: 280,
+    height: 340,
   },
   noImage: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 280,
+    height: 340,
     backgroundColor: '#fcfcfc',
     borderBottomColor: '#f2efef',
     borderBottomWidth: 0.5
   },
   uploadImageLoadingOverlay: {
-    height: 280,
+    height: 340,
     width: '100%',
     position:'absolute',
     backgroundColor: 'rgba(0,0,0,0.4)',

@@ -17,10 +17,7 @@ export default StyleSheet.create({
   },
   cardContainer: {
     backgroundColor: 'white',
-    marginLeft: 20,
-    marginRight: 20,
-    paddingTop: 20,
-    paddingBottom: 20,
+    padding: 20,
     justifyContent: 'space-around'
   },
   inputContainer: {
