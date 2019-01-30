@@ -61,7 +61,7 @@ class VenturistDetail extends Component {
   render() {
     const { state: { params: user } } = this.props.navigation
     return (
-      <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
+      <ScrollView style={{flex: 1, backgroundColor: 'white', marginTop: -64}}>
         <User {...user} readOnly />
       </ScrollView>
     )

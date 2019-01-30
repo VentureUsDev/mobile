@@ -30,6 +30,8 @@ export const venturistStyles = StyleSheet.create({
   },
   noUserText: {
     paddingHorizontal: 40,
+    fontSize: 18,
+    textAlign: 'center'
   },
   subheaderContainer: {
     backgroundColor: 'white',
@@ -50,5 +52,16 @@ export const venturistStyles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 14,
     color: 'gray'
+  },
+  noTxt: {
+    textAlign: 'center',
+    fontSize: 18,
+    color: '#007aff'
+  },
+  noFriends: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    paddingHorizontal: 40
   }
 });

@@ -55,7 +55,7 @@ export const commonStyles = StyleSheet.create({
     position: 'relative',
   },
   image: {
-    height: 340,
+    height: 400,
     width: null,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4},
@@ -139,18 +139,18 @@ export const commonStyles = StyleSheet.create({
     borderColor: 'gainsboro',
   },
   uploadImageContainer: {
-    height: 340,
+    height: 400,
   },
   noImage: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 340,
+    height: 400,
     backgroundColor: '#fcfcfc',
     borderBottomColor: '#f2efef',
     borderBottomWidth: 0.5
   },
   uploadImageLoadingOverlay: {
-    height: 340,
+    height: 400,
     width: '100%',
     position:'absolute',
     backgroundColor: 'rgba(0,0,0,0.4)',

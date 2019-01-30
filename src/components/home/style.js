@@ -231,6 +231,11 @@ export const homeStyles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 40
   },
+  noTxt: {
+    textAlign: 'center',
+    fontSize: 18,
+    color: '#007aff'
+  },
   btnContainer: {
     flexDirection: 'row',
     justifyContent: 'center',

@@ -23,11 +23,11 @@ class Venturists extends React.Component {
     this.props.getFriends()
   }
   render() {
-    const { fetchingUsers, friendsList, select } = this.props
+    const { fetchingUsers, friendsList, select, navigation } = this.props
     return (
       <View style={{flex: 1}}>
         {fetchingUsers
-          ? <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+          ? <View style={style.noUserContainer}>
               <ActivityIndicator size="large" />
             </View>
           : <View style={{flex: 1}}>
@@ -40,9 +40,9 @@ class Venturists extends React.Component {
                       ListHeaderComponent={<Subheader style={{container: style.subheaderContainer, text: style.subheaderText}} text="Friends" />}
                     />
                   </ScrollView>
-                : <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-                    <Text>A lone wolf will be devoured by the pack.</Text>
-                  </View>
+                : <TouchableOpacity onPress={() => navigation.navigate('AllVenturists')} style={style.noFriends}>
+                    <Text style={style.noTxt}>You have no friends! Tap here to add friends to invite.</Text>
+                  </TouchableOpacity>
               }
             </View>
         }

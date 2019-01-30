@@ -28,28 +28,15 @@ class ProfileImage extends Component {
       </View>
     )
   }
-
   renderImage = () => {
     const { image, readOnly } = this.props
     return (
       <View>
-        {image
-          ? <View>
-              <Image style={c.image} source={{uri: image}} />
-              {!readOnly &&
-              <TouchableOpacity style={c.editImage} onPress={this.pickImage}>
-                <Icon name="photo" color="white" size={30} />
-              </TouchableOpacity>}
-            </View>
-          : <View style={c.noImage}>
-              {readOnly
-                ? <Text style={c.uploadImageText}>No Image Available</Text>
-                : <TouchableOpacity style={c.uploadImage} onPress={this.pickImage}>
-                    <Text style={c.uploadImageText}>tap to add an image</Text>
-                  </TouchableOpacity>
-              }
-            </View>
-        }
+        <Image style={c.image} source={image ? {uri: image} : require('../../assets/venture.png')} />
+        {!readOnly &&
+          <TouchableOpacity style={c.editImage} onPress={this.pickImage}>
+            <Icon name="photo" color="white" size={30} />
+          </TouchableOpacity>}
       </View>
     )
   }

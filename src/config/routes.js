@@ -29,6 +29,11 @@ const headerStyles = {
   borderBottom: 0
 }
 
+const clearHeaderStyles = {
+  borderBottomWidth: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.1)'
+}
+
 const ImageHeader = props => (
   <View style={{ marginBottom: 64}}>
     <Image
@@ -36,18 +41,29 @@ const ImageHeader = props => (
       source={require('../assets/background.png')}
       resizeMode="cover"
     />
-    <View style={{position: 'absolute', backgroundColor: 'transparent', height: 64, width: '100%', zIndex: 3, backgroundColor: 'transparent'}}>
+    <View style={{position: 'absolute', height: 64, width: '100%', zIndex: 3, backgroundColor: 'transparent'}}>
     <Header {...props} />
     </View>
   </View>
 )
 
-const makeNavOptions = title => ({
+const ClearHeader = props => (
+  <View style={{ marginBottom: 64}}>
+    <View style={{ position: 'absolute', height: 64, width: '100%', zIndex: 3, backgroundColor: 'rgba(0, 0, 0, 0.1)' }}>
+      <Header {...props} />
+    </View>
+  </View>
+)
+
+const makeNavOptions = (title, clear) => ({
   title,
-  headerStyle: headerStyles,
+  headerStyle: clear ? clearHeaderStyles : headerStyles,
   headerTitleStyle: { fontSize: 26 },
   headerTintColor: 'white',
-  header: (props) => <ImageHeader {...props} />
+  header: (props) =>
+    clear
+      ? <ClearHeader {...props} />
+      : <ImageHeader {...props} />
 })
 
 const HomeTab = StackNavigator({
@@ -89,7 +105,7 @@ const VenturistsTab = StackNavigator({
   VenturistProfile: {
     screen: VenturistScreen,
     navigationOptions: ({navigation}) => ({
-      ...makeNavOptions(navigation.state.params.user.username),
+      ...makeNavOptions(navigation.state.params.user.username, 'clear'),
       headerBackTitle: null
     }),
   },
@@ -109,7 +125,7 @@ const TerritoryTab = StackNavigator({
 const ProfileTab = StackNavigator({
   Profile: {
     screen: ProfileScreen,
-    navigationOptions: makeNavOptions('Profile'),
+    navigationOptions: makeNavOptions('Profile', 'clear'),
   },
 })
 

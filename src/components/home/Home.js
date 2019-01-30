@@ -25,7 +25,7 @@ class App extends Component {
     this.props.getPendingVentures()
   }
   render() {
-    const { loading, pendingVentures } = this.props
+    const { loading, pendingVentures, navigation } = this.props
     return (
       <View style={s.container}>
         {loading
@@ -34,9 +34,9 @@ class App extends Component {
             </View>
           : <View style={s.container}>
               {pendingVentures.length === 0
-                ? <View style={s.noVentureTxt}>
-                    <Text>No pending invites... If you need someone, you can always talk to me.</Text>
-                  </View>
+                ? <TouchableOpacity onPress={() => navigation.navigate('NewVenture')} style={s.noVentureTxt}>
+                    <Text style={s.noTxt}>You have no pending invites... Tap here to get started!</Text>
+                  </TouchableOpacity>
                 : <ScrollView style={{paddingBottom: 70}}>
                     <FlatList
                       data={pendingVentures}
