@@ -6,6 +6,7 @@ import Card from '../common/Card'
 import CardSection from '../common/CardSection'
 import { Icon, Avatar } from 'react-native-material-ui'
 import { categories } from '../../helpers/venture'
+import { LinearGradient } from 'expo'
 
 import { homeStyles as s } from './style'
 
@@ -34,9 +35,17 @@ class App extends Component {
             </View>
           : <View style={s.container}>
               {pendingVentures.length === 0
-                ? <TouchableOpacity onPress={() => navigation.navigate('NewVenture')} style={s.noVentureTxt}>
-                    <Text style={s.noTxt}>You have no pending invites... Tap here to get started!</Text>
-                  </TouchableOpacity>
+                ? <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <TouchableOpacity onPress={() => navigation.navigate('NewVenture')}>
+                      <LinearGradient
+                        colors={['#0065ff', '#21c0ff']}
+                        style={s.noVentureBtn}
+                      >
+                      <Image style={{ height: 70, width: 70 }} source={require('../../assets/clearlogo.png')} />
+                      <Text style={s.noTxt}>NEW VENTURE</Text>
+                      </LinearGradient>
+                    </TouchableOpacity>
+                  </View>
                 : <ScrollView style={{paddingBottom: 70}}>
                     <FlatList
                       data={pendingVentures}

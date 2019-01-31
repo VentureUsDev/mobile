@@ -54,14 +54,17 @@ export const venturistStyles = StyleSheet.create({
     color: 'gray'
   },
   noTxt: {
-    textAlign: 'center',
-    fontSize: 18,
-    color: '#007aff'
+    fontSize: 20,
+    color: 'white',
+    fontWeight: '600'
   },
-  noFriends: {
-    justifyContent: 'center',
+  noFriendsBtn: {
+    height: 80,
+    marginHorizontal: 80,
+    borderRadius: 8,
+    flexDirection: 'row',
     alignItems: 'center',
-    flex: 1,
-    paddingHorizontal: 40
+    justifyContent: 'center',
+    paddingRight: 20
   }
 });

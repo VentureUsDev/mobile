@@ -2,7 +2,7 @@ const { width } = Dimensions.get('window')
 
 export const homeStyles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   subheader: {
     alignItems: 'center',
@@ -225,6 +225,15 @@ export const homeStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  noVentureBtn: {
+    height: 80,
+    marginHorizontal: 80,
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingRight: 20
+  },
   noVentureTxt: {
     flex: 1,
     justifyContent: 'center',
@@ -232,9 +241,9 @@ export const homeStyles = StyleSheet.create({
     paddingHorizontal: 40
   },
   noTxt: {
-    textAlign: 'center',
-    fontSize: 18,
-    color: '#007aff'
+    fontSize: 20,
+    color: 'white',
+    fontWeight: '600'
   },
   btnContainer: {
     flexDirection: 'row',

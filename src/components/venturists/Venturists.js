@@ -4,6 +4,7 @@ import { ListItem, Avatar, Subheader, Icon } from 'react-native-material-ui'
 import Header from '../common/Header'
 import { getFriends } from '../../actions'
 import Venturist from './Venturist'
+import { LinearGradient } from 'expo'
 
 import { venturistStyles as style } from './style'
 
@@ -40,9 +41,17 @@ class Venturists extends React.Component {
                       ListHeaderComponent={<Subheader style={{container: style.subheaderContainer, text: style.subheaderText}} text="Friends" />}
                     />
                   </ScrollView>
-                : <TouchableOpacity onPress={() => navigation.navigate('AllVenturists')} style={style.noFriends}>
-                    <Text style={style.noTxt}>You have no friends! Tap here to add friends to invite.</Text>
-                  </TouchableOpacity>
+                : <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <TouchableOpacity onPress={() => navigation.navigate('AllVenturists')} style={style.noFriends}>
+                      <LinearGradient
+                        colors={['#0065ff', '#21c0ff']}
+                        style={style.noFriendsBtn}
+                      >
+                        <Image style={{ height: 70, width: 70 }} source={require('../../assets/clearlogo.png')} />
+                        <Text style={style.noTxt}>FIND FRIENDS</Text>
+                      </LinearGradient>
+                    </TouchableOpacity>
+                  </View>
               }
             </View>
         }
