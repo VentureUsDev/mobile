@@ -1,3 +1,5 @@
+import React, { Component } from 'react'
+import { Button } from 'react-native'
 import Venturists from '../venturists/Venturists'
 import { venturistStyles as v } from '../venturists/style'
 

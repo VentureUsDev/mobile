@@ -1,12 +1,19 @@
+import React, { Component } from 'react'
+import { Keyboard, KeyboardAvoidingView, TouchableOpacity, TouchableWithoutFeedback, View, Text, TextInput, ActivityIndicator } from 'react-native'
 import Card from '../../common/Card'
-import { LinearGradient } from 'expo'
+import { LinearGradient, Permissions } from 'expo'
 import firebase, { auth } from '../../firebase'
 
 import style from '../style'
 
 export default class extends Component {
   state = { email: '', password: '', error: '', loading: false }
-
+  async componentDidMount() {
+    let { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS)
+    if (status === 'granted') {
+      console.log('Notification permissions granted.')
+    }
+  }
   handleEmailChange = email => this.setState({email, error: ''})
 
   handlePasswordChange = password => this.setState({password, error: ''})
@@ -62,7 +69,7 @@ export default class extends Component {
                   <Text style={style.forgotPwTxt}>Forgot Password?</Text>
                 </TouchableOpacity>
               </View>
-              {error && <Text style={style.errorText}>{error}</Text>}
+              {error ? <Text style={style.errorText}>{error}</Text> : null}
               <TouchableOpacity
                 onPress={this.login}
                 disabled={!email || !password}

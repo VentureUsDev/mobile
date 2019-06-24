@@ -1,3 +1,5 @@
+import React, { Component } from 'react'
+import { View, Dimensions, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { MapView, Location, Permissions } from 'expo'
 import { getVentureMarkers } from '../../actions'

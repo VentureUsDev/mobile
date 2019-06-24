@@ -1,3 +1,6 @@
+import React, { Component } from 'react'
+import { View, Text, TextInput } from 'react-native'
+
 export default class Input extends Component {
   render() {
     const { label, value, onChangeText, placeholder } = this.props;

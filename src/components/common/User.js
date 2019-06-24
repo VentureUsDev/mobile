@@ -1,3 +1,6 @@
+import React, { Component } from 'react'
+import { View, Text } from 'react-native'
+import { groupBy } from 'lodash'
 import ProfileImage from './ProfileImage'
 import { getUserDetails } from '../../helpers/venture'
 import { commonStyles as c } from './style'
@@ -21,7 +24,7 @@ export default class User extends React.Component {
     const { username, level, totalVentures, categories } = this.props.user
     const favoriteCategory = () => {
       if (!!categories && categories.length > 0) {
-        const allCategories = _.groupBy(categories, category => Object.keys(category))
+        const allCategories = groupBy(categories, category => Object.keys(category))
         return Object.keys(allCategories).reduce((a, b) => {
           return allCategories[a] > allCategories[b] ? a : b
         })

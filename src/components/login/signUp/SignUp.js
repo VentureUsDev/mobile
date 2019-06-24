@@ -1,3 +1,5 @@
+import React, { Component } from 'react'
+import { Keyboard, KeyboardAvoidingView, TouchableOpacity, TouchableWithoutFeedback, View, Text, TextInput, ActivityIndicator } from 'react-native'
 import Card from '../../common/Card'
 import { signUp } from '../../../actions/account'
 import firebase, { auth, db } from '../../firebase'
@@ -77,7 +79,7 @@ export default class extends Component {
                   onChangeText={this.handlePasswordChange}
                 />
               </View>
-              {error && <Text style={style.errorText}>{error}</Text>}
+              {error ? <Text style={style.errorText}>{error}</Text> : null}
               <TouchableOpacity
                 onPress={this.signUp}
                 disabled={!email || !password}

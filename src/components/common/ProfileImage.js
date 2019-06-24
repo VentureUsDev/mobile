@@ -1,3 +1,5 @@
+import React, { Component } from 'react'
+import { View, ActivityIndicator, TouchableOpacity, Image } from 'react-native'
 import { ImagePicker, Permissions, Constants } from 'expo'
 import firebase, { db } from '../firebase'
 import { connect } from 'react-redux'

@@ -1,3 +1,5 @@
+import React, { Component } from 'react'
+import { View, Image, TouchableOpacity, Text, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import Swiper from 'react-native-deck-swiper'
 import { Modal, Linking } from 'react-native'
@@ -62,7 +64,7 @@ class Venture extends Component {
               onSwipedLeft={this.onSwipeLeft}
               onSwipedRight={this.onSwipeRight}
               onSwipedAll={() => this.getMoreVentures()}
-              cardIndex={userIndex}
+              cardIndex={0}
               showSecondCard
               stackSize={3}
               backgroundColor="gainsboro"

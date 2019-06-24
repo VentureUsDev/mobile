@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native'
 export const venturistStyles = StyleSheet.create({
   text: {
     marginTop: 400,

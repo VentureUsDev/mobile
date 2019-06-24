@@ -5,6 +5,7 @@ import {
   REMOVE_FRIEND,
   ALL_USERS_FETCH_SUCCESS
 } from '../actions/util'
+import { map, filter, isEmpty } from 'lodash'
 
 export const initialState = {
   friendsList: {},
@@ -18,8 +19,8 @@ export default function friendsReducer(state = initialState, action) {
     case ALL_USERS_FETCH_SUCCESS: {
       const { email } = firebase.auth().currentUser
       const allUsers = action.payload.filter(user => user.email !== email)
-      const users = _.filter(allUsers, user => {
-        return !_.map(state.friendsList, 'uid').includes(user.uid)
+      const users = filter(allUsers, user => {
+        return !map(state.friendsList, 'uid').includes(user.uid)
       })
       return {...state, allUsers: users, fetchingAllUsers: false}
     }
@@ -33,7 +34,7 @@ export default function friendsReducer(state = initialState, action) {
     }
 
     case REMOVE_FRIEND: {
-      if (_.isEmpty(state.friendsList)) {
+      if (isEmpty(state.friendsList)) {
         return {...state, friendsList: {}}
       } else {
         return {...state}

@@ -1,5 +1,6 @@
+import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-import { AsyncStorage, StatusBar } from 'react-native'
+import { StatusBar, View, Text } from 'react-native'
 
 import configureStore from './config/store'
 import AppContainer from './components'

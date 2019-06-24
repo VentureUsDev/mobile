@@ -1,3 +1,5 @@
+import React, { Component } from 'react'
+import { View, Image, SafeAreaView, Dimensions } from 'react-native'
 import { TabNavigator, StackNavigator, NavigationActions } from 'react-navigation'
 import Header from 'react-navigation/src/views/Header/Header'
 
@@ -19,7 +21,7 @@ import SignUpScreen from '../components/login/signUp/SignUp'
 import PasswordReset from '../components/login/pwdRecovery/pwdRecovery'
 
 import { Icon } from 'react-native-material-ui'
-
+const screen = Dimensions.get('window');
 const headerStyles = {
   shadowColor: '#000',
   shadowOffset: { width: 0, height: 2 },
@@ -35,21 +37,21 @@ const clearHeaderStyles = {
 }
 
 const ImageHeader = props => (
-  <View style={{ marginBottom: 64}}>
+  <View style={{ marginBottom: 64 }}>
     <Image
-      style={{position: 'absolute', height: 64, width: '100%'}}
+      style={{position: 'absolute', height: screen.height > 800 ? 88 : 64, width: '100%', zIndex: 1}}
       source={require('../assets/background.png')}
       resizeMode="cover"
     />
-    <View style={{position: 'absolute', height: 64, width: '100%', zIndex: 3, backgroundColor: 'transparent'}}>
-    <Header {...props} />
+    <View style={{position: 'absolute', width: '100%', zIndex: 3, backgroundColor: 'transparent'}}>
+      <Header {...props} />
     </View>
   </View>
 )
 
 const ClearHeader = props => (
-  <View style={{ marginBottom: 64}}>
-    <View style={{ position: 'absolute', height: 64, width: '100%', zIndex: 3, backgroundColor: 'rgba(0, 0, 0, 0.1)' }}>
+  <View style={{ marginBottom: 64 }}>
+    <View style={{ position: 'absolute', height: screen.height > 800 ? 88 : 64, width: '100%', zIndex: 3, backgroundColor: 'rgba(0, 0, 0, 0.1)' }}>
       <Header {...props} />
     </View>
   </View>

@@ -1,3 +1,5 @@
+import React, { Component } from 'react'
+import { TouchableOpacity, View, Image, Text } from 'react-native'
 export default class extends Component {
   render() {
     const { title, message, onPress } = this.props

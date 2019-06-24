@@ -1,3 +1,5 @@
+import React, { Component } from 'react'
+import { KeyboardAvoidingView, TouchableWithoutFeedback, TouchableOpacity, Image, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { setLocation } from '../../actions'
 import Card from '../common/Card'

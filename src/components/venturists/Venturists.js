@@ -1,5 +1,7 @@
 import React from 'react'
+import { View, Text, ScrollView, FlatList, ActivityIndicator, TouchableOpacity, Image, Button } from 'react-native'
 import { connect } from 'react-redux'
+import { uniqueId } from 'lodash'
 import { ListItem, Avatar, Subheader, Icon } from 'react-native-material-ui'
 import Header from '../common/Header'
 import { getFriends } from '../../actions'

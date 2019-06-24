@@ -1,4 +1,6 @@
+import React, { Component } from 'react'
 import firebase from './firebase'
+import { ActivityIndicator, Text, View, StyleSheet } from 'react-native'
 import { getUser } from '../actions'
 import { connect } from 'react-redux'
 

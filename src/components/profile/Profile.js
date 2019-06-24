@@ -1,3 +1,5 @@
+import React, { Component } from 'react'
+import { ScrollView, Button } from 'react-native'
 import firebase, { auth } from '../firebase'
 import { connect } from 'react-redux'
 import User from '../common/User'
@@ -17,7 +19,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <ScrollView style={p.container}>
+      <ScrollView contentContainerStyle={p.container}>
         <User user={this.props.user} readOnly={false} />
       </ScrollView>
     )

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import firebase, { db } from '../components/firebase'
+import { find, findIndex, flatten } from 'lodash'
 import {
   SET_CATEGORY,
   SET_LOCATION,
@@ -18,6 +19,7 @@ import {
 } from './util'
 import { generateUUID } from '../helpers/venture'
 import { API_KEY } from '../config/env'
+import { map } from 'lodash'
 
 export const setCategory = category => {
   return {
@@ -138,12 +140,12 @@ export const ventureSwipe = (index, ventureId, venture) => {
       db.collection('ventures').doc(ventureId).collection('allVentures').doc('ventureList').get()
         .then(ventures => {
           const { acceptedVenture, userIndex } = ventures.data()
-          const ventureExists = _.find(acceptedVenture, { id: venture.id })
-          const ventureIndex = _.findIndex(acceptedVenture, { id: venture.id })
+          const ventureExists = find(acceptedVenture, { id: venture.id })
+          const ventureIndex = findIndex(acceptedVenture, { id: venture.id })
           if (ventureExists) {
             db.collection('ventures').doc(ventureId).get().then(data => {
               const { users, category, date } = data.data()
-              const userIds = _.map(users, 'uid')
+              const userIds = map(users, 'uid')
               const votePassed = ventureExists.vote === users.length - 1
               if (votePassed) {
                 return users.map(user => {
@@ -269,7 +271,7 @@ export const createVenture = data => {
   const { users, location, category, currentUser } = data
   let allUsers = []
   allUsers.push(users, currentUser)
-  allUsers = _.flatten(allUsers)
+  allUsers = flatten(allUsers)
   const ventureId = generateUUID()
   return (dispatch) => {
     const ventureData = {

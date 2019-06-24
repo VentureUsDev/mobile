@@ -1,3 +1,4 @@
+import { Dimensions, StyleSheet } from 'react-native'
 const { width } = Dimensions.get('window')
 
 export const homeStyles = StyleSheet.create({
@@ -56,8 +57,8 @@ export const homeStyles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     margin: 15,
-    height: 150,
-    width: 150,
+    height: 130,
+    width: 130,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,

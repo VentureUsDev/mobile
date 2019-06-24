@@ -13,6 +13,7 @@ import {
   SEND_VENTURE_NOTE,
   CLEAR_NOTE
 } from '../actions/util'
+import { find, filter } from 'lodash'
 
 import firebase from '../components/firebase'
 
@@ -38,8 +39,8 @@ export default function venturesReducer(state = initialState, action) {
     }
 
     case SET_VENTURIST: {
-      if (_.find(state.users, action.payload)) {
-        const filterUsers = _.filter(state.users, user => {
+      if (find(state.users, action.payload)) {
+        const filterUsers = filter(state.users, user => {
           return user.uid !== action.payload.uid
         })
         return {...state, users: filterUsers}

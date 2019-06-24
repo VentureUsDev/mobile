@@ -1,3 +1,5 @@
+import React, { Component } from 'react'
+import { View } from 'react-native'
 import { commonStyles as common } from './style'
 
 export default class CardSection extends Component {

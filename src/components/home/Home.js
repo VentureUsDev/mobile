@@ -1,4 +1,7 @@
+import React, { Component } from 'react'
+import { Button, View, ActivityIndicator, Alert, TouchableOpacity, Image, Text, ScrollView, FlatList } from 'react-native'
 import { connect } from 'react-redux'
+import { uniqueId, filter, find } from 'lodash'
 import firebase from '../firebase'
 import { getPendingVentures, deleteVenture, acceptVenture } from '../../actions'
 import Header from '../common/Header'
@@ -46,7 +49,7 @@ class App extends Component {
                       </LinearGradient>
                     </TouchableOpacity>
                   </View>
-                : <ScrollView style={{paddingBottom: 70}}>
+                : <ScrollView style={{paddingTop: 20}}>
                     <FlatList
                       data={pendingVentures}
                       keyExtractor={() => uniqueId()}
@@ -70,13 +73,13 @@ class App extends Component {
   }
 
   renderVenture = venture => {
-    const { category, date, location: { text }, users } = venture.item
+    const { category, date, location: { text }, users } = venture && venture.item
     // move this stuff to reduer?
     const { currentUser } = firebase.auth()
-    const filteredUsers = _.filter(users, user => {
+    const filteredUsers = filter(users, user => {
       return user.uid !== currentUser.uid
     })
-    const iconData = _.find(categories, ({name}) => {
+    const iconData = find(categories, ({name}) => {
       return name === category || name === 'Custom'
     })
     return (
@@ -88,7 +91,7 @@ class App extends Component {
                 <Image resizeMode="contain" source={iconData.image} style={{width: 55, height: 55}} />
               </View>
               <View>
-                <Text style={s.headerText}>{category}</Text>
+                <Text style={s.headerText}>{category && category}</Text>
                 <Text style={s.locationTxt}>@{text}</Text>
               </View>
               <View style={s.ventureCardRight}>

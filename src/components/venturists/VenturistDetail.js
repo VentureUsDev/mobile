@@ -1,3 +1,5 @@
+import React, { Component } from 'react'
+import { View, Button, ScrollView, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import { addFriend, removeFriend } from '../../actions'
 import User from '../common/User'
@@ -61,7 +63,7 @@ class VenturistDetail extends Component {
   render() {
     const { state: { params: user } } = this.props.navigation
     return (
-      <ScrollView style={{flex: 1, backgroundColor: 'white', marginTop: -64}}>
+      <ScrollView contentContainerStyle={{flex: 1, backgroundColor: 'white', marginTop: -64}}>
         <User {...user} readOnly />
       </ScrollView>
     )

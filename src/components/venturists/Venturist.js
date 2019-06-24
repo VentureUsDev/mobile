@@ -1,4 +1,7 @@
+import React, { Component } from 'react'
+import { View, Text, Image } from 'react-native'
 import { connect } from 'react-redux'
+import { find } from 'lodash'
 import { setVenturist } from '../../actions'
 import { ListItem, Avatar, Icon } from 'react-native-material-ui'
 import { getUserDetails } from '../../helpers/venture'
@@ -11,7 +14,7 @@ class Venturist extends Component {
   render() {
     const { user: { username, image, totalVentures, level }, user, friend, navigation, select, users } = this.props
     const venturistDetails = getUserDetails(totalVentures)
-    const selected = _.find(users, userObj => {
+    const selected = find(users, userObj => {
       return userObj.uid === user.uid && true
     })
     return (

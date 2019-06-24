@@ -1,3 +1,5 @@
+import React, { Component } from 'react'
+import { View, Image, Text, TouchableOpacity } from 'react-native'
 import { commonStyles as style } from './style'
 import { getYelpStars } from '../../helpers/venture'
 

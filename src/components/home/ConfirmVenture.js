@@ -1,3 +1,6 @@
+import React, { Component } from 'react'
+import { ScrollView, View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { toUpperCase, find } from 'lodash'
 import { connect } from 'react-redux'
 import { createVenture } from '../../actions'
 import { Avatar } from 'react-native-material-ui'

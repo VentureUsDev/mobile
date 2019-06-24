@@ -1,5 +1,6 @@
 import axios from 'axios'
 import firebase, { db } from '../components/firebase'
+import { map } from 'lodash'
 import { GET_VENTURE_MAP_MARKERS_SUCCESS } from './util'
 import fetch from 'cross-fetch'
 import { API_KEY } from '../config/env'
@@ -45,7 +46,7 @@ export const getVentureMarkers = () => {
         })
         .then(response => response.json())
         .then(data => {
-          _.map(data, ventureData => {
+          map(data, ventureData => {
             const ventures = Object.values(ventureData)
             const combinedData = ventures.reverse().map((venture, index) => {
               return Object.assign(completed[index], venture)
